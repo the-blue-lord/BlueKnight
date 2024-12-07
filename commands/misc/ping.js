@@ -1,18 +1,11 @@
-const Command = require("../../structures/Command");
+const BlueCommand = require("../../structures/BlueCommand");
 
-module.exports = class Ping extends Command{
+module.exports = class Ping extends BlueCommand {
     constructor(client) {
         super(client, "ping");
     }
 
-    async run(client, interaction) {
-        await interaction.deferReply({ephemeral: true});
-
-        if(!this.memberIsAllowed(interaction)) {
-            return;
-        }
-        
-        interaction.editReply("Pong!");
-        return;
+    run(interaction) {
+        console.command("Ping n." + interaction.id);
     }
 };

@@ -1,18 +1,13 @@
-const JsonDatabase = require("../../structures/JsonDatabase");
+const BlueEvent = require("../../structures/BlueEvent");
 
-module.exports = class MessageCreate {
+const command_router = require("../../utilis/commands-router");
+
+module.exports = class InteractionCreate extends BlueEvent {
     constructor(client) {
-        this.client = client;
+        super(client, "messageCreate");
     }
 
-    async run(message) {
-        const pingdatabase = new JsonDatabase("databases/ghost_ping.jsdb", "databasesBackups");
-        if(!pingdatabase.data.enabled) return;
-
-        if(message.mentions.users.size == 0) return;
-
-        message.delete();
-
-        return;
+    run(message) {
+        //console.event("Message: https://discord.com/channels/" + message.guild.id + "/" + message.channel.id +"/" + message.content);
     }
 };

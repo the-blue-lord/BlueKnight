@@ -1,13 +1,11 @@
-module.exports = class Ready {
-    // Class constructor //
+const BlueEvent = require("../../structures/BlueEvent");
+
+module.exports = class Ready extends BlueEvent {
     constructor(client) {
-        // Save the client in a class variable //
-        this.client = client;
+        super(client, "ready");
     }
 
-    // Function to run when the event is triggered //
     run(client) {
-        // Log to the console the succesfull startup of the bot //
-        console.log("[CLIENT] The bot is online");
+        console.event("Client", client?.user?.username, "is online");
     }
-}
+};

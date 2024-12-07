@@ -2,211 +2,48 @@
 #
 # COMMANDS CONFIGURATION, SEE BELOW FOR FURTHER INFORMATION
 # 
-# - id: <command id> (NOT EDITABLE)
-#   name: <the command name without '/'> (string)
+# <command name>:
 #   description: <the description of the command> (string)
-#   enabled: <weather the command should be shown or not> (true/false)
-#   whitelist: <list of roles ids wich are surely always allowed to run the command> (roles id)
-#   - <role id 1>
-#   - <role id 2>
-#   blacklist: <list of roles ids wich are surely never allowed to run the command> (roles id)
-#   - <role id 1>
-#   - <role id 2>
-#   unlisted: <weather people who are not whitelisted nor blacklisted should be able to run the command> (true/false)
+#   test: <weather the command should be shown or not> (false/true)
 #   options: <the options needed for this command> (array of command_option)
 #
-# <command_option>:
-#   id: <the id of the option> (NOT EDITABLE)
-#   name: <the name of the option wich will be displayed bold on the left> (string)
-#   description <the description of the option wich will be displayed on the right> (right)
-#   type: <what type of data can be inputted in this option> (application_command_option_type)
-#   required: <weather it's mandatory to input the option before sending> (true/false)
+#   <command_option>:
+#     id: <the id of the option>
+#     name: <the name of the option wich will be displayed bold on the left> (string)
+#     description <the description of the option wich will be displayed on the right> (right)
+#     required: <weather it's mandatory to input the option before sending> (true/false)
+#     type: <what type of data can be inputted in this option> (application_command_option_type)
 #
-# <application_command_option_type>:
-#   Subcommand: 1
-#   SubcommandGroup: 2
-#   String: 3
-#   Integer: 4
-#   Boolean: 5
-#   User: 6
-#   Channel: 7
-#   Role: 8
-#   Mentionable: 9
-#   Number: 10
-#   Attachment: 11
+#     <application_command_option_type>:
+#       Subcommand: 1
+#       SubcommandGroup: 2
+#       String: 3
+#       Integer: 4
+#       Boolean: 5
+#       User: 6
+#       Channel: 7
+#       Role: 8
+#       Mentionable: 9
+#       Number: 10
+#       Attachment: 11
 # 
 # __________________________________________________
 
-- id: "ghost_ping"
-  name: "ghost-ping"
-  description: "Enables/disables ghost pings"
-  enabled: true
-  unlisted: true
-
-- id: "tck_closerequest"
-  name: "tck-closerequest"
-  description: "Request the closure of an open ticket"
-  enabled: true
-  unlisted: true
-
-- id: "ping"
-  name: "ping"
-  description: "Replies with pong"
-  enabled: true
-  blacklist:
-  - "1183701090940768346"
-  unlisted: true
-
-- id: "tck_panel"
-  name: "tck-panel"
-  description: "Sends embed for ticket selection"
-  enabled: true
-  whitelist:
-  - "1183901664541941831"
-  unlisted: false
-
-- id: "tck_open"
-  name: "tck-open"
-  description: "Manually opens a ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
+ping:
+  description: "ping the bot"
+  test: true
   options:
-    - id: "mbr"
-      name: "user"
-      description: "The user you are creating the ticket for"
-      type: 6
+    - name: "pings"
+      description: "how many pings to execute"
+      required: false
+      type: 4
+
+ping-test:
+  description: "ping2 the bot"
+  test: true
+  options:
+    - name: "pings2"
+      description: "how2 many pings to execute"
       required: true
-    - id: "cat"
-      name: "ticket-category"
-      description: "The category of the ticket you are creating"
-      type: 3
-      required: true
+      type: 11
 
-- id: "tck_add"
-  name: "tck-add"
-  description: "Adds a user to a ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "mbr"
-      name: "user"
-      description: "The user to add to the ticket"
-      type: 6
-      required: true
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket where to add the user"
-      type: 7
-      required: false
-
-- id: "tck_remove"
-  name: "tck-remove"
-  description: "Removes a user from a ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "mbr"
-      name: "user"
-      description: "The user to remove from the ticket"
-      type: 6
-      required: true
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket where to remove the user"
-      type: 7
-      required: false
-
-- id: "tck_claim"
-  name: "tck-claim"
-  description: "Makes a helper to claim a ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to claim"
-      type: 7
-      required: false
-
-- id: "tck_unassign"
-  name: "tck-unassign"
-  description: "Unassigns a ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to unassign"
-      type: 7
-      required: false
-
-- id: "tck_assign"
-  name: "tck-assign"
-  description: "Assigns a ticket to a helper"
-  enabled: true
-  whitelist:
-  - "1183901664541941831"
-  unlisted: false
-  options:
-    - id: "mbr"
-      name: "user"
-      description: "The helper to assign the ticket to"
-      type: 6
-      required: true
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to assign the helper to"
-      type: 7
-      required: false
-
-- id: "tck_close"
-  name: "tck-close"
-  description: "Closes an opened ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to close"
-      type: 7
-      required: false
-
-- id: "tck_delete"
-  name: "tck-delete"
-  description: "Deletes a ticket"
-  enabled: true
-  whitelist:
-  - "1183901664541941831"
-  unlisted: false
-  options:
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to delete"
-      type: 7
-      required: false
-
-- id: "tck_reopen"
-  name: "tck-reopen"
-  description: "Reopens a closed ticket"
-  enabled: true
-  whitelist:
-  - "1166995041642876938"
-  unlisted: false
-  options:
-    - id: "chn"
-      name: "ticket"
-      description: "The ticket to reopen"
-      type: 7
-      required: false
