@@ -62,13 +62,16 @@ async function initCommands() {
     const applicationCommands = await rest.get(Routes.applicationCommands(process.env.CLIENT_ID));
     const guildCommands = await rest.get(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID));
 
-    // --- Replace old public cpommands with the new ones //
-    //await applicationCommands.forEach(command => rest.delete(Routes.applicationCommand(process.env.CLIENT_ID, command.id)));
-    //await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: application_commands.map(command => command.getData())});
+    if(process.env.UPDATE_COMMANDS) {
+        // --- Replace old public commands with the new ones //
+        for(const command of applicationCommands) await rest.delete(Routes.applicationCommand(process.env.CLIENT_ID, command.id));
+        await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: application_commands.map(command => command.getData())});
 
-    // --- Replace old testing commands with the new ones //
-    //await guildCommands.forEach(command => rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.GUILD_ID, command.id)));
-    //await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: test_commands.map(command => command.getData())});
+        // --- Replace old testing commands with the new ones //
+        for(const command of guildCommands) await rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.GUILD_ID, command.id));
+        await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: test_commands.map(command => command.getData())});
+    }
+
 }
 
 async function initEvents() {

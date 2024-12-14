@@ -5,7 +5,10 @@ module.exports = class Ping extends BlueCommand {
         super(client, "ping");
     }
 
-    run(interaction) {
-        console.command("Ping n." + interaction.id);
+    async run(interaction) {
+        const start = Date.now();
+        await interaction.deferReply();
+        await interaction.editReply("WebSocket ping: " + interaction.client.ws.ping + "ms | Interaction latency: " + (Date.now()-start) + "ms");
+        return;
     }
 };

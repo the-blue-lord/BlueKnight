@@ -7,13 +7,13 @@ module.exports = class BlueCommand {
         // --- Get command info from name
         this.commandConfig = client.commands[commandName];
 
-        this.name = this.commandConfig?commandName:"<undefined>";
-        this.description = this.commandConfig?.description || "<undefined>";
+        this.name = this.commandConfig?commandName:"undefined";
+        this.description = this.commandConfig?.description || "undefined";
         this.test = (() => {
             if(this.commandConfig?.test === false) return false;
             else return true;
         })();
-        this.options = this.commandConfig?.options || "<undefined>";
+        this.options = this.commandConfig?.options || [];
     }
 
     getData() {

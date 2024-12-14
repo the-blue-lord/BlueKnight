@@ -20,7 +20,6 @@ module.exports = (interaction) => {
         // --- For each command in the folder
         for(let j = 0; j < commandFiles.length; j++) {
             const commandFile = commandFiles[i];
-            console.log(commandFile);
 
             // --- Get the command object
             const commandClass = require(commandFile);

@@ -30,20 +30,6 @@
 # __________________________________________________
 
 ping:
-  description: "ping the bot"
-  test: true
-  options:
-    - name: "pings"
-      description: "how many pings to execute"
-      required: false
-      type: 4
-
-ping-test:
-  description: "ping2 the bot"
-  test: true
-  options:
-    - name: "pings2"
-      description: "how2 many pings to execute"
-      required: true
-      type: 11
+  description: "Get bot ping"
+  test: false
 
