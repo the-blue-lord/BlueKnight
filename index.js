@@ -1,6 +1,6 @@
 const fs = require("fs");
 const yaml = require("yaml");
-const { Client, GatewayIntentBits, Partials, REST, Routes } = require("discord.js");
+const { Client, GatewayIntentBits, Partials, REST, Routes, applicationDirectory } = require("discord.js");
 
 // --- Console element extension for custom logging
 const old_error = console.error
@@ -71,6 +71,7 @@ async function initCommands() {
 
         // --- Replace old testing commands with the new ones //
         for(const command of guildCommands) await rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.GUILD_ID, command.id));
+        
         await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: test_commands.map(command => command.getData())});
         console.command("Commands updated");
     }
@@ -94,4 +95,30 @@ async function initEvents() {
             eventObject.init();
         });
     });
+}
+
+function compareJson(obj1, obj2) {
+    if(obj1 == obj2) return true;
+
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+
+    if(keys1.length != keys2.length) return false;
+
+    if (Array.isArray(obj1) && Array.isArray(obj2)) {
+        // If the arrays are of different lengths, they can't be equal
+        if (obj1.length !== obj2.length) return false;
+
+        // Compare each element in the arrays
+        for (let i = 0; i < obj1.length; i++) {
+            if (!compareJson(obj1[i], obj2[i])) return false;
+        }
+        return true;
+    }
+
+    for(let index = 0; index < keys1.length; index++) 
+        if(!compareJson(obj1[keys1[index]], obj2[keys1[index]]))
+            return false;
+
+    return true;
 }
