@@ -1,5 +1,6 @@
 const fs = require("fs");
 const yaml = require("yaml");
+const { Client, GatewayIntentBits, Partials, REST, Routes } = require("discord.js");
 
 // --- Console element extension for custom logging
 const old_error = console.error
@@ -7,13 +8,13 @@ console.event = (...msg) => console.log("[EVENT]", ...msg);
 console.command = (...msg) => console.log("[COMMAND]", ...msg);
 console.error = (...msg) => old_error("[ERROR]", ...msg);
 
-const { Client, GatewayIntentBits, Partials, REST, Routes } = require("discord.js");
-
 const EVENTS_FOLDERS = "events";
 const COMMANDS_FOLDERS = "commands";
+const BUTTONS_FOLDER = "buttons"
 
 global.EVENTS_FOLDERS = EVENTS_FOLDERS;
 global.COMMANDS_FOLDERS = COMMANDS_FOLDERS;
+global.BUTTONS_FOLDER = BUTTONS_FOLDER
 
 // Client init //
 
@@ -62,7 +63,8 @@ async function initCommands() {
     const applicationCommands = await rest.get(Routes.applicationCommands(process.env.CLIENT_ID));
     const guildCommands = await rest.get(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID));
 
-    if(process.env.UPDATE_COMMANDS) {
+    if(parseInt(process.env.UPDATE_COMMANDS)) {
+        console.command("Updating commands...");
         // --- Replace old public commands with the new ones //
         for(const command of applicationCommands) await rest.delete(Routes.applicationCommand(process.env.CLIENT_ID, command.id));
         await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: application_commands.map(command => command.getData())});
@@ -70,6 +72,7 @@ async function initCommands() {
         // --- Replace old testing commands with the new ones //
         for(const command of guildCommands) await rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.GUILD_ID, command.id));
         await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: test_commands.map(command => command.getData())});
+        console.command("Commands updated");
     }
 
 }

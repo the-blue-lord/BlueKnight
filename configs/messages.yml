@@ -1,0 +1,32 @@
+default-color: "#03bafc"
+
+supported_languages:
+  - - id: "en"
+      flag: "🇬🇧"
+    - id: "it"
+      flag: "🇮🇹"
+    - id: "es"
+      flag: "🇪🇸"
+
+unknown-message:
+  type: "error"
+  title:
+    en: "Unknown message"
+    it: "Messaggio sconosciuto"
+    es: "Mensaje desconocido"
+  content:
+    en: "Error fetching data for message **`<!--message-id--!>`**. The error has already been reported in the logs, it will be solved as soon as possible."
+    it: "Errore recuperando le infomazioni del messaggio **`<!--message-id--!>`**. L'errore è già stato riportato nei registri, sarà risolto il prima possibile."
+    es: "Error recuperando las inforaciones del mensaje **`<!--message-id--!>`**. El error ya ha sido reportado en los registros, se solucionarà lo antes posible."
+
+unknown-command:
+  type: "error"
+  title:
+    en: "Unknown command"
+    it: "Comando sconosciuto"
+    es: "Comando desconocido"
+  content:
+    en: "The command you just tried to run appers to be unknow or not defined. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below."
+    it: "Il comando che hai appena eseguito sembra essere sconosciuto o non definto. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto."
+    es: "El comando que has intentado ejecutar parece ser desconocido o no estar definido. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo."
+

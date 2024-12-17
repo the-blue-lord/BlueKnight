@@ -33,3 +33,20 @@ ping:
   description: "Get bot ping"
   test: false
 
+unknown-command:
+  decription: "Send unknwon-command message"
+  test: true
+  options:
+    - name: "localisation"
+      description: "The message language"
+      required: true
+      type: 3
+
+unknown-message:
+  decription: "Send unknwon-message message"
+  test: true
+  options:
+    - name: "localisation"
+      description: "The message language"
+      required: true
+      type: 3
