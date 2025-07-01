@@ -3,7 +3,6 @@ Todo:
   ☐ Upgrade translation system
     ☐ Add translation for embeds
     ☐ Replace translate buttons with translate string select menu
-  ☐ Add command `/set-update_ticket_category`
   ☐ Substitute message-reply with embed-reply in `/server-info` command
     ☐ Implement category template in the embed data for server-info
     Note: Translation for server info is implmented differently using specific `getServerInfo` function, located at `utilis\getServerInfo.js`
@@ -18,3 +17,17 @@ Todo:
 
 Fixme:
   ☐ Default categories broken in `/server-info` ~embed~ message
+
+Commands:
+  Settings:
+    ☐ `/set-update_ticket_category`
+  Ticketing:
+    ☐ `/tck-close`
+    ☐ `/tck-reopen`
+    ☐ `/tck-delete`
+    ☐ `/tck-add`
+    ☐ `/tck-remove`
+    ☐ `/tck-assign`
+    ☐ `/tck-claim`
+    ☐ `/tck-unassign`
+

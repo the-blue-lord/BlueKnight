@@ -15,9 +15,9 @@ customize-panel:
         it: "Titolo del pannello"
         es: "Título del panel"
       placeholder:
-        en: "The title that will be displayed on the ticket panel. Leave blank to not change it."
-        it: "Il titolo che verrà visualizzato sul pannello dei ticket. Lascia vuoto per non cambiarlo."
-        es: "El título que se mostrará en el panel de tickets. Deja en blanco para no cambiarlo."
+        en: "Leave blank to not change it."
+        it: "Lascia vuoto per non cambiarlo."
+        es: "Deja en blanco para no cambiarlo."
     - id: "panel_description"
       required: false
       style: 2
@@ -26,9 +26,9 @@ customize-panel:
         it: "Descrizione del pannello"
         es: "Descripción del panel"
       placeholder:
-        en: "The description that will be displayed on the ticket panel. Leave blank to not change it."
-        it: "La descrizione che verrà visualizzata sul pannello dei ticket. Lascia vuoto per non cambiarla."
-        es: "La descripción que se mostrará en el panel de tickets. Deja en blanco para no cambiarla."
+        en: "Leave blank to not change it. Discord markdown compatible."
+        it: "Lascia vuoto per non cambiarlo. Compatibile con il markdown di Discord."
+        es: "Deja en blanco para no cambiarlo. Compatible con el markdown de Discord."
     - id: "panel_color"
       required: false
       style: 2
