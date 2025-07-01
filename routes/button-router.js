@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = interaction => {
+module.exports = async interaction => {
 
     // --- If the interaction was not produced by a button, exit
     if(!interaction.isButton()) return;
@@ -14,7 +14,7 @@ module.exports = interaction => {
         if(buttonFile.split(".").reverse()[0] != "js") continue;
 
         const buttonClass = require("../" + buttonsFolder + "/" + buttonFile);
-        const buttonObject = new buttonClass();
-        if(buttonAction == buttonObject.action) buttonObject.run(buttonAction, buttonData, interaction);
+        const buttonObject = new buttonClass(interaction.client, ...buttonData);
+        if(buttonAction == buttonObject.action) return await buttonObject.run(buttonAction, interaction);
     }
 };

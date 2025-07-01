@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const COMMANDS_FOLDERS =global.COMMANDS_FOLDERS;
 
-module.exports = interaction => {
+module.exports = async interaction => {
     // --- If the interaction it's not a chat input command, exit
     if(!interaction.isChatInputCommand()) return;
 
@@ -23,7 +23,7 @@ module.exports = interaction => {
 
             // --- If it's the right one, run it
             if(commandObject.name == interaction.commandName) {
-                commandObject.run(interaction);
+                await commandObject.run(interaction);
                 return;
             }
         }

@@ -1,0 +1,20 @@
+Todo:
+  ☐ Add Report and feedback buttons
+  ☐ Upgrade translation system
+    ☐ Add translation for embeds
+    ☐ Replace translate buttons with translate string select menu
+  ☐ Add command `/set-update_ticket_category`
+  ☐ Substitute message-reply with embed-reply in `/server-info` command
+    ☐ Implement category template in the embed data for server-info
+    Note: Translation for server info is implmented differently using specific `getServerInfo` function, located at `utilis\getServerInfo.js`
+  ☐ Add logging
+  ☐ Use specific classes to create custom objects
+  ✔ Add guild localisation @started(25-06-25 03:59) @done(25-06-25 04:20) @lasted(21m16s)
+  ✔ Solve /* Localisation */ issue @started(25-06-26 02:03) @done(25-06-26 02:38) @lasted(35m7s)
+  ✔ Manage select menu ticket creation @started(25-06-23 16:29) @done(25-06-24 00:35) @lasted(8h6m19s)
+  ✔ Manage button ticket creation @started(25-06-24 22:02) @done(25-06-25 02:28) @lasted(4h26m9s)
+  ✔ Add default ticket emoji @started(25-06-26 02:40) @done(25-06-26 03:41) @lasted(1h1m10s)
+  ✔ Get guild locale on /setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
+
+Fixme:
+  ☐ Default categories broken in `/server-info` ~embed~ message

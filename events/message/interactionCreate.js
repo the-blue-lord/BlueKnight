@@ -1,15 +1,18 @@
 const BlueEvent = require("../../structures/BlueEvent");
 
-const button_router = require("../../routes/button-router");
-const command_router = require("../../routes/commands-router");
+const router = require("../../routes/router");
 
 module.exports = class InteractionCreate extends BlueEvent {
     constructor(client) {
         super(client, "interactionCreate");
     }
 
-    run(interaction) {
-        if(interaction.isChatInputCommand()) command_router(interaction);
-        if(interaction.isButton()) button_router(interaction);
+    async run(interaction) {
+        if(interaction.isChatInputCommand()) await router.command(interaction);
+        else if(interaction.isButton()) await router.button(interaction);
+        else if(interaction.isStringSelectMenu()) await router.menu(interaction);
+        else if(interaction.isModalSubmit()) await router.modal(interaction);
+
+        return;
     }
 };

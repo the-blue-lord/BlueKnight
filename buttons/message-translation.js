@@ -1,33 +1,57 @@
+const Discord = require("discord.js");
 const yaml = require("yaml");
 const fs = require("fs");
 
 const BlueButton = require("../structures/BlueButton");
 const BlueMessage = require("../structures/BlueMessage");
+const getServerInfo = require("../utilis/getServerInfo");
 
-module.exports = class MessageTranslation extends BlueButton {
-    constructor(interaction) {
-        super("message-translation");
+module.exports = class MessageTranslationButton extends BlueButton {
+    constructor(client, message_id = "unknown-message", from_language = "en", to_language = "en", flag = "🇬🇧") {
+        const data = message_id + "_" + from_language + "_" + to_language;
+        super(client, "message-translation", data);
+
+        this.message_id = message_id;
+        this.from_language = from_language;
+        this.to_language = to_language;
+
+        this.button.setEmoji(flag)
+            .setLabel(to_language.toUpperCase())
+            .setStyle("Primary");
     }
 
-    async run(action, data, interaction) {        
+    async run(action, interaction) {
         if(action != this.action) return;
 
-        const message_id = data[0];
-        const from_lan = data[1];
-        const to_lan = data[2];
+        if(this.message_id == "server-info") {
+            await interaction.deferReply({
+                flags: Discord.MessageFlags.Ephemeral
+            });
+
+            const msg = await getServerInfo(this.client, interaction.guild.id, this.to_language)
+
+            await interaction.editReply({
+                embeds: [msg.embed],
+                files: msg.attachments,
+                components: msg.components,
+                flags: Discord.MessageFlags.Ephemeral
+            });
+    
+            return;
+        }
 
         const og_msg = interaction.message.embeds[0].description;
-        const def_msg = yaml.parse(fs.readFileSync("./configs/messages.yml", "utf-8"))[message_id].content[from_lan];
+        const def_msg = yaml.parse(fs.readFileSync("./configs/messages.yml", "utf-8"))[this.message_id].content[this.from_language];
 
         const variables = getVariables(og_msg, def_msg);
 
-        const message = new BlueMessage(interaction.client, message_id, to_lan, variables);
+        const message = new BlueMessage(interaction.client, this.message_id, this.to_language, variables);
 
-        interaction.reply({
+        await interaction.reply({
             embeds: [message.embed],
-            files: message.files,
+            files: message.attachments,
             components: message.components,
-            ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
         });
 
         return;

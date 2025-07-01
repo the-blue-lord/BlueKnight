@@ -34,20 +34,20 @@ initCommands();
 // Initializers
 
 function initProcessListeners() {
-    process.on('SIGINT', async () => {
+    process.on("SIGINT", async () => {
         if (global.DATABASE) {
             global.DATABASE.end();
-            console.log('Database connection closed.');
+            console.log("Database connection closed.");
         }
         process.exit(0);
     });
     
-    process.on('uncaughtException', async (err) => {
-        console.error('Uncaught Exception:', err);
+    process.on("uncaughtException", async (err) => {
+        console.error("Uncaught Exception:", err);
     });
     
-    process.on('unhandledRejection', async (reason, promise) => {
-        console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    process.on("unhandledRejection", async (reason, promise) => {
+        console.error("Unhandled Rejection at:", promise, "reason:", reason);
     });
 }
 
@@ -58,7 +58,7 @@ function initDatabase() {
         user: process.env.USER,
         password: process.env.PASSWORD,
         database: process.env.DATABASE,
-        charset: 'utf8mb4'
+        charset: "utf8mb4"
     });
 
     global.EVENTS_FOLDERS = "events";

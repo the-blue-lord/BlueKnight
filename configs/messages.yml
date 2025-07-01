@@ -15,9 +15,9 @@ unknown-message:
     it: "Messaggio sconosciuto"
     es: "Mensaje desconocido"
   content:
-    en: "Error fetching data for message **`<!--message-id--!>`**. The error has already been reported in the logs, it will be solved as soon as possible."
-    it: "Errore recuperando le infomazioni del messaggio **`<!--message-id--!>`**. L'errore è già stato riportato nei registri, sarà risolto il prima possibile."
-    es: "Error recuperando las inforaciones del mensaje **`<!--message-id--!>`**. El error ya ha sido reportado en los registros, se solucionarà lo antes posible."
+    en: "Error fetching data for message **`<!--unknown_message_id--!>`**. The error has already been reported in the logs, it will be solved as soon as possible."
+    it: "Errore recuperando le infomazioni del messaggio **`<!--unknown_message_id--!>`**. L'errore è già stato riportato nei registri, sarà risolto il prima possibile."
+    es: "Error recuperando las inforaciones del mensaje **`<!--unknown_message_id--!>`**. El error ya ha sido reportado en los registros, se solucionarà lo antes posible."
 
 unknown-command:
   type: "error"
@@ -30,3 +30,198 @@ unknown-command:
     it: "Il comando che hai appena eseguito sembra essere sconosciuto o non definto. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto."
     es: "El comando que has intentado ejecutar parece ser desconocido o no estar definido. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo."
 
+ticket-opened:
+  type: "success"
+  title:
+    en: "Ticket opened"
+    it: "Ticket aperto"
+    es: "Ticket abierto"
+  content:
+    en: "The user <@<!--user_id--!>> succesfully opened the ticket <#<!--channel_id--!>>."
+    it: "L'utente <@<!--user_id--!>> ha aperto con successo il ticket <#<!--channel_id--!>>."
+    es: "El usuario <@<!--user_id--!>> ha abierto con éxito el ticket <#<!--channel_id--!>>."
+
+unknown-category:
+  type: "error"
+  title:
+    en: "Unknown category"
+    it: "Categoria sconosciuta"
+    es: "Categoría desconocida"
+  content:
+    en: "The category you just tried to select appears to be unknown or not defined. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below."
+    it: "La categoria che hai appena selezionato sembra essere sconosciuta o non definita. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto."
+    es: "La categoría que has intentado seleccionar parece ser desconocida o no estar definida. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo."
+
+not-admin:
+  type: "error"
+  title:
+    en: "Not an admin"
+    it: "Non sei un amministratore"
+    es: "No eres un administrador"
+  content:
+    en: "The command you just tried to run is allowed only for Bot Administators, to be one you must be a server admin or at least have the BotAdmin role specified in the bot settings."
+    it: "Il comando che hai appena eseguito è permesso solo agli Amministratori del Bot, per esserlo devi essere un amministratore del server o avere almeno il ruolo BotAdmin specificato nelle impostazioni del bot."
+    es: "El comando que acabas de ejecutar está permitido solo para los Administradores del Bot, para serlo tienes que ser un administrador del servidor o tener al menos el rol BotAdmin especificado en la configuración del bot."
+
+unknown-embed:
+  type: "error"
+  title:
+    en: "Unknown embed"
+    it: "Embed sconosciuto"
+    es: "Embed desconocido"
+  content:
+    en: "The embed you just tried to display appears to be unknown or not defined. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below."
+    it: "L'embed che hai appena provato a visualizzare sembra essere sconosciuto o non definito. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto."
+    es: "El embed que acabas de intentar mostrar parece ser desconocido o no estar definido. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo."
+
+setup-successful:
+  type: "success"
+  title:
+    en: "Setup successful"
+    it: "Setup completato"
+    es: "Configuración exitosa"
+  content:
+    en: "The server has been successfully set up in the bot's database. You can now start using the bot's commands."
+    it: "Il server è stato configurato con successo nel database del bot. Ora puoi iniziare ad usare i comandi del bot."
+    es: "El servidor ha sido configurado con éxito en la base de datos del bot. Ahora puedes empezar a usar los comandos del bot."
+
+already-setup:
+  type: "error"
+  title:
+    en: "Already setup"
+    it: "Già configurato"
+    es: "Ya configurado"
+  content:
+    en: "The server has already been set up in the bot's database. You can already use the bot's commands."
+    it: "Il server è già stato configurato nel database del bot. Puoi già usare i comandi del bot."
+    es: "El servidor ya ha sido configurado en la base de datos del bot. Ya puedes usar los comandos del bot."
+
+not-setup:
+  type: "error"
+  title:
+    en: "Server not setup"
+    it: "Server non configurato"
+    es: "Servidor no configurado"
+  content:
+    en: "The server has not been set up in the bot's database yet. To do so, run the `/setup` command."
+    it: "Il server non è ancora stato configurato nel database del bot. Per farlo, esegui il comando `/setup`."
+    es: "El servidor aún no ha sido configurado en la base de datos del bot. Para hacerlo, ejecuta el comando `/setup`."
+
+no-categories:
+  type: "error"
+  title:
+    en: "No categories"
+    it: "Nessuna categoria"
+    es: "Sin categorías"
+  content:
+    en: "There are no categories available for the ticketing system in this server: please contact the server administrator to set them up. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below.\n\n> **TIP**\n> If you are a BotAdmin, you should be able to setup the categories by running `/set-ticket_category` or `/set-add_ticket_category`."
+    it: "Non ci sono categorie disponibili per il sistema di ticketing in questo server: ontatta l'amministratore del server per impostarle. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto.\n\n> **SUGGERIMENTO**\n> Se sei un BotAdmin, dovresti essere in grado di impostare le categorie eseguendo `/set-ticket_category` o `/set-add_ticket_category`."
+    es: "No hay categorías disponibles para el sistema de tickets en este servidor: por favor, contacta al administrador del servidor para configurarlas. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo.\n\n> **CONSEJO**\n> Si eres un BotAdmin, deberías poder configurar las categorías ejecutando `/set-ticket_category` o `/set-add_ticket_category`."
+
+server-info:
+  type: "info"
+  title:
+    en: "Server information"
+    it: "Informazioni del server"
+    es: "Información del servidor"
+  content:
+    en: "## Roles:\n**Vip Role:** <@&<!--vip_role--!>>\n**BotAdmin Role:** <@&<!--admin_role--!>>\n\n## Default categories:\n**Ticket Category:** <#<!--ticket_category--!>>\n**Vip Ticket Category:** <#<!--vip_ticket_category--!>>\n\n## Additional categories:\n<!--ticket_categories/category_info--!>"
+    it: "## Ruoli:\n**Ruolo VIP:** <@&<!--vip_role--!>>\n**Ruolo BotAdmin:** <@&<!--admin_role--!>>\n\n## Categorie predefinite:\n**Categoria Ticket:** <#<!--ticket_category--!>>\n**Categoria Ticket Vip:** <#<!--vip_ticket_category--!>>\n\n## Categorie aggiuntive:\n<!--ticket_categories/category_info--!>"
+    es: "## Roles:\n**Rol VIP:** <@&<!--vip_role--!>>\n**Rol BotAdmin:** <@&<!--admin_role--!>>\n\n## Categorías predefinidas:\n**Categoría Tickets:** <#<!--ticket_category--!>>\n**Categoría Tickets Vip:** <#<!--vip_ticket_category--!>>\n\n## Categorías adicionales:\n<!--ticket_categories/category_info--!>"
+  
+category-info:
+  type: "support"
+  title:
+    en: "support"
+  content:
+    en: "**\"<!--category_name--!>\" category:**\n> **Description:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Channels:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
+    it: "**Categoria \"<!--category_name--!>\":**\n> **Descrizione:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Canali:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
+    es: "**Categoría \"<!--category_name--!>\":**\n> **Descripción:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Canales:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
+
+viprole-setup:
+  type: "success"
+  title:
+    en: "VIP role setup"
+    it: "Ruolo VIP impostato"
+    es: "Rol VIP configurado"
+  content:
+    en: "The VIP role has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
+    it: "Il ruolo VIP è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
+    es: "El rol VIP ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+
+adminrole-setup:
+  type: "success"
+  title:
+    en: "BotAdmin role setup"
+    it: "Ruolo BotAdmin impostato"
+    es: "Rol BotAdmin configurado"
+  content:
+    en: "The BotAdmin role has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
+    it: "Il ruolo BotAdmin è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
+    es: "El rol BotAdmin ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+
+category-setup:
+  type: "success"
+  title:
+    en: "Category setup"
+    it: "Categoria impostata"
+    es: "Categoría configurada"
+  content:
+    en: "The category has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
+    it: "La categoria è stata impostata con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
+    es: "La categoría ha sido configurada con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+
+category-added:
+  type: "success"
+  title:
+    en: "Category added"
+    it: "Categoria aggiunta"
+    es: "Categoría añadida"
+  content:
+    en: "The category has been successfully added to the bot's database. You can check everything went as expected by running the `/server-info` command."
+    it: "La categoria è stata aggiunta con successo al database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
+    es: "La categoría ha sido añadida con éxito a la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+
+category-removed:
+  type: "success"
+  title:
+    en: "Category removed"
+    it: "Categoria rimossa"
+    es: "Categoría eliminada"
+  content:
+    en: "The category has been successfully removed from the bot's database. You can check everything went as expected by running the `/server-info` command."
+    it: "La categoria è stata rimossa con successo dal database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
+    es: "La categoría ha sido eliminada con éxito de la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+
+panel-updated:
+  type: "success"
+  title:
+    en: "Ticket panel updated"
+    it: "Pannello dei ticket aggiornato"
+    es: "Panel de tickets actualizado"
+  content:
+    en: "The ticket panel has been successfully updated. You can check everything went as expected by running the `/tck-panel` command."
+    it: "Il pannello dei ticket è stato aggiornato con successo. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/tck-panel`."
+    es: "El panel de tickets ha sido actualizado con éxito. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/tck-panel`."
+
+category-used:
+  type: "error"
+  title:
+    en: "Ticket category name already in use"
+    it: "Nome della categoria dei ticket già in uso"
+    es: "Nombre de la categoría de tickets ya en uso"
+  content:
+    en: "The name you just tried to use for the ticket category is already in use by another category. Please choose a different name.\n\nIf you belive this is an error, you can\n* see the list of categories by running the `/server-info` command and then going to the tickets page\n* run the `/set-remove_ticket_category` command with the ticket category name you just use to delete that category from the bot's database and then re-run `/set-add_ticket_category`."
+    it: "Il nome che hai appena provato ad usare per la categoria dei ticket è già in uso da un'altra categoria. Per favore, scegli un nome diverso.\n\nSe credi ci sia un errore, puoi\n* vedere la lista delle categorie eseguendo il comando `/server-info` e poi andando alla pagina dei ticket\n* eseguire il comando `/set-remove_ticket_category` con il nome della categoria dei ticket che hai appena usato per eliminare quella categoria dal database del bot e poi rieseguire `/set-add_ticket_category`."
+    es: "El nombre que acabas de intentar usar para la categoría de tickets ya está en uso por otra categoría. Por favor, elige un nombre diferente.\n\nSi crees que hay un error, puedes\n* ver la lista de categorías ejecutando el comando `/server-info` y luego yendo a la página de tickets\n* ejecutar el comando `/set-remove_ticket_category` con el nombre de la categoría de tickets que acabas de usar para eliminar esa categoría de la base de datos del bot y luego volver a ejecutar `/set-add_ticket_category`."
+
+language-setup:
+  type: "success"
+  title:
+    en: "Language changed"
+    it: "Lingua cambiata"
+    es: "Idioma cambiado"
+  content:
+    en: "The bot's server language was successfully changed"
+    it: "[IT] The bot's server language was successfully changed"
+    es: "[ES] The bot's server language was successfully changed"

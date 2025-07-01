@@ -1,0 +1,104 @@
+# Short input = 1
+# Paragraph input = 2
+
+customize-panel:
+  title:
+    en: "Customize ticket panel"
+    it: "Personalizza pannello dei ticket"
+    es: "Personalizar panel de tickets"
+  inputs:
+    - id: "panel_title"
+      required: false
+      style: 1
+      label:
+        en: "Panel title"
+        it: "Titolo del pannello"
+        es: "Título del panel"
+      placeholder:
+        en: "The title that will be displayed on the ticket panel. Leave blank to not change it."
+        it: "Il titolo che verrà visualizzato sul pannello dei ticket. Lascia vuoto per non cambiarlo."
+        es: "El título que se mostrará en el panel de tickets. Deja en blanco para no cambiarlo."
+    - id: "panel_description"
+      required: false
+      style: 2
+      label:
+        en: "Panel description"
+        it: "Descrizione del pannello"
+        es: "Descripción del panel"
+      placeholder:
+        en: "The description that will be displayed on the ticket panel. Leave blank to not change it."
+        it: "La descrizione che verrà visualizzata sul pannello dei ticket. Lascia vuoto per non cambiarla."
+        es: "La descripción que se mostrará en el panel de tickets. Deja en blanco para no cambiarla."
+    - id: "panel_color"
+      required: false
+      style: 2
+      label:
+        en: "Panel color"
+        it: "Colore del pannello"
+        es: "Color del panel"
+      placeholder:
+        en: "The color panel in HEX code (e.g. #03bafc). Leave blank to not change it."
+        it: "Il colore del pannello in codice HEX (es. #03bafc). Lascia vuoto per non cambiarlo."
+        es: "El color del panel en código HEX (ej. #03bafc). Deja en blanco para no cambiarlo."
+
+category-questions:
+  title:
+    en: "Questions for this category"
+    it: "Domande per questa categoria"
+    es: "Preguntas para esta categoría"
+  inputs:
+    - id: "question_0"
+      required: false
+      style: 1
+      label:
+        en: "Question 1"
+        it: "Domanda 1"
+        es: "Pregunta 1"
+      placeholder:
+        en: "First question (leave empty if you don't need it)"
+        it: "Prima domanda (lascia vuoto se non ti serve)"
+        es: "Primera pregunta (deja vacío si no la necesitas)"
+    - id: "question_1"
+      required: false
+      style: 1
+      label:
+        en: "Question 2"
+        it: "Domanda 2"
+        es: "Pregunta 2"
+      placeholder:
+        en: "Second question (leave empty if you don't need it)"
+        it: "Seconda domanda (lascia vuoto se non ti serve)"
+        es: "Segunda pregunta (deja vacío si no la necesitas)"
+    - id: "question_2"
+      required: false
+      style: 1
+      label:
+        en: "Question 3"
+        it: "Domanda 3"
+        es: "Pregunta 3"
+      placeholder:
+        en: "Third question (leave empty if you don't need it)"
+        it: "Terza domanda (lascia vuoto se non ti serve)"
+        es: "Tercera pregunta (deja vacío si no la necesitas)"
+    - id: "question_3"
+      required: false
+      style: 1
+      label:
+        en: "Question 4"
+        it: "Domanda 4"
+        es: "Pregunta 4"
+      placeholder:
+        en: "Fourth question (leave empty if you don't need it)"
+        it: "Quarta domanda (lascia vuoto se non ti serve)"
+        es: "Cuarta pregunta (deja vacío si no la necesitas)"
+    - id: "question_4"
+      required: false
+      style: 1
+      label:
+        en: "Question 5"
+        it: "Domanda 5"
+        es: "Pregunta 5"
+      placeholder:
+        en: "Fifth question (leave empty if you don't need it)"
+        it: "Quinta domanda (lascia vuoto se non ti serve)"
+        es: "Quinta pregunta (deja vacío si no la necesitas)"

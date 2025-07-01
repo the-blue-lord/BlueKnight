@@ -1,0 +1,48 @@
+supported_languages:
+  - - id: "en"
+      flag: "🇬🇧"
+    - id: "it"
+      flag: "🇮🇹"
+    - id: "es"
+      flag: "🇪🇸"
+
+setup-info:
+  title:
+    en: "Setup information"
+    it: "Informazioni di setup"
+    es: "Información de configuración"
+  description:
+    en: "**IMPORTANT: Before doing any of the steps below, setup the server in the bot database by doing `/setup`**\n\nThis bot has plenty of customisable features.\nAll the commands that let you customize this features start with `/set-` and are only available for BotAdmins.\n\n**Who are BotAdmins?**\nA BotAdmin is somone who is server administrator or at least has the role specified in the settings to access BotAdmin commands."
+    it: "Questo bot ha molte funzionalità personalizzabili.\nTutti i comandi che ti permettono di personalizzare queste funzionalità iniziano con `/set-` e sono disponibili solo per i BotAdmin.\n\n**Chi sono i BotAdmin?**\nUn BotAdmin è qualcuno che è amministratore del server o ha almeno il ruolo specificato nelle impostazioni per accedere ai comandi BotAdmin."
+    es: "Este bot tiene muchas características personalizables.\nTodos los comandos que te permiten personalizar estas características comienzan con `/set-` y solo están disponibles para los BotAdmins.\n\n**¿Quiénes son los BotAdmins?**\nUn BotAdmin es alguien que es administrador del servidor o tiene al menos el rol especificado en la configuración para acceder a los comandos BotAdmin."
+  fields:
+    - inline: false
+      name:
+        en: "Tickets"
+        it: "Ticket"
+        es: "Tickets"
+      value:
+        en: "If you follow this instructions you will be ready to manage the bot ticketing service:\n* Run `/tck-panel` to display the ticket panel\n* Run `/set-ticket_panel` to customize it\n* (optional) Re-run `/tck-panel` to see the changes"
+        it: "Se segui queste istruzioni sarai pronto a gestire il servizio di ticketing del bot:\n* Esegui `/tck-panel` per visualizzare il pannello dei ticket\n* Esegui `/set-ticket_panel` per personalizzarlo\n* (opzionale) Riesegui `/tck-panel` per vedere i cambiamenti"
+        es: "Si sigues estas instrucciones estarás listo para gestionar el servicio de tickets del bot:\n* Ejecuta `/tck-panel` para mostrar el panel de tickets\n* Ejecuta `/set-ticket_panel` para personalizarlo\n* (opcional) Vuelve a ejecutar `/tck-panel` para ver los cambios"
+
+ticket-questions:
+  title:
+    en: "Answers"
+    it: "Risposte"
+    es: "Respuestas"
+  description:
+    en: "The answers the user gave to the category questions."
+    it: "Le risposte che l'utente ha dato alle domande della categoria."
+    es: "Las respuestas que el usuario dio a las preguntas de la categoría."
+  templates:
+    question:
+      inline: false
+      name:
+        en: "**<!--question--!>**"
+        it: "**<!--question--!>**"
+        es: "**<!--question--!>**"
+      value:
+        en: "<!--answer--!>"
+        it: "<!--answer--!>"
+        es: "<!--answer--!>"

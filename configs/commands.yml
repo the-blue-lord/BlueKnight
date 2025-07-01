@@ -4,14 +4,14 @@
 # 
 # <command name>:
 #   description: <the description of the command> (string)
-#   test: <weather the command should be shown or not> (false/true)
+#   test: <whether the command should be shown or not> (false/true)
 #   options: <the options needed for this command> (array of command_option)
 #
 #   <command_option>:
 #     id: <the id of the option>
 #     name: <the name of the option wich will be displayed bold on the left> (string)
 #     description <the description of the option wich will be displayed on the right> (right)
-#     required: <weather it's mandatory to input the option before sending> (true/false)
+#     required: <whether it's mandatory to input the option before sending> (true/false)
 #     type: <what type of data can be inputted in this option> (application_command_option_type)
 #
 #     <application_command_option_type>:
@@ -29,24 +29,276 @@
 # 
 # __________________________________________________
 
+
+# VARIABLES
+
+language-choices: &language_choices
+  - name: "English"
+    value: "en"
+  - name: "Italiano"
+    value: "it"
+  - name: "Español"
+    value: "es"
+
+
+# MESSAGES 
+
+msg-already-setup:
+  description: "Send already-setup message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-category-used:
+  description: "Send category-used message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-no-categories:
+  description: "Send no-categories message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-not-admin:
+  description: "Send not-admin message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-not-setup:
+  description: "Send not-setup message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-setup-successful:
+  description: "Send setup-successful message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-ticket-opened:
+  description: "Send ticket-opened message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-unknown-category:
+  description: "Send unknown-category message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-unknown-command:
+  description: "Send unknown-command message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-unknown-embed:
+  description: "Send unknown-embed message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+msg-unknown-message:
+  description: "Send unknown-message message"
+  test: true
+  options:
+    - name: "language"
+      description: "The message language"
+      required: false
+      type: 3
+      choices: *language_choices
+
+# MISC
+
 ping:
   description: "Get bot ping"
   test: false
 
-unknown-command:
-  decription: "Send unknwon-command message"
+server-info:
+  description: "Display information on the server"
+  test: true
+
+setup-info:
+  description: "Display information on how to setup the bot"
+  test: true
+
+
+
+# SETTINGS
+
+set-add_ticket_category:
+  description: "Add a ticket category to the server"
   test: true
   options:
-    - name: "localisation"
-      description: "The message language"
+    - name: "name"
+      description: "The name of the category to be added (it must be unique)"
+      required: true
+      type: 3
+    - name: "description"
+      description: "The description of the category to be added"
+      required: true
+      type: 3
+    - name: "normal-category"
+      description: "The channel category where you want a normal ticket of this ticket category to be placed"
+      required: true
+      type: 7
+    - name: "vip-category"
+      description: "The channel category where you want a vip ticket of this ticket category to be placed"
+      required: true
+      type: 7
+    - name: "emoji"
+      description: "The emoji for this category (USE ONLY SIMPLE EMOJIS)"
+      required: true
+      type: 3
+    - name: "category-helper"
+      description: "The role (apart from helper and BotAdmin role) that can manage tickets in this category"
+      required: false
+      type: 8
+
+set-admin_role:
+  description: "Setup the BotAdmin role in the bot database"
+  test: true
+  options:
+    - name: "role"
+      description: "The role that can run every bot command, even the most delicate ones (settings commands)"
+      required: false
+      type: 8
+
+set-default_ticket_emoji:
+  description: "Set the default emoji for the tickets"
+  test: true
+  options:
+    - name: "emoji"
+      description: "The emoji to be used as the default ticket emoji"
       required: true
       type: 3
 
-unknown-message:
-  decription: "Send unknwon-message message"
+set-language:
+  description: "Set the language for this server"
   test: true
   options:
-    - name: "localisation"
-      description: "The message language"
+    - name: "language"
+      description: "The language you want the bot to use"
       required: true
       type: 3
+      choices: *language_choices
+
+set-helper_role:
+  description: "Setup the helper role in the bot database"
+  test: true
+  options:
+    - name: "role"
+      description: "The role that can interact with every command of the bot, except the most delicate ones (settings commands)"
+      required: false
+      type: 8
+
+set-remove_ticket_category:
+  description: "Remove a ticket category from the server"
+  test: true
+  options:
+    - name: "name"
+      description: "The name of the category to be removed"
+      required: true
+      type: 3
+
+set-ticket_category:
+  description: "Set the ticket category for the server"
+  test: true
+  options:
+    - name: "category"
+      description: "The channel category to be set"
+      required: true
+      type: 7
+    - name: "vip"
+      description: "Whether this is the VIP category"
+      required: true
+      type: 5
+
+set-ticket_panel:
+  description: "Customize the ticket panel"
+  test: true
+
+set-vip_role:
+  description: "Setup the vip role in the bot database"
+  test: true
+  options:
+    - name: "role"
+      description: "The role that will be used as the VIP role"
+      required: false
+      type: 8
+
+set-vip_ticket_emoji:
+  description: "Set the emoji that will be displayed next to the category emoji in vip tickets name"
+  test: true
+  options:
+    - name: "emoji"
+      description: "The emoji to be used as the vip ticket emoji"
+      required: true
+      type: 3
+
+
+setup:
+  description: "Add server to the bot database"
+  test: true
+
+
+
+# TICKETING
+
+tck-panel:
+  description: "Display the ticket panel"
+  test: true
+
+tck-open:
+  test: false
+  description: "Open a new ticket for a user."
+  options:
+    - name: "user"
+      description: "The user whom to open the ticket to"
+      required: true
+      type: 9

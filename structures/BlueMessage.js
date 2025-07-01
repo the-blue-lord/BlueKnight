@@ -7,12 +7,14 @@ module.exports = class BlueMessage {
         this.messages = yaml.parse(fs.readFileSync("./configs/messages.yml", "utf-8"));
         this.messageData = this.messages[message_id] || this.messages["unknown-message"];
 
+        const real_message_id = this.messages[message_id] ? message_id : "unknown-message";
+
         this.title = this.messageData.title[language] || this.messageData.title["en"];
         this.content = this.messageData.content[language] || this.messageData.content["en"];
         this.type = this.messageData.type || "undefined";
         this.type = this.type[0].toUpperCase() + this.type.slice(1);
 
-        variables["message-id"] = message_id;
+        variables["unknown_message_id"] = variables["unknown_message_id"] || message_id;
         Object.entries(variables).forEach(([key, value]) => {
             this.title = this.title.replaceAll("<!--" + key + "--!>", value);
             this.content = this.content.replaceAll("<!--" + key + "--!>", value);
@@ -31,6 +33,10 @@ module.exports = class BlueMessage {
             this.attachments.push(new AttachmentBuilder("./images/error-icon.png"));
             authorIconUrl = "attachment://error-icon.png";
             this.color = "#ff0000";
+        }
+        else if(this.type == "Info") {
+            authorIconUrl = client.user.avatarURL();
+            this.color = "#03bafc";
         }
         else {
             this.color = this.messages["default-color"];
@@ -56,19 +62,19 @@ module.exports = class BlueMessage {
         this.components = []
 
         for(const sub_languages of this.messages.supported_languages) {
+            const MessageTranslationButton = require("../buttons/message-translation");
             const row = new ActionRowBuilder();
             for(const lan of sub_languages) {
-                const button = new ButtonBuilder()
-                    .setEmoji(lan.flag)
-                    .setCustomId("message-translation_"+message_id+"_"+language+"_"+lan.id)
-                    .setLabel(lan.id.toUpperCase())
-                    .setStyle("Primary");
+                const button = new MessageTranslationButton(client, real_message_id, language, lan.id, lan.flag);
 
-                    button.variables = variables;
-
-                row.addComponents(button);
+                row.addComponents(button.button);
             }
             this.components.push(row);
+        }
+
+        for(const lan of this.messages.supported_languages) {
+            // TODO: complete logic after creating MessageTranslationMenu
+            //const menu_row
         }
 
         return this;

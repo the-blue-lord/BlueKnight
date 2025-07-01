@@ -5,10 +5,18 @@ module.exports = class BlueEvent {
     }
 
     init() {
-        this.client.on(this.name, this.run);
+        this.client.on(this.name, async (...args) => {
+            try {
+                await this.run(...args);
+            }
+            catch (err) {
+                if(this.name == "error") return;
+                this.client.emit("error", err, this.name);
+            }
+        });
     }
 
-    run() {
-        consolex.event("No run function for the following event: " + this.name)
+    async run() {
+        console.event("No run function for the following event: " + this.name)
     }
 };

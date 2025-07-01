@@ -5,7 +5,7 @@ module.exports = class Ready extends BlueEvent {
         super(client, "ready");
     }
 
-    run(client) {
+    async run(client) {
         console.event("Client", client?.user?.username, "is online");
     }
 };
