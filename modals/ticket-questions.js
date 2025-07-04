@@ -93,7 +93,7 @@ module.exports = class TicketQuestionsModal extends BlueModal {
             });
         }
 
-        const answer_embed = new BlueEmbed(interaction.client, "ticket-questions", locale, answer_fields);
+        const answer_embed = new BlueEmbed(interaction.client, "ticket-questions", locale, {}, answer_fields);
 
         await ticketChannel.send({
             embeds: [answer_embed.embed],

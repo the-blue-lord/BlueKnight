@@ -6,6 +6,30 @@ supported_languages:
     - id: "es"
       flag: "🇪🇸"
 
+server-info:
+  title:
+    en: "Server information"
+  description:
+    en: "Basic server configuration info"
+  fields:
+    - inline: false
+      name:
+        en: "Roles"
+      value:
+        en: "**Vip Role:** <@&<!--vip_role--!>>\n**BotAdmin Role:** <@&<!--admin_role--!>>"
+    - inline: false
+      name:
+        en: "Default ticket categories"
+      value:
+        en: "**Regular Ticket Category:** <#<!--ticket_category--!>>\n**Vip Ticket Category:** <#<!--vip_ticket_category--!>>"
+  templates:
+    additional-category:
+      inline: false
+      name:
+        en: "\"<!--category_name--!>\" ticket category:"
+      value:
+        en: "> **Description:** <!--category_description--!>\n> **Channels:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n> **Emoji:** <!--category_emoji--!>"
+
 setup-info:
   title:
     en: "Setup information"

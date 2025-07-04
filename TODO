@@ -3,8 +3,8 @@ Todo:
   ☐ Upgrade translation system
     ☐ Add translation for embeds
     ☐ Replace translate buttons with translate string select menu
-  ☐ Substitute message-reply with embed-reply in `/server-info` command
-    ☐ Implement category template in the embed data for server-info
+  ✔ Substitute message-reply with embed-reply in `/server-info` command @started(25-07-04 03:00) @done(25-07-04 03:57) @lasted(57m45s)
+    ✔ Implement category template in the embed data for server-info @done(25-07-04 03:00)
     Note: Translation for server info is implmented differently using specific `getServerInfo` function, located at `utilis\getServerInfo.js`
   ☐ Add logging
   ☐ Use specific classes to create custom objects

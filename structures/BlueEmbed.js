@@ -3,15 +3,18 @@ const yaml = require("yaml");
 const fs = require("fs");
 
 module.exports = class BlueEmbed {
-    constructor(client, embed_id, language = "en", additional_fields = []) {
+    constructor(client, embed_id, language = "en", variables = {}, additional_fields = []) {
         const embeds = yaml.parse(fs.readFileSync("./configs/embeds.yml", "utf-8"));
         const embedData = embeds[embed_id];
 
         if(!embedData) return null;
 
+        const title = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (embedData.title[language] || embedData.title["en"]));
+        const description = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (embedData.description[language] || embedData.description["en"]));
+
         this.embed = new EmbedBuilder()        
-            .setTitle(embedData.title[language] || embedData.title["en"])
-            .setDescription(embedData.description[language] || embedData.description["en"])
+            .setTitle(title)
+            .setDescription(description)
             .setColor(embedData.color || "#03bafc")
             .setTimestamp()
             .setFooter({
@@ -22,8 +25,8 @@ module.exports = class BlueEmbed {
         const fields = embedData.fields || [];
         for(const field of fields) {
             this.embed.addFields({
-                name: field.name[language] || field.name["en"],
-                value: field.value[language] || field.value["en"],
+                name: Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (field.name[language] || field.name["en"])),
+                value: Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (field.value[language] || field.value["en"])),
                 inline: field.inline || false
             });
         }
@@ -32,14 +35,14 @@ module.exports = class BlueEmbed {
             const template = embedData.templates[field.type];
             if(!template) continue;
 
-            var field_name = template.name[language] || template.name["en"];
+            var field_name = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.name[language] || template.name["en"]));
             for(const key in field.vars) {
-                field_name = field_name.replaceAll("<!--" + key + "--!>", field.vars[key]);
+                field_name = field_name.replaceAll(`<!--${key}--!>`, field.vars[key]);
             }
 
-            var field_value = template.value[language] || template.value["en"];
+            var field_value = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.value[language] || template.value["en"]));
             for(const key in field.vars) {
-                field_value = field_value.replaceAll("<!--" + key + "--!>", field.vars[key]);
+                field_value = field_value.replaceAll(`<!--${key}--!>`, field.vars[key]);
             }
 
             this.embed.addFields({

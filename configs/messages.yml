@@ -118,26 +118,6 @@ no-categories:
     it: "Non ci sono categorie disponibili per il sistema di ticketing in questo server: ontatta l'amministratore del server per impostarle. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto.\n\n> **SUGGERIMENTO**\n> Se sei un BotAdmin, dovresti essere in grado di impostare le categorie eseguendo `/set-ticket_category` o `/set-add_ticket_category`."
     es: "No hay categorías disponibles para el sistema de tickets en este servidor: por favor, contacta al administrador del servidor para configurarlas. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo.\n\n> **CONSEJO**\n> Si eres un BotAdmin, deberías poder configurar las categorías ejecutando `/set-ticket_category` o `/set-add_ticket_category`."
 
-server-info:
-  type: "info"
-  title:
-    en: "Server information"
-    it: "Informazioni del server"
-    es: "Información del servidor"
-  content:
-    en: "## Roles:\n**Vip Role:** <@&<!--vip_role--!>>\n**BotAdmin Role:** <@&<!--admin_role--!>>\n\n## Default categories:\n**Ticket Category:** <#<!--ticket_category--!>>\n**Vip Ticket Category:** <#<!--vip_ticket_category--!>>\n\n## Additional categories:\n<!--ticket_categories/category_info--!>"
-    it: "## Ruoli:\n**Ruolo VIP:** <@&<!--vip_role--!>>\n**Ruolo BotAdmin:** <@&<!--admin_role--!>>\n\n## Categorie predefinite:\n**Categoria Ticket:** <#<!--ticket_category--!>>\n**Categoria Ticket Vip:** <#<!--vip_ticket_category--!>>\n\n## Categorie aggiuntive:\n<!--ticket_categories/category_info--!>"
-    es: "## Roles:\n**Rol VIP:** <@&<!--vip_role--!>>\n**Rol BotAdmin:** <@&<!--admin_role--!>>\n\n## Categorías predefinidas:\n**Categoría Tickets:** <#<!--ticket_category--!>>\n**Categoría Tickets Vip:** <#<!--vip_ticket_category--!>>\n\n## Categorías adicionales:\n<!--ticket_categories/category_info--!>"
-  
-category-info:
-  type: "support"
-  title:
-    en: "support"
-  content:
-    en: "**\"<!--category_name--!>\" category:**\n> **Description:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Channels:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
-    it: "**Categoria \"<!--category_name--!>\":**\n> **Descrizione:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Canali:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
-    es: "**Categoría \"<!--category_name--!>\":**\n> **Descripción:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Canales:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n"
-
 viprole-setup:
   type: "success"
   title:
