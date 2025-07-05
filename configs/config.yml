@@ -1,0 +1,7 @@
+languages:
+  - id: "en"
+    flag: "🇬🇧"
+  - id: "it"
+    flag: "🇮🇹"
+  - id: "es"
+    flag: "🇪🇸"

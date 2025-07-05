@@ -61,6 +61,8 @@ module.exports = class BlueMessage {
 
         this.components = []
 
+        /*
+
         for(const sub_languages of this.messages.supported_languages) {
             const MessageTranslationButton = require("../buttons/message-translation");
             const row = new ActionRowBuilder();
@@ -72,10 +74,14 @@ module.exports = class BlueMessage {
             this.components.push(row);
         }
 
-        for(const lan of this.messages.supported_languages) {
-            // TODO: complete logic after creating MessageTranslationMenu
-            //const menu_row
-        }
+        */
+
+        const TranslateMessageMenu = require("../menus/translate-message");
+
+        //const translation_menu = new TranslateMessageMenu(client, message_id, language);
+        //translation_menu.build();
+
+        this.components.push(new TranslateMessageMenu(client, message_id, language).build());
 
         return this;
     }

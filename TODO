@@ -2,12 +2,15 @@ Todo:
   ☐ Add Report and feedback buttons
   ☐ Upgrade translation system
     ☐ Add translation for embeds
-    ☐ Replace translate buttons with translate string select menu
+    ☐ Implement select menu translation @started(25-07-05 02:31)
+      ✔ Replace translate buttons with translate string select menu @started(25-07-05 02:31) @done(25-07-05 03:19) @lasted(49m)
+      ☐ Deal with different translating request
   ✔ Substitute message-reply with embed-reply in `/server-info` command @started(25-07-04 03:00) @done(25-07-04 03:57) @lasted(57m45s)
     ✔ Implement category template in the embed data for server-info @done(25-07-04 03:00)
     Note: Translation for server info is implmented differently using specific `getServerInfo` function, located at `utilis\getServerInfo.js`
   ☐ Add logging
   ☐ Use specific classes to create custom objects
+  // Note: menus are manually generated and only when triggered recognized via
   ✔ Add guild localisation @started(25-06-25 03:59) @done(25-06-25 04:20) @lasted(21m16s)
   ✔ Solve /* Localisation */ issue @started(25-06-26 02:03) @done(25-06-26 02:38) @lasted(35m7s)
   ✔ Manage select menu ticket creation @started(25-06-23 16:29) @done(25-06-24 00:35) @lasted(8h6m19s)
