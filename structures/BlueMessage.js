@@ -59,27 +59,9 @@ module.exports = class BlueMessage {
             });
         }
 
-        this.components = []
-
-        /*
-
-        for(const sub_languages of this.messages.supported_languages) {
-            const MessageTranslationButton = require("../buttons/message-translation");
-            const row = new ActionRowBuilder();
-            for(const lan of sub_languages) {
-                const button = new MessageTranslationButton(client, real_message_id, language, lan.id, lan.flag);
-
-                row.addComponents(button.button);
-            }
-            this.components.push(row);
-        }
-
-        */
+        this.components = [];
 
         const TranslateMessageMenu = require("../menus/translate-message");
-
-        //const translation_menu = new TranslateMessageMenu(client, message_id, language);
-        //translation_menu.build();
 
         this.components.push(new TranslateMessageMenu(client, message_id, language).build());
 

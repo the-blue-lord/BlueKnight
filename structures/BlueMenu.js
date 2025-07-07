@@ -3,6 +3,6 @@ module.exports = class BlueMenu {
         this.client = client;
         this.action = menu_action;
 
-        this.id = menu_action + menu_data ? ("_" + menu_data) : "";
+        this.id = menu_action + (menu_data ? "_" + menu_data : "");
     }
 };

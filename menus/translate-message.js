@@ -1,9 +1,11 @@
-const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require("discord.js");
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, Emoji } = require("discord.js");
 const BlueMenu = require("../structures/BlueMenu");
 const fs = require("fs");
 const yaml = require("yaml");
 
-const getVariables = require("../utilis/getVariables")
+const BlueMessage = require("../structures/BlueMessage");
+
+const getVariables = require("../utilis/getVariables");
 
 module.exports = class TranslateMessageMenu extends BlueMenu {
     constructor(client, message_id, from_language = "en") {
@@ -17,14 +19,18 @@ module.exports = class TranslateMessageMenu extends BlueMenu {
 
     build() {
         this.menu.setCustomId(this.id);
-
-        this.menu.setPlaceholder("Translate");
-
-        this.component = new ActionRowBuilder();
         
         const languages = yaml.parse(fs.readFileSync("./configs/config.yml", "utf-8"))?.languages || [];
+
+        const translating_languages = languages.filter(lan => lan.id != this.language);
+
+        const placeholders = this.language.toUpperCase() + "  >>  " + translating_languages.map(ele => ele.id.toUpperCase()).join("/");
+
+        this.menu.setPlaceholder(placeholders);
+
+        this.component = new ActionRowBuilder();
             
-        for(const lan of languages) {
+        for(const lan of translating_languages) {
             const option = new StringSelectMenuOptionBuilder()
                 .setLabel(lan.id.toUpperCase())
                 .setValue(lan.id)
@@ -55,7 +61,7 @@ module.exports = class TranslateMessageMenu extends BlueMenu {
             embeds: [message.embed],
             files: message.attachments,
             components: message.components,
-            flags: Discord.MessageFlags.Ephemeral
+            flags: MessageFlags.Ephemeral
         });
     }
 };
