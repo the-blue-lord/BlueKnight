@@ -9,26 +9,43 @@ supported_languages:
 server-info:
   title:
     en: "Server information"
+    it: "Informazioni sul server"
+    es: "Información del servidor"
   description:
     en: "Basic server configuration info"
+    it: "Informazioni di base sulla configurazione del server"
+    es: "Información básica de configuración del servidor"
   fields:
     - inline: false
       name:
         en: "Roles"
+        it: "Ruoli"
+        es: "Roles"
       value:
-        en: "**Vip Role:** <@&<!--vip_role--!>>\n**BotAdmin Role:** <@&<!--admin_role--!>>"
+        en: "Vip Role: <@&<!--vip_role--!>>\nBotAdmin Role: <@&<!--admin_role--!>>"
+        it: "Ruolo Vip: <@&<!--vip_role--!>>\nRuolo BotAdmin: <@&<!--admin_role--!>>"
+        es: "Rol Vip: <@&<!--vip_role--!>>\nRol BotAdmin: <@&<!--admin_role--!>>"
     - inline: false
       name:
         en: "Default ticket categories"
+        it: "Categorie ticket predefinite"
+        es: "Categorías de ticket predeterminadas"
       value:
-        en: "**Regular Ticket Category:** <#<!--ticket_category--!>>\n**Vip Ticket Category:** <#<!--vip_ticket_category--!>>"
+        en: "_Regular Ticket Category:_ <#<!--ticket_category--!>>\n_Vip Ticket Category:_ <#<!--vip_ticket_category--!>>"
+        it: "_Categoria Ticket Normale:_ <#<!--ticket_category--!>>\n_Categoria Ticket Vip:_ <#<!--vip_ticket_category--!>>"
+        es: "_Categoría de Ticket Normal:_ <#<!--ticket_category--!>>\n_Categoría de Ticket Vip:_ <#<!--vip_ticket_category--!>>"
+    - template_type: "additional-category"
   templates:
     additional-category:
       inline: false
       name:
         en: "\"<!--category_name--!>\" ticket category:"
+        it: "Categoria ticket \"<!--category_name--!>\":"
+        es: "Categoría de ticket \"<!--category_name--!>\":"
       value:
-        en: "> **Description:** <!--category_description--!>\n> **Channels:** <#<!--category_id--!>> (**vip**: <#<!--vip_category_id--!>>)\n> **Helper:** <@&<!--helper_role--!>>\n> **Emoji:** <!--category_emoji--!>"
+        en: "> _Description:_ <!--category_description--!>\n> _Channels:_ <#<!--category_id--!>> (_vip:_ <#<!--vip_category_id--!>>)\n> _Helper:_ <@&<!--helper_role--!>>\n> _Emoji:_ <!--category_emoji--!>"
+        it: "> _Descrizione:_ <!--category_description--!>\n> _Canali:_ <#<!--category_id--!>> (_vip:_ <#<!--vip_category_id--!>>)\n> _Helper:_ <@&<!--helper_role--!>>\n> _Emoji:_ <!--category_emoji--!>"
+        es: "> _Descripción:_ <!--category_description--!>\n> _Canales:_ <#<!--category_id--!>> (_vip:_ <#<!--vip_category_id--!>>)\n> _Helper:_ <@&<!--helper_role--!>>\n> _Emoji:_ <!--category_emoji--!>"
 
 setup-info:
   title:
@@ -37,8 +54,8 @@ setup-info:
     es: "Información de configuración"
   description:
     en: "**IMPORTANT: Before doing any of the steps below, setup the server in the bot database by doing `/setup`**\n\nThis bot has plenty of customisable features.\nAll the commands that let you customize this features start with `/set-` and are only available for BotAdmins.\n\n**Who are BotAdmins?**\nA BotAdmin is somone who is server administrator or at least has the role specified in the settings to access BotAdmin commands."
-    it: "Questo bot ha molte funzionalità personalizzabili.\nTutti i comandi che ti permettono di personalizzare queste funzionalità iniziano con `/set-` e sono disponibili solo per i BotAdmin.\n\n**Chi sono i BotAdmin?**\nUn BotAdmin è qualcuno che è amministratore del server o ha almeno il ruolo specificato nelle impostazioni per accedere ai comandi BotAdmin."
-    es: "Este bot tiene muchas características personalizables.\nTodos los comandos que te permiten personalizar estas características comienzan con `/set-` y solo están disponibles para los BotAdmins.\n\n**¿Quiénes son los BotAdmins?**\nUn BotAdmin es alguien que es administrador del servidor o tiene al menos el rol especificado en la configuración para acceder a los comandos BotAdmin."
+    it: "**IMPORTANTE: Prima di eseguire uno qualsiasi dei passaggi seguenti, configura il server nel database del bot eseguendo `/setup`**\n\nQuesto bot ha molte funzionalità personalizzabili.\nTutti i comandi che ti permettono di personalizzare queste funzionalità iniziano con `/set-` e sono disponibili solo per i BotAdmin.\n\n**Chi sono i BotAdmin?**\nUn BotAdmin è qualcuno che è amministratore del server o ha almeno il ruolo specificato nelle impostazioni per accedere ai comandi BotAdmin."
+    es: "**IMPORTANTE: Antes de realizar cualquiera de los siguientes pasos, configura el servidor en la base de datos del bot ejecutando `/setup`**\n\nEste bot tiene muchas características personalizables.\nTodos los comandos que te permiten personalizar estas características comienzan con `/set-` y solo están disponibles para los BotAdmins.\n\n**¿Quiénes son los BotAdmins?**\nUn BotAdmin es alguien que es administrador del servidor o tiene al menos el rol especificado en la configuración para acceder a los comandos BotAdmin."
   fields:
     - inline: false
       name:
@@ -59,6 +76,8 @@ ticket-questions:
     en: "The answers the user gave to the category questions."
     it: "Le risposte che l'utente ha dato alle domande della categoria."
     es: "Las respuestas que el usuario dio a las preguntas de la categoría."
+  fields:
+    - template_type: "question"
   templates:
     question:
       inline: false

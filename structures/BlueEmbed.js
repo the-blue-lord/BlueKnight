@@ -2,6 +2,8 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("
 const yaml = require("yaml");
 const fs = require("fs");
 
+const zeroWidth = require("../utilis/zeroWidthSteganography");
+
 module.exports = class BlueEmbed {
     constructor(client, embed_id, language = "en", variables = {}, additional_fields = []) {
         const embeds = yaml.parse(fs.readFileSync("./configs/embeds.yml", "utf-8"));
@@ -22,8 +24,39 @@ module.exports = class BlueEmbed {
                 text: "BlueKnight"
             });
 
+        const data = {};
+
         const fields = embedData.fields || [];
+
         for(const field of fields) {
+            const template_type = field.template_type;
+            if(template_type) {
+                data[template_type] = 0;
+                for(const additional_field of additional_fields.filter(f => f.type == template_type)) {
+                    data[template_type]++;
+                    const template = embedData.templates[additional_field.type];
+                    if(!template) continue;
+
+                    var field_name = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.name[language] || template.name["en"]));
+                    for(const key in additional_field.vars) {
+                        field_name = field_name.replaceAll(`<!--${key}--!>`, additional_field.vars[key]);
+                    }
+
+                    var field_value = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.value[language] || template.value["en"]));
+                    for(const key in additional_field.vars) {
+                        field_value = field_value.replaceAll(`<!--${key}--!>`, additional_field.vars[key]);
+                    }
+
+                    this.embed.addFields({
+                        name: field_name,
+                        value: field_value,
+                        inline: additional_field.inline || template.inline || false
+                    });
+                }
+
+                continue;
+            }
+
             this.embed.addFields({
                 name: Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (field.name[language] || field.name["en"])),
                 value: Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (field.value[language] || field.value["en"])),
@@ -31,41 +64,14 @@ module.exports = class BlueEmbed {
             });
         }
 
-        for(const field of additional_fields) {
-            const template = embedData.templates[field.type];
-            if(!template) continue;
+        const encoded_data = zeroWidth.encode(JSON.stringify(data));
 
-            var field_name = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.name[language] || template.name["en"]));
-            for(const key in field.vars) {
-                field_name = field_name.replaceAll(`<!--${key}--!>`, field.vars[key]);
-            }
+        this.embed.setDescription(description + "\u2063" + encoded_data);
 
-            var field_value = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (template.value[language] || template.value["en"]));
-            for(const key in field.vars) {
-                field_value = field_value.replaceAll(`<!--${key}--!>`, field.vars[key]);
-            }
-
-            this.embed.addFields({
-                name: field_name,
-                value: field_value,
-                inline: field.inline || template.inline || false
-            });
-        }
+        const TranslateEmbedMenu = require("../menus/translate-embed");
 
         this.components = [];
-        for(const sub_languages of embeds.supported_languages) {
-            const row = new ActionRowBuilder();
-            for(const lan of sub_languages) {
-                row.addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("embed-translation_"+embed_id+"_"+language+"_"+lan.id)
-                        .setStyle(ButtonStyle.Primary)
-                        .setLabel(lan.id.toUpperCase())
-                        .setEmoji(lan.flag)
-                );
-            }
-            this.components.push(row);
-        }
+        this.components.push(new TranslateEmbedMenu(client, embed_id, language).build());
 
         return;
     }

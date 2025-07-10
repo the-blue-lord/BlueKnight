@@ -1,7 +1,7 @@
 const BlueCommand = require("../../structures/BlueCommand");
 const BlueMessage = require("../../structures/BlueMessage");
 
-module.exports = class AlreadySetup extends BlueCommand {
+module.exports = class CategoryUsed extends BlueCommand {
     constructor(client) {
         super(client, "msg-category-used");
     }

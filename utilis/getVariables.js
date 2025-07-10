@@ -1,7 +1,7 @@
 module.exports = (variables_string, placeholders_string, starting_delimiter = "<!--", ending_delimiter = "--!>") => {
     const startingIndex = placeholders_string.indexOf(starting_delimiter);
 
-    const newPlaceholders = placeholders_string.slice(startingIndex+4)+"<additional-padding>";
+    const newPlaceholders = placeholders_string.slice(startingIndex+starting_delimiter.length)+"<additional-padding>";
     let newVariables = variables_string.slice(startingIndex)+"<additional-padding>";
 
     const splittedPlaceholders = newPlaceholders.split(starting_delimiter).map(e => e.split(ending_delimiter)).flat();
