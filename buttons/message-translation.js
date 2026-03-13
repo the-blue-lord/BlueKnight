@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const BlueButton = require("../structures/BlueButton");
 const BlueMessage = require("../structures/BlueMessage");
-const getServerInfo = require("../utilis/getServerInfo");
+const getServerInfo = require("../utils/getServerInfo");
 
 module.exports = class MessageTranslationButton extends BlueButton {
     constructor(client, message_id = "unknown-message", from_language = "en", to_language = "en", flag = "🇬🇧") {

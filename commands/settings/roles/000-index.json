@@ -1,0 +1,6 @@
+{
+    "name": "roles",
+    "description": "Commands related to role management.",
+    "test": false,
+    "type": 2
+}

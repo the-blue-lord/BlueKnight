@@ -10,9 +10,12 @@
   "author": "Mr. Blue (the-blue-lord)",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^7.0.1",
     "chalk": "^5.3.0",
+    "discord-html-transcripts": "^3.2.0",
     "discord.js": "^14.16.3",
     "dotenv": "^16.5.0",
+    "jszip": "^3.10.1",
     "mysql": "^2.18.1",
     "node": "^20.18.1",
     "yaml": "^2.6.1"

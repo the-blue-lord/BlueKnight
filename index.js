@@ -3,6 +3,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const yaml = require("yaml");
+const path = require("path");
 const mysql = require("mysql");
 const { Client, GatewayIntentBits, Partials, REST, Routes, applicationDirectory } = require("discord.js");
 
@@ -17,6 +18,16 @@ console.error = (...msg) => old_error("[ERROR]", ...msg);
 
 
 
+// Global variables
+
+global.EVENTS_FOLDERS = "events";
+global.COMMANDS_FOLDER = "commands";
+global.BUTTONS_FOLDER = "buttons";
+global.MENUS_FOLDER = "menus";
+global.MODALS_FOLDER = "modals";
+
+
+
 // Initializations
 
 initProcessListeners();
@@ -24,10 +35,6 @@ initProcessListeners();
 initDatabase();
 
 initClient();
-
-initEvents();
-
-initCommands();
 
 
 
@@ -56,20 +63,14 @@ function initDatabase() {
         host: process.env.HOST,
         port: process.env.PORT,
         user: process.env.USER,
-        password: process.env.PASSWORD,
         database: process.env.DATABASE,
         charset: "utf8mb4"
+        //password: process.env.PASSWORD,
     });
-
-    global.EVENTS_FOLDERS = "events";
-    global.COMMANDS_FOLDERS = "commands";
-    global.BUTTONS_FOLDER = "buttons";
-    global.MENUS_FOLDER = "menus";
-    global.MODALS_FOLDER = "modals";
 }
 
-function initClient() {
-    global.client = new Client({
+async function initClient() {
+    const client = new Client({
         intents: [
             GatewayIntentBits.Guilds,
             GatewayIntentBits.GuildMessages,
@@ -80,70 +81,32 @@ function initClient() {
             Partials.Message
         ]
     });
-    global.client.commands = yaml.parse(fs.readFileSync("configs/commands.yml", "utf-8"));
+    client.commands = yaml.parse(fs.readFileSync("configs/commands.yml", "utf-8"));
 
-    global.client.login(process.env.TOKEN);
+    await client.login(process.env.TOKEN);
+
+    global.client = client;
+
+    initEvents(client);
+
+    initCommands(client);
 }
 
-async function initCommands() {
-    // Get command folders
-    const command_folders = fs.readdirSync(global.COMMANDS_FOLDERS);
-    const commands = [];
+async function initCommands(client) {
+    // Fetch commands
+    const { test_commands, commands } = getFolderCommands(client, "commands");
 
-    // For each command folder
-    command_folders.forEach(command_folder => {
-        // Get commands in the folder
-        const commandFolderPath = global.COMMANDS_FOLDERS + "/" + command_folder;
-        const commandFiles = fs.readdirSync(commandFolderPath).filter(c => c.split(".").reverse()[0] == "js").map(c => "./" + commandFolderPath + "/" + c.split(".").slice(0, -1).join("."));
+    //console.log(JSON.stringify(test_commands, null, 4));
 
-        // Store the commands in an array
-        commandFiles.forEach(commandFile => {
-            const commandClass = require(commandFile);
-            const commandObject = new commandClass(client);
-            commands.push(commandObject);
-        });
-    });
+    // Register the commands
+    await client.application?.commands?.set(commands);
+    await client.guilds?.cache?.get(process.env.GUILD_ID)?.commands?.set(test_commands);
 
-    // Split the public commands and the testing commands
-    const application_commands = commands.filter(command => !command.test && !command.guild_specific);
-    const test_commands = commands.filter(command => command.test);
-    const guild_commands = commands.filter(command => !command.test && command.guild_specific);
-
-    // Get the rest object, the public commands and the testing commands
-    const rest = new REST().setToken(process.env.TOKEN);
-    const applicationCommands = await rest.get(Routes.applicationCommands(process.env.CLIENT_ID));
-
-    if(parseInt(process.env.UPDATE_GUILD_COMMANDS)) {
-        console.command("Updating guild commands...");
-        for(const [guild_id, guild] of client.guilds.cache) {
-            const commandsInGuild = await rest.get(Routes.applicationGuildCommands(process.env.CLIENT_ID, guild.id));
-            if(commandsInGuild.length) {
-                await Promise.all(commandsInGuild.map(async command => {
-                    await rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, guild.id, command.id));
-                }));
-            }
-            if(guild_commands.length) await rest.put(Routes.applicationCommands(process.env.CLIENT_ID, guild.id), {body: guild_commands.map(command => command.getData())});
-        }
-        console.command("Guild commands updated");
-    }
-
-    if(parseInt(process.env.UPDATE_COMMANDS)) {
-        console.command("Updating commands...");
-
-        // Replace old public commands with the new ones //
-        await Promise.all(applicationCommands.map(async command => {
-            await rest.delete(Routes.applicationCommand(process.env.CLIENT_ID, command.id));
-        }));
-        await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: application_commands.map(command => command.getData())});
-
-        // Add new testing commands //
-        await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {body: test_commands.map(command => command.getData())});
-
-        console.command("Commands updated");
-    }
+    // Log commands registration
+    console.command("Commands registered");
 }
 
-async function initEvents() {
+async function initEvents(client) {
     // Get event folders
     const event_folders = fs.readdirSync(global.EVENTS_FOLDERS);
 
@@ -160,4 +123,56 @@ async function initEvents() {
             eventObject.init();
         });
     });
+}
+
+function readDirSeparately(dirPath) {
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+
+    const files = [];
+    const directories = [];
+
+    for (const entry of entries) {
+        if (entry.isFile()) {
+            files.push(entry.name);
+        } else if (entry.isDirectory()) {
+            directories.push(entry.name);
+        }
+    }
+
+    return { files, directories };
+}
+
+function getFolderCommands(client, folderPath) {
+    const commands = [];
+    const test_commands = [];
+
+    const { files, directories } = readDirSeparately(folderPath);
+
+    files.forEach(file => {
+        if(file == "000-index.json") return;
+        const commandClass = require(path.join(__dirname, folderPath, file));
+        const commandObject = new commandClass(client);
+        const data = commandObject.getData();
+        test_commands.push(data);
+        if(!commandObject.test) commands.push(data);
+    });
+
+    directories.forEach(directory => {
+        const subData = JSON.parse(fs.readFileSync(path.join(folderPath, directory, "000-index.json"), "utf-8"));
+        const { test_commands: test_options, commands: options} = getFolderCommands(client, path.join(folderPath, directory));
+        test_commands.push({
+            "type": subData.type,
+            "name": subData.name,
+            "description": subData.description,
+            "options": test_options
+        });
+        if(!subData.test) commands.push({
+            "type": subData.type,
+            "name": subData.name,
+            "description": subData.description,
+            "options": options
+        });
+    });
+
+    return {test_commands, commands};
 }

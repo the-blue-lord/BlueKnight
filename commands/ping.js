@@ -1,4 +1,4 @@
-const BlueCommand = require("../../structures/BlueCommand");
+const BlueCommand = require("../structures/BlueCommand");
 
 module.exports = class Ping extends BlueCommand {
     constructor(client) {

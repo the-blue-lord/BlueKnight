@@ -1,0 +1,6 @@
+{
+    "name": "message",
+    "description": "Commands related to messaging.",
+    "test": false,
+    "type": 1
+}

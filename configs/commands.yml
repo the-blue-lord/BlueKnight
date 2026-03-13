@@ -44,6 +44,7 @@ language-choices: &language_choices
 # MESSAGES 
 
 msg-already-setup:
+  name: "already-setup"
   description: "Send already-setup message"
   test: true
   options:
@@ -54,6 +55,7 @@ msg-already-setup:
       choices: *language_choices
 
 msg-category-used:
+  name: "category-used"
   description: "Send category-used message"
   test: true
   options:
@@ -64,6 +66,7 @@ msg-category-used:
       choices: *language_choices
 
 msg-no-categories:
+  name: "no-categories"
   description: "Send no-categories message"
   test: true
   options:
@@ -74,6 +77,7 @@ msg-no-categories:
       choices: *language_choices
 
 msg-not-admin:
+  name: "not-admin"
   description: "Send not-admin message"
   test: true
   options:
@@ -84,6 +88,7 @@ msg-not-admin:
       choices: *language_choices
 
 msg-not-setup:
+  name: "not-setup"
   description: "Send not-setup message"
   test: true
   options:
@@ -94,6 +99,7 @@ msg-not-setup:
       choices: *language_choices
 
 msg-setup-successful:
+  name: "setup-successful"
   description: "Send setup-successful message"
   test: true
   options:
@@ -104,6 +110,7 @@ msg-setup-successful:
       choices: *language_choices
 
 msg-ticket-opened:
+  name: "ticket-opened"
   description: "Send ticket-opened message"
   test: true
   options:
@@ -114,6 +121,7 @@ msg-ticket-opened:
       choices: *language_choices
 
 msg-unknown-category:
+  name: "unknown-category"
   description: "Send unknown-category message"
   test: true
   options:
@@ -124,6 +132,7 @@ msg-unknown-category:
       choices: *language_choices
 
 msg-unknown-command:
+  name: "unknown-command"
   description: "Send unknown-command message"
   test: true
   options:
@@ -134,6 +143,7 @@ msg-unknown-command:
       choices: *language_choices
 
 msg-unknown-embed:
+  name: "unknown-embed"
   description: "Send unknown-embed message"
   test: true
   options:
@@ -144,6 +154,7 @@ msg-unknown-embed:
       choices: *language_choices
 
 msg-unknown-message:
+  name: "unknown-message"
   description: "Send unknown-message message"
   test: true
   options:
@@ -156,14 +167,22 @@ msg-unknown-message:
 # MISC
 
 ping:
+  name: "ping"
   description: "Get bot ping"
   test: false
 
 server-info:
+  name: "server"
   description: "Display information on the server"
   test: true
 
+tck-info:
+  name: "tck"
+  description: "Infomration about the server ticketing system"
+  test: true
+
 setup-info:
+  name: "setup"
   description: "Display information on how to setup the bot"
   test: true
 
@@ -171,7 +190,28 @@ setup-info:
 
 # SETTINGS
 
+set-transcripts_channel:
+  name: "transcripts-channel"
+  description: "Set the channel where the ticket transcripts will be sent"
+  test: true
+  options:
+    - name: "channel"
+      description: "The channel where the ticket transcripts will be sent. Leave blank to disable the current channel."
+      required: false
+      type: 7
+
+set-default_cateogry_enable:
+  name: "default-category-enable"
+  description: "Enable the default category for the server (use one default category)"
+  test: true
+  
+set-default_cateogry_disable:
+  name: "default-category-disable"
+  description: "Disable the default category for the server (use ticket categories)"
+  test: true
+
 set-add_ticket_category:
+  name: "add-category"
   description: "Add a ticket category to the server"
   test: true
   options:
@@ -179,28 +219,9 @@ set-add_ticket_category:
       description: "The name of the category to be added (it must be unique)"
       required: true
       type: 3
-    - name: "description"
-      description: "The description of the category to be added"
-      required: true
-      type: 3
-    - name: "normal-category"
-      description: "The channel category where you want a normal ticket of this ticket category to be placed"
-      required: true
-      type: 7
-    - name: "vip-category"
-      description: "The channel category where you want a vip ticket of this ticket category to be placed"
-      required: true
-      type: 7
-    - name: "emoji"
-      description: "The emoji for this category (USE ONLY SIMPLE EMOJIS)"
-      required: true
-      type: 3
-    - name: "category-helper"
-      description: "The role (apart from helper and BotAdmin role) that can manage tickets in this category"
-      required: false
-      type: 8
 
 set-admin_role:
+  name: "admin"
   description: "Setup the BotAdmin role in the bot database"
   test: true
   options:
@@ -210,6 +231,7 @@ set-admin_role:
       type: 8
 
 set-default_ticket_emoji:
+  name: "default-emoji"
   description: "Set the default emoji for the tickets"
   test: true
   options:
@@ -219,6 +241,7 @@ set-default_ticket_emoji:
       type: 3
 
 set-language:
+  name: "language"
   description: "Set the language for this server"
   test: true
   options:
@@ -229,6 +252,7 @@ set-language:
       choices: *language_choices
 
 set-helper_role:
+  name: "helper"
   description: "Setup the helper role in the bot database"
   test: true
   options:
@@ -238,32 +262,34 @@ set-helper_role:
       type: 8
 
 set-remove_ticket_category:
+  name: "remove-category"
   description: "Remove a ticket category from the server"
   test: true
   options:
-    - name: "name"
-      description: "The name of the category to be removed"
+    - name: "category_id"
+      description: "The id of the category to be removed"
       required: true
-      type: 3
+      type: 4
+      autocomplete: true
 
 set-ticket_category:
-  description: "Set the ticket category for the server"
+  name: "default-category"
+  description: "Choose the default ticket category among the ones already added"
   test: true
   options:
-    - name: "category"
-      description: "The channel category to be set"
+    - name: "category_id"
+      description: "The id of the category you want to use as default for the server"
       required: true
-      type: 7
-    - name: "vip"
-      description: "Whether this is the VIP category"
-      required: true
-      type: 5
+      type: 4
+      autocomplete: true
 
 set-ticket_panel:
+  name: "panel"
   description: "Customize the ticket panel"
   test: true
 
 set-vip_role:
+  name: "vip"
   description: "Setup the vip role in the bot database"
   test: true
   options:
@@ -273,6 +299,7 @@ set-vip_role:
       type: 8
 
 set-vip_ticket_emoji:
+  name: "vip-emoji"
   description: "Set the emoji that will be displayed next to the category emoji in vip tickets name"
   test: true
   options:
@@ -290,15 +317,152 @@ setup:
 
 # TICKETING
 
-tck-panel:
-  description: "Display the ticket panel"
+tck-add:
+  name: "add"
+  description: "Add a user to the ticket"
   test: true
+  options:
+    - name: "user"
+      description: "The user to add"
+      required: true
+      type: 6
+    - name: "ticket-channel"
+      description: "The ticket where to add the member to"
+      required: false
+      type: 7
+
+tck-assign:
+  name: "assign"
+  description: "Assign a ticket to a category helper"
+  test: true
+  options:
+    - name: "user"
+      description: "The user to assign"
+      required: true
+      type: 6
+    - name: "ticket-channel"
+      description: "The ticket to assign"
+      required: false
+      type: 7
+
+tck-claim:
+  name: "claim"
+  description: "Claim a ticket as helper"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to claim"
+      required: false
+      type: 7
+
+tck-close:
+  name: "close"
+  description: "Close a ticket"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to be closed"
+      required: false
+      type: 7
+
+tck-delete:
+  name: "delete"
+  description: "Delete a ticket"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to be deleted"
+      required: false
+      type: 7
 
 tck-open:
+  name: "open"
   test: false
   description: "Open a new ticket for a user."
   options:
+    - name: "category_id"
+      description: "The category in which the ticket will be opened"
+      required: true
+      type: 4
+      autocomplete: true
     - name: "user"
       description: "The user whom to open the ticket to"
       required: true
       type: 9
+
+tck-panel:
+  name: "panel"
+  description: "Display the ticket panel"
+  test: true
+
+tck-remove:
+  name: "remove"
+  description: "Remove a user from the ticket"
+  test: true
+  options:
+    - name: "member"
+      description: "The member to remove"
+      required: true
+      type: 6
+    - name: "ticket-channel"
+      description: "The ticket from where to remove the member"
+      required: false
+      type: 7
+
+tck-reopen:
+  name: "reopen"
+  description: "Reopen a closed ticket"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to be closed"
+      required: false
+      type: 7
+
+tck-unassign:
+  name: "unassign"
+  description: "Unassign a ticket"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to unassign"
+      required: false
+      type: 7
+
+tck-unclaim:
+  name: "unclaim"
+  description: "Unclaim a ticket you are assigned to"
+  test: true
+  options:
+    - name: "ticket-channel"
+      description: "The ticket to unclaim"
+      required: false
+      type: 7
+
+tck-unmute:
+  name: "unmute"
+  description: "Unmuted a previously muted user inside the ticket"
+  test: true
+  options:
+    - name: "user"
+      description: "The user to unmute"
+      required: true
+      type: 6
+    - name: "ticket-channel"
+      description: "The ticket where to unmute the user"
+      required: false
+      type: 7
+
+tck-mute:
+  name: "mute"
+  description: "Mute a user inside the ticket"
+  test: true
+  options:
+    - name: "user"
+      description: "The user to mute"
+      required: true
+      type: 6
+    - name: "ticket-channel"
+      description: "The ticket where to mute the user"
+      required: false
+      type: 7

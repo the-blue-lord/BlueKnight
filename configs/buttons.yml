@@ -1,0 +1,95 @@
+# Button Styles
+# Primary: 1
+# Secondary: 2
+# Success: 3
+# Danger: 4
+# Link: 5
+# Premium: 6
+
+ask-reopening:
+  label:
+    en: "Ask re-opening"
+    it: "Richiedi riapertura"
+    es: "Pedir re-apertura"
+  style: 1
+  emoji: "🔁"
+
+close-ticket:
+  label:
+    en: "Close Ticket"
+    it: "Chiudi Ticket"
+    es: "Cerrar Ticket"
+  style: 4
+  emoji: "🔒"
+
+delete-ticket:
+  label:
+    en: "Delete Ticket"
+    it: "Elimina Ticket"
+    es: "Eliminar Ticket"
+  style: 4
+  emoji: "🗑️"
+
+open-ticket:
+  label:
+    en: "Open Ticket"
+    it: "Apri Ticket"
+    es: "Abrir Ticket"
+  style: 2
+  emoji: "📩"
+
+reopen-ticket:
+  label:
+    en: "Reopen Ticket"
+    it: "Riapri Ticket"
+    es: "Reabrir Ticket"
+  style: 3
+  emoji: "🔓"
+
+accept-reopening:
+  label:
+    en: "Accept re-opening"
+    it: "Accetta riapertura"
+    es: "Aceptar re-apertura"
+  style: 3
+  emoji: "✅"
+
+deny-reopening:
+  label:
+    en: "Deny re-opening"
+    it: "Rifiuta riapertura"
+    es: "Rechazar re-apertura"
+  style: 2
+  emoji: "❌"
+
+block-reopening:
+  label:
+    en: "Block further requests"
+    it: "Blocca ulteriori richieste"
+    es: "Bloquear solicitudes adicionales"
+  style: 2
+  emoji: "⛔"
+
+confirm-deletion:
+  label:
+    en: "Confirm Deletion"
+    it: "Conferma Eliminazione"
+    es: "Confirmar Eliminación"
+  style: 4
+  emoji: "🗑️"
+
+cancel-deletion:
+  label:
+    en: "Cancel Deletion"
+    it: "Annulla Eliminazione"
+    es: "Cancelar Eliminación"
+  style: 2
+  emoji: "🚫"
+
+add-category-questions:
+  label:
+    en: "Add Category Questions"
+    it: "Aggiungi Domande Categoria"
+    es: "Agregar Preguntas de Categoría"
+  style: 1
+  emoji: "➕"

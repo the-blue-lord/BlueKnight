@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
-const queryDatabase = require("../../utilis/queryDatabase");
+const BlueCommand = require("../../../structures/BlueCommand.js");
+const BlueMessage = require("../../../structures/BlueMessage.js");
+const queryDatabase = require("../../../utils/queryDatabase.js");
 
-module.exports = class StnViprole extends BlueCommand{
+module.exports = class StnAdminrole extends BlueCommand {
     constructor(client) {
-        super(client, "set-default_ticket_emoji");
+        super(client, "set-admin_role");
     }
 
     async run(interaction) {
@@ -17,7 +17,7 @@ module.exports = class StnViprole extends BlueCommand{
         const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
-        if(!this.isBotAdmin(interaction.member)) {
+        if(!(await this.isBotAdmin(interaction.member))) {
             const msg = new BlueMessage(this.client, "not-administrator", locale);
             await interaction.editReply({
                 embeds: [msg.embed],
@@ -26,6 +26,8 @@ module.exports = class StnViprole extends BlueCommand{
             });
             return;
         }
+
+        const roleId = interaction.guild.roles.cache.find(r => r.id == interaction.options?.get("role")?.value)?.id;
 
         if(guildData.length == 0) {
             const msg = new BlueMessage(this.client, "not-setup", locale);
@@ -39,10 +41,9 @@ module.exports = class StnViprole extends BlueCommand{
             return;
         }
 
-        const emoji = interaction.options?.get("emoji")?.value;
-        await queryDatabase("UPDATE `Ticketing` SET `default_emoji` = ? WHERE `guild_id` = ?", [emoji, interaction.guild.id]);
+        await queryDatabase("UPDATE `Guilds` SET `admin_role` = ? WHERE `guild_id` = ?", [roleId, interaction.guild.id]);
 
-        const msg = new BlueMessage(this.client, "viprole-setup", locale);
+        const msg = new BlueMessage(this.client, "adminrole-setup", locale);
 
         await interaction.editReply({
             embeds: [msg.embed],

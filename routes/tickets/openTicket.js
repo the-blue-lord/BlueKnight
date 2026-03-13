@@ -1,25 +1,32 @@
-const { OverwriteType, ChannelType, PermissionFlagsBits, PermissionsBitField } = require("discord.js");
-const queryDatabase = require("../../utilis/queryDatabase");
-const { type } = require("os");
+const { OverwriteType, ChannelType, PermissionFlagsBits, PermissionsBitField, ActionRowBuilder } = require("discord.js");
+const queryDatabase = require("../../utils/queryDatabase");
+const BlueEmbed = require("../../structures/BlueEmbed");
+const CloseTicketButton = require("../../buttons/close-ticket");
 
-module.exports = async (client, interaction, guild_id, category, user_id, vipTicket = false) => {
-    await fetchGuildCategories(guild_id);
-    const categoryId = category ? await getCategoryId(guild_id, category, vipTicket) : await getDefaultGuildCategory(guild_id, vipTicket);
-    const categoryRole = await getHelperRole(guild_id, category) || client.user.id;
-    const defaultTicketEmoji = await getDefaultEmoji(guild_id);
+module.exports = async (client, interaction, guild_id, category_id, user_id, vip_ticket = false) => {
+    const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [guild_id]);
+    const ticketingData = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [guild_id]);;
+    const categoryData = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [category_id]);
+    if(!guildData.length || !ticketingData.length || !categoryData?.length) return;
 
-    const vip_emoji = await getVipEmoji(guild_id) || "";
-    const emoji = await getCategoryEmoji(guild_id, category) || defaultTicketEmoji || "🎫";
+    const channel_id = categoryData[0].channel_id;
+    const vip_channel_id = categoryData[0].vip_channel_id;
+
+    const category_role = categoryData[0].helper_role || client.user.id;
+
+    const category_name = categoryData[0].category_name || "";
+    const vip_emoji = ticketingData[0].vip_emoji || "";
+    const emoji = categoryData[0].category_emoji || "🎫";
     const username = interaction.guild.members.cache.get(user_id)?.user?.username || "undefined";
 
-    const ticketChannelName = (vipTicket?vip_emoji:"") + emoji + "┃" + username + (category ? ("・" + category) : "");
+    const ticketChannelName = (vip_ticket ? vip_emoji : "") + emoji + "┃" + username + (category_name ? ("・" + category_name) : "");
 
-    if(!categoryId) return;
+    if(!channel_id || !vip_channel_id) return;
 
     const channel = await interaction.guild.channels.create({
         name: ticketChannelName,
         type: ChannelType.GuildText,
-        parent: categoryId,
+        parent: vip_ticket ? vip_channel_id : channel_id,
         permissionOverwrites: [
             {
                 type: OverwriteType.Role,
@@ -35,75 +42,27 @@ module.exports = async (client, interaction, guild_id, category, user_id, vipTic
                 allow: [PermissionFlagsBits.ViewChannel]
             },
             {
-                id: categoryRole,
+                id: category_role,
                 allow: [PermissionFlagsBits.ViewChannel]
             }
         ]
     });
+    await queryDatabase("INSERT INTO `Tickets` (`ticket_id`, `category_id`, `guild_id`, `user_id`) VALUES (?, ?, ?, ?)", [channel.id, category_id, guild_id, user_id]);
 
-    await queryDatabase("INSERT INTO `Tickets` (`ticket_id`, `guild_id`, `user_id`) VALUES (?, ?, ?)", [channel.id, guild_id, user_id]);
+    const locale = guildData[0]?.locale;
+    const embed = new BlueEmbed(client, "ticket-opened", locale, {
+        user_id: user_id,
+        category_name: category_name
+    });
+    
+    const close_button = new CloseTicketButton(client, locale);
+
+    const row = new ActionRowBuilder().addComponents(close_button.button);
+
+    await channel.send({
+        embeds: [embed.embed],
+        components: [...embed.components, row]
+    });
 
     return channel;
 };
-
-async function getDefaultGuildCategory(guild_id, vip = false) {
-    const ticketing_guilds = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [guild_id]);
-
-    if(vip) return ticketing_guilds[0]?.vip_ticket_category;
-
-    return ticketing_guilds[0]?.ticket_category;
-}
-
-async function fetchGuildCategories(guild_id) {
-    const result = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [guild_id]);
-
-    return result;
-}
-
-async function getCategoryId(guild_id, category, vip = false) {
-    const categories = await fetchGuildCategories(guild_id);
-
-    const categoryData = categories.find(cat => cat.category_name == category);
-
-    if(!categoryData) return null;
-
-    if(vip) return categoryData?.vip_channel_id;
-
-    return categoryData?.channel_id;
-}
-
-async function getHelperRole(guild_id, category) {
-    const categories = await fetchGuildCategories(guild_id);
-
-    const categoryData = categories.find(cat => cat.name == category);
-
-    if(!categoryData) return null;
-
-    return categoryData?.helper_role;
-}
-
-async function getCategoryEmoji(guild_id, category) {
-    const categories = await fetchGuildCategories(guild_id);
-
-    const categoryData = categories.find(cat => cat.category_name == category);
-
-    if(!categoryData) return null;
-
-    return categoryData?.category_emoji;
-}
-
-async function getVipEmoji(guild_id) {
-    const guildData = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [guild_id]);
-
-    if(!guildData.length) return null;
-
-    return guildData[0]?.vip_emoji;
-}
-
-async function getDefaultEmoji(guild_id) {
-    const guildData = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [guild_id]);
-
-    if(!guildData.length) return null;
-
-    return guildData[0]?.default_emoji;
-}

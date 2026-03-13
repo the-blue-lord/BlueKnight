@@ -1,14 +1,14 @@
-const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, Emoji } = require("discord.js");
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, Emoji, ComponentType } = require("discord.js");
 const BlueMenu = require("../structures/BlueMenu");
 const fs = require("fs");
 const yaml = require("yaml");
 
-const zeroWidth = require("../utilis/zeroWidthSteganography");
+const zeroWidth = require("../utils/zeroWidthSteganography");
 
-const BlueMessage = require("../structures/BlueMessage");
-
-const getVariables = require("../utilis/getVariables");
+const getVariables = require("../utils/getVariables");
 const BlueEmbed = require("../structures/BlueEmbed");
+const BlueButton = require("../structures/BlueButton");
+const rebuildComponents = require("../utils/rebuildComponents");
 
 module.exports = class TranslateEmbedMenu extends BlueMenu {
     constructor(client, embed_id, from_language = "en") {
@@ -53,21 +53,56 @@ module.exports = class TranslateEmbedMenu extends BlueMenu {
 
         const message_embed = interaction.message.embeds[0].data;
 
+        const translating_language = interaction.values[0];
+
+        const new_components = rebuildComponents(interaction.message.components);
+
+        new_components.forEach(row => 
+            row.components = row.components.map(component => {
+                const custom_id = component.data?.custom_id || component.customId;
+
+                const action = custom_id.split("_")[0];
+                const data = custom_id.split("_").slice(1);
+
+                if(component.data.type == ComponentType.Button) {
+                    const blue_button = new BlueButton(this.client, action, translating_language, data.join("_"));
+                    return blue_button.button;
+                }
+
+                if(action == "translate-embed") {
+                    const menu = new TranslateEmbedMenu(this.client, data[0], translating_language);
+                    return menu.build()?.components[0];
+                }
+                
+                const menus_files = fs.readdirSync("./menus");
+                for(const menu_file of menus_files) {
+                    const menuClass = require(`../menus/${menu_file}`);
+                    const menuObject = new menuClass(this.client, ...data);
+
+                    if(menuObject.action != action) continue;
+
+                    return menuObject.build()?.components[0];
+                }
+
+                return component;
+            })
+        );
+
+        const actual_description = message_embed.description.split("\u2063")[0];
         const hidden_data = message_embed.description.split("\u2063")[1];
         const data = JSON.parse(zeroWidth.decode(hidden_data));
-
-        const translating_language = interaction.values[0];
 
         const embedData = yaml.parse(fs.readFileSync("./configs/embeds.yml", "utf8"))[this.embed_id];
 
         const title_vars = getVariables(message_embed.title, embedData.title[this.language] || embedData.title["en"]);
-        const description_vars = getVariables(message_embed.description, embedData.description[this.language] || embedData.description["en"]);
+        const description_vars = getVariables(actual_description, embedData.description[this.language] || embedData.description["en"]);
 
         const variables = {...title_vars, ...description_vars};
         const additional_fields = [];
 
         var field_cnt = 0;
-        for(let i = 0; i < message_embed.fields.length; i++) {
+        const fields_length = message_embed.fields?.length || 0;
+        for(let i = 0; i < fields_length; i++) {
             const field = message_embed.fields[i];
             const def_field = embedData.fields[field_cnt];
             const template_type = def_field.template_type;
@@ -104,7 +139,7 @@ module.exports = class TranslateEmbedMenu extends BlueMenu {
 
         await interaction.reply({
             embeds: [embed.embed],
-            components: embed.components,
+            components: new_components,
             flags: MessageFlags.Ephemeral
         });
     }

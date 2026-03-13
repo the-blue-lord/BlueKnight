@@ -1,0 +1,6 @@
+{
+    "name": "help",
+    "description": "Displays general or specific help message",
+    "test": false,
+    "type": 1
+}

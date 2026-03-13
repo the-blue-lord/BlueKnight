@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 const BlueCommand = require("../../structures/BlueCommand");
 const BlueMessage = require("../../structures/BlueMessage");
-const queryDatabase = require("../../utilis/queryDatabase");
+const queryDatabase = require("../../utils/queryDatabase");
 const OpenTicketButton = require("../../buttons/open-ticket");
 
 module.exports = class TckPanel extends BlueCommand {
@@ -17,7 +17,7 @@ module.exports = class TckPanel extends BlueCommand {
         const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
-        if(!this.isBotAdmin(interaction.member)) {
+        if(!(await this.isBotAdmin(interaction.member))) {
             const msg = new BlueMessage(this.client, "not-admin", locale);
 
             interaction.editReply({
@@ -25,6 +25,8 @@ module.exports = class TckPanel extends BlueCommand {
                 components: msg.components,
                 files: msg.attachments
             });
+
+            return;
         }
 
         const embed = await this.getPanelEmbed(interaction.guild.id);
@@ -37,14 +39,17 @@ module.exports = class TckPanel extends BlueCommand {
                 components: msg.components,
                 files: msg.attachments
             });
+
+            return;
         }
 
         const ticketing_guilds = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [interaction.guild.id]);
         const categoriesData = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [interaction.guild.id]);
 
-        const generalCategory = ticketing_guilds[0].ticket_category || categoriesData[0];
+        const generalActive = ticketing_guilds[0]?.default_category_active;
+        const generalCategory = ticketing_guilds[0]?.default_ticket_category;
 
-        if(!categoriesData.length && !generalCategory) {
+        if(!categoriesData.length) {
             const msg = new BlueMessage(this.client, "no-categories", locale);
 
             interaction.editReply({
@@ -58,17 +63,16 @@ module.exports = class TckPanel extends BlueCommand {
 
         const row  = new ActionRowBuilder();
 
-        if(categoriesData.length > 1) {
+        if(!generalActive || generalActive == "0") {
             const selectMenu = new StringSelectMenuBuilder().setCustomId("open-ticket");
             
             for(const cat of categoriesData) {
                 const option = new StringSelectMenuOptionBuilder()
-                    .setLabel(cat.category_name)
-                    .setDescription(cat.category_description)
-                    .setValue(cat.category_name)
+                    .setLabel(cat.category_name || "unknown")
+                    .setDescription(cat.category_description || "unknown")
+                    .setValue(String(cat.category_id || "0"))
                     .setEmoji(cat.category_emoji || "🎫");
-
-
+                    
                 selectMenu.addOptions(option);
             }
 
@@ -76,7 +80,7 @@ module.exports = class TckPanel extends BlueCommand {
         }
         else {
             row.addComponents(
-                new OpenTicketButton(this.client, generalCategory.category_name).button
+                new OpenTicketButton(this.client, locale, generalCategory).button
             );
         }
 

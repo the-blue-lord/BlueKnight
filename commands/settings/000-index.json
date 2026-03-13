@@ -1,0 +1,6 @@
+{
+    "name": "set",
+    "description": "Commands related to system settings.",
+    "test": false,
+    "type": 1
+}

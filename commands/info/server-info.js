@@ -4,7 +4,7 @@ const BlueCommand = require("../../structures/BlueCommand");
 const BlueMessage = require("../../structures/BlueMessage");
 const BlueEmbed = require("../../structures/BlueEmbed");
 
-const queryDatabase = require("../../utilis/queryDatabase");
+const queryDatabase = require("../../utils/queryDatabase");
 
 module.exports = class ServerInfo extends BlueCommand {
     constructor(client) {
@@ -22,7 +22,7 @@ module.exports = class ServerInfo extends BlueCommand {
 
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
-        if(!this.isBotAdmin(interaction.member)) {
+        if(!(await this.isBotAdmin(interaction.member))) {
             const msg = new BlueMessage(this.client, "not-administrator", locale);
             await interaction.editReply({
                 embeds: [msg.embed],
@@ -48,12 +48,19 @@ module.exports = class ServerInfo extends BlueCommand {
             });
         }
 
+        const multi_negation = {
+            en: "not",
+            it: "non",
+            es: "no"
+        }
+
         const embed = new BlueEmbed(interaction.client, "server-info", locale, {
             vip_role: guildData[0].vip_role,
             admin_role: guildData[0].admin_role,
             ticket_category: ticketingData[0].ticket_category,
             vip_ticket_category: ticketingData[0].vip_ticket_category,
-            guild_id: interaction.guild.id
+            guild_id: interaction.guild.id,
+            default_category_information: additional_categories.length > 0 ? (multi_negation[locale] || "not") : "",
         }, additional_categories);
 
         if(!embed) {

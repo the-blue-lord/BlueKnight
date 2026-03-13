@@ -2,7 +2,7 @@ const BlueEvent = require("../../structures/BlueEvent");
 
 module.exports = class Ready extends BlueEvent {
     constructor(client) {
-        super(client, "ready");
+        super(client, "clientReady");
     }
 
     async run(client) {

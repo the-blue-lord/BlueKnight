@@ -1,6 +1,12 @@
 # Short input = 1
 # Paragraph input = 2
 
+# Channel Types:
+# DM = 1
+# GuildVoice = 2
+# GroupDM = 3
+# GuildCategory = 4
+
 customize-panel:
   title:
     en: "Customize ticket panel"
@@ -9,7 +15,7 @@ customize-panel:
   inputs:
     - id: "panel_title"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Panel title"
         it: "Titolo del pannello"
@@ -18,20 +24,28 @@ customize-panel:
         en: "Leave blank to not change it."
         it: "Lascia vuoto per non cambiarlo."
         es: "Deja en blanco para no cambiarlo."
+      value:
+        en: "<!--panel_title--!>"
+        it: "<!--panel_title--!>"
+        es: "<!--panel_title--!>"
     - id: "panel_description"
       required: false
-      style: 2
+      type: 2
       label:
-        en: "Panel description"
-        it: "Descrizione del pannello"
-        es: "Descripción del panel"
+        en: "Panel description (markdown supported)"
+        it: "Descrizione del pannello (markdown supportato)"
+        es: "Descripción del panel (markdown compatible)"
       placeholder:
         en: "Leave blank to not change it. Discord markdown compatible."
         it: "Lascia vuoto per non cambiarlo. Compatibile con il markdown di Discord."
         es: "Deja en blanco para no cambiarlo. Compatible con el markdown de Discord."
+      value:
+        en: "<!--panel_description--!>"
+        it: "<!--panel_description--!>"
+        es: "<!--panel_description--!>"
     - id: "panel_color"
       required: false
-      style: 2
+      type: 1
       label:
         en: "Panel color"
         it: "Colore del pannello"
@@ -40,6 +54,10 @@ customize-panel:
         en: "The color panel in HEX code (e.g. #03bafc). Leave blank to not change it."
         it: "Il colore del pannello in codice HEX (es. #03bafc). Lascia vuoto per non cambiarlo."
         es: "El color del panel en código HEX (ej. #03bafc). Deja en blanco para no cambiarlo."
+      value:
+        en: "<!--panel_color--!>"
+        it: "<!--panel_color--!>"
+        es: "<!--panel_color--!>"
 
 category-questions:
   title:
@@ -49,7 +67,7 @@ category-questions:
   inputs:
     - id: "question_0"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Question 1"
         it: "Domanda 1"
@@ -60,7 +78,7 @@ category-questions:
         es: "Primera pregunta (deja vacío si no la necesitas)"
     - id: "question_1"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Question 2"
         it: "Domanda 2"
@@ -71,7 +89,7 @@ category-questions:
         es: "Segunda pregunta (deja vacío si no la necesitas)"
     - id: "question_2"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Question 3"
         it: "Domanda 3"
@@ -82,7 +100,7 @@ category-questions:
         es: "Tercera pregunta (deja vacío si no la necesitas)"
     - id: "question_3"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Question 4"
         it: "Domanda 4"
@@ -93,7 +111,7 @@ category-questions:
         es: "Cuarta pregunta (deja vacío si no la necesitas)"
     - id: "question_4"
       required: false
-      style: 1
+      type: 1
       label:
         en: "Question 5"
         it: "Domanda 5"
@@ -102,3 +120,85 @@ category-questions:
         en: "Fifth question (leave empty if you don't need it)"
         it: "Quinta domanda (lascia vuoto se non ti serve)"
         es: "Quinta pregunta (deja vacío si no la necesitas)"
+
+category-data:
+  title:
+    en: "Data for this category"
+    it: "Dati per questa categoria"
+    es: "Datos para esta categoría"
+  inputs:
+    - id: "description"
+      required: false
+      type: 2
+      label:
+        en: "Description"
+        it: "Descrizione"
+        es: "Descripción"
+      placeholder:
+        en: "Description of the category. MAX 100 charcters."
+        it: "Descrizione della categoria. MAX 100 caratteri."
+        es: "Descripción de la categoría. MAX 100 caracteres."
+    - id: "normal_category"
+      required: true
+      type: "channel_menu"
+      channel_types: [4]
+      label:
+        en: "Default ticket category"
+        it: "Categoria predefinita dei ticket"
+        es: "Categoría predeterminada de los tickets"
+      placeholder:
+        en: "Where normal tickets will be created"
+        it: "Dove saranno creati i ticket normali"
+        es: "Dónde se crearán los tickets normales"
+    - id: "vip_category"
+      required: true
+      type: "channel_menu"
+      channel_types: [4]
+      label:
+        en: "Category for VIP tickets"
+        it: "Categoria per i ticket VIP"
+        es: "Categoría para los tickets VIP"
+      placeholder:
+        en: "Where VIP tickets will be created"
+        it: "Dove saranno creati i ticket VIP"
+        es: "Dónde se crearán los tickets VIP"
+    - id: "emoji"
+      required: false
+      type: 2
+      label:
+        en: "Category emoji"
+        it: "Emoji della categoria"
+        es: "Emoji de la categoría"
+      placeholder:
+        en: "Must be an emoji (to be sure you can copy paste from a chat message)."
+        it: "Deve essere un'emoji (per essere sicuro puoi copiare incollare da un messaggio di chat)."
+        es: "Debe ser un emoji (para estar seguro puedes copiar pegar desde un mensaje de chat)."
+    - id: "helper_role"
+      required: false
+      type: "role_menu"
+      label:
+        en: "Helper role"
+        it: "Ruolo dell'assistente"
+        es: "Rol de ayudante"
+      placeholder:
+        en: "Select the helper role"
+        it: "Seleziona il ruolo dell'assistente"
+        es: "Selecciona el rol de ayudante"
+
+ticket-reopening-reason:
+  title:
+    en: "Reason for reopening the ticket"
+    it: "Motivo per riaprire il ticket"
+    es: "Motivo para reabrir el ticket"
+  inputs:
+    - id: "reopen_reason"
+      required: true
+      type: 2
+      label:
+        en: "Reason"
+        it: "Motivo"
+        es: "Motivo"
+      placeholder:
+        en: "Explain the reason for reopening the ticket."
+        it: "Spiega il motivo per cui stai riaprendo il ticket."
+        es: "Explica el motivo por el que estás reabriendo el ticket."

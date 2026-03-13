@@ -103,9 +103,9 @@ not-setup:
     it: "Server non configurato"
     es: "Servidor no configurado"
   content:
-    en: "The server has not been set up in the bot's database yet. To do so, run the `/setup` command."
-    it: "Il server non è ancora stato configurato nel database del bot. Per farlo, esegui il comando `/setup`."
-    es: "El servidor aún no ha sido configurado en la base de datos del bot. Para hacerlo, ejecuta el comando `/setup`."
+    en: "The server has not been set up in the bot's database yet. To do so, run the `/set setup` command."
+    it: "Il server non è ancora stato configurato nel database del bot. Per farlo, esegui il comando `/set setup`."
+    es: "El servidor aún no ha sido configurado en la base de datos del bot. Para hacerlo, ejecuta el comando `/set setup`."
 
 no-categories:
   type: "error"
@@ -114,9 +114,9 @@ no-categories:
     it: "Nessuna categoria"
     es: "Sin categorías"
   content:
-    en: "There are no categories available for the ticketing system in this server: please contact the server administrator to set them up. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below.\n\n> **TIP**\n> If you are a BotAdmin, you should be able to setup the categories by running `/set-ticket_category` or `/set-add_ticket_category`."
-    it: "Non ci sono categorie disponibili per il sistema di ticketing in questo server: ontatta l'amministratore del server per impostarle. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto.\n\n> **SUGGERIMENTO**\n> Se sei un BotAdmin, dovresti essere in grado di impostare le categorie eseguendo `/set-ticket_category` o `/set-add_ticket_category`."
-    es: "No hay categorías disponibles para el sistema de tickets en este servidor: por favor, contacta al administrador del servidor para configurarlas. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo.\n\n> **CONSEJO**\n> Si eres un BotAdmin, deberías poder configurar las categorías ejecutando `/set-ticket_category` o `/set-add_ticket_category`."
+    en: "There are no categories available for the ticketing system in this server: please contact the server administrator to set them up. If you think this is an error, you can either just report the problem or send a detailed feedback by clicking the buttons below.\n\n> **TIP**\n> If you are a BotAdmin, you should be able to setup the categories by running `/set tck default-category` or `/set tck add-category`."
+    it: "Non ci sono categorie disponibili per il sistema di ticketing in questo server: ontatta l'amministratore del server per impostarle. Se credi ci sia un problema, puoi o semplicemente segnalarlo o inviare un commento a riguardo (feedback) cliccando i bottoni qui sotto.\n\n> **SUGGERIMENTO**\n> Se sei un BotAdmin, dovresti essere in grado di impostare le categorie eseguendo `/set tck default-category` o `/set tck add-category`."
+    es: "No hay categorías disponibles para el sistema de tickets en este servidor: por favor, contacta al administrador del servidor para configurarlas. Si crees que hay un error, puedes o simplemente reportarlo o enviar un comentario al respecto (feedback) presionando los botones de abajo.\n\n> **CONSEJO**\n> Si eres un BotAdmin, deberías poder configurar las categorías ejecutando `/set tck default-category` o `/set tck add-category`."
 
 viprole-setup:
   type: "success"
@@ -125,9 +125,9 @@ viprole-setup:
     it: "Ruolo VIP impostato"
     es: "Rol VIP configurado"
   content:
-    en: "The VIP role has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
-    it: "Il ruolo VIP è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
-    es: "El rol VIP ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+    en: "The VIP role has been successfully set up in the bot's database. You can check everything went as expected by running the `/info server` command."
+    it: "Il ruolo VIP è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/info server`."
+    es: "El rol VIP ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/info server`."
 
 adminrole-setup:
   type: "success"
@@ -136,9 +136,9 @@ adminrole-setup:
     it: "Ruolo BotAdmin impostato"
     es: "Rol BotAdmin configurado"
   content:
-    en: "The BotAdmin role has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
-    it: "Il ruolo BotAdmin è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
-    es: "El rol BotAdmin ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+    en: "The BotAdmin role has been successfully set up in the bot's database. You can check everything went as expected by running the `/info server` command."
+    it: "Il ruolo BotAdmin è stato impostato con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/info server`."
+    es: "El rol BotAdmin ha sido configurado con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/info server`."
 
 category-setup:
   type: "success"
@@ -147,9 +147,9 @@ category-setup:
     it: "Categoria impostata"
     es: "Categoría configurada"
   content:
-    en: "The category has been successfully set up in the bot's database. You can check everything went as expected by running the `/server-info` command."
-    it: "La categoria è stata impostata con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
-    es: "La categoría ha sido configurada con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+    en: "The category has been successfully set up in the bot's database. You can check everything went as expected by running the `/info server` command."
+    it: "La categoria è stata impostata con successo nel database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/info server`."
+    es: "La categoría ha sido configurada con éxito en la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/info server`."
 
 category-added:
   type: "success"
@@ -158,9 +158,9 @@ category-added:
     it: "Categoria aggiunta"
     es: "Categoría añadida"
   content:
-    en: "The category has been successfully added to the bot's database. You can check everything went as expected by running the `/server-info` command."
-    it: "La categoria è stata aggiunta con successo al database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
-    es: "La categoría ha sido añadida con éxito a la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+    en: "The category has been successfully added to the bot's database. You can check everything went as expected by running the `/info server` command."
+    it: "La categoria è stata aggiunta con successo al database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/info server`."
+    es: "La categoría ha sido añadida con éxito a la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/info server`."
 
 category-removed:
   type: "success"
@@ -169,9 +169,9 @@ category-removed:
     it: "Categoria rimossa"
     es: "Categoría eliminada"
   content:
-    en: "The category has been successfully removed from the bot's database. You can check everything went as expected by running the `/server-info` command."
-    it: "La categoria è stata rimossa con successo dal database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/server-info`."
-    es: "La categoría ha sido eliminada con éxito de la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/server-info`."
+    en: "The category has been successfully removed from the bot's database. You can check everything went as expected by running the `/info server` command."
+    it: "La categoria è stata rimossa con successo dal database del bot. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/info server`."
+    es: "La categoría ha sido eliminada con éxito de la base de datos del bot. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/info server`."
 
 panel-updated:
   type: "success"
@@ -180,9 +180,9 @@ panel-updated:
     it: "Pannello dei ticket aggiornato"
     es: "Panel de tickets actualizado"
   content:
-    en: "The ticket panel has been successfully updated. You can check everything went as expected by running the `/tck-panel` command."
-    it: "Il pannello dei ticket è stato aggiornato con successo. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/tck-panel`."
-    es: "El panel de tickets ha sido actualizado con éxito. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/tck-panel`."
+    en: "The ticket panel has been successfully updated. You can check everything went as expected by running the `/tck panel` command."
+    it: "Il pannello dei ticket è stato aggiornato con successo. Puoi controllare che tutto sia andato come previsto eseguendo il comando `/tck panel`."
+    es: "El panel de tickets ha sido actualizado con éxito. Puedes comprobar que todo haya ido como se esperaba ejecutando el comando `/tck panel`."
 
 category-used:
   type: "error"
@@ -191,9 +191,9 @@ category-used:
     it: "Nome della categoria dei ticket già in uso"
     es: "Nombre de la categoría de tickets ya en uso"
   content:
-    en: "The name you just tried to use for the ticket category is already in use by another category. Please choose a different name.\n\nIf you belive this is an error, you can\n* see the list of categories by running the `/server-info` command and then going to the tickets page\n* run the `/set-remove_ticket_category` command with the ticket category name you just use to delete that category from the bot's database and then re-run `/set-add_ticket_category`."
-    it: "Il nome che hai appena provato ad usare per la categoria dei ticket è già in uso da un'altra categoria. Per favore, scegli un nome diverso.\n\nSe credi ci sia un errore, puoi\n* vedere la lista delle categorie eseguendo il comando `/server-info` e poi andando alla pagina dei ticket\n* eseguire il comando `/set-remove_ticket_category` con il nome della categoria dei ticket che hai appena usato per eliminare quella categoria dal database del bot e poi rieseguire `/set-add_ticket_category`."
-    es: "El nombre que acabas de intentar usar para la categoría de tickets ya está en uso por otra categoría. Por favor, elige un nombre diferente.\n\nSi crees que hay un error, puedes\n* ver la lista de categorías ejecutando el comando `/server-info` y luego yendo a la página de tickets\n* ejecutar el comando `/set-remove_ticket_category` con el nombre de la categoría de tickets que acabas de usar para eliminar esa categoría de la base de datos del bot y luego volver a ejecutar `/set-add_ticket_category`."
+    en: "The name you just tried to use for the ticket category is already in use by another category. Please choose a different name.\n\nIf you belive this is an error, you can\n* see the list of categories by running the `/info server` command and then going to the tickets page\n* run the `/set tck remove-category` command with the ticket category name you just use to delete that category from the bot's database and then re-run `/set tck add-category`."
+    it: "Il nome che hai appena provato ad usare per la categoria dei ticket è già in uso da un'altra categoria. Per favore, scegli un nome diverso.\n\nSe credi ci sia un errore, puoi\n* vedere la lista delle categorie eseguendo il comando `/info server` e poi andando alla pagina dei ticket\n* eseguire il comando `/set tck remove-category` con il nome della categoria dei ticket che hai appena usato per eliminare quella categoria dal database del bot e poi rieseguire `/set tck add-category`."
+    es: "El nombre que acabas de intentar usar para la categoría de tickets ya está en uso por otra categoría. Por favor, elige un nombre diferente.\n\nSi crees que hay un error, puedes\n* ver la lista de categorías ejecutando el comando `/info server` y luego yendo a la página de tickets\n* ejecutar el comando `/set tck remove-category` con el nombre de la categoría de tickets que acabas de usar para eliminar esa categoría de la base de datos del bot y luego volver a ejecutar `/set tck add-category`."
 
 language-setup:
   type: "success"
@@ -203,5 +203,236 @@ language-setup:
     es: "Idioma cambiado"
   content:
     en: "The bot's server language was successfully changed"
-    it: "[IT] The bot's server language was successfully changed"
-    es: "[ES] The bot's server language was successfully changed"
+    it: "La lingua del server del bot è stata cambiata con successo"
+    es: "El idioma del servidor del bot ha sido cambiado con éxito"
+
+not-category-helper:
+  type: "error"
+  title:
+    en: "Lacking permissions"
+    it: "Permessi insufficienti"
+    es: "Permisos insuficientes"
+  content:
+    en: "You don't have the necessary permissions to run this command. You need to have at least this category helper role."
+    it: "Non hai i permessi necessari per eseguire questo comando. Devi avere almeno il ruolo helper per questa categoria."
+    es: "No tienes los permisos necesarios para ejecutar este comando. Necesitas tener al menos el rol de helper para esta categoría."
+
+ticket-closed:
+  type: "success"
+  title:
+    en: "Ticket closed"
+    it: "Ticket chiuso"
+    es: "Ticket cerrado"
+  content:
+    en: "The ticket has been closed successfully."
+    it: "Il ticket è stato chiuso con successo."
+    es: "El ticket ha sido cerrado con éxito."
+
+ticket-reopened:
+  type: "success"
+  title:
+    en: "Ticket reopened"
+    it: "Ticket riaperto"
+    es: "Ticket reabierto"
+  content:
+    en: "The ticket has been reopened successfully."
+    it: "Il ticket è stato riaperto con successo."
+    es: "El ticket ha sido reabierto con éxito."
+
+ticket-not-found:
+  type: "error"
+  title:
+    en: "Channel is not a ticket"
+    it: "Il canale non è un ticket"
+    es: "El canal no es un ticket"
+  content:
+    en: "This channel is not a ticket. Please use the command in a ticket channel, or speicfy one in the command options."
+    it: "Questo canale non è un ticket. Per favore usa il comando in un canale ticket, o specificane uno nelle opzioni del comando."
+    es: "Este canal no es un ticket. Por favor usa el comando en un canal de ticket, o especifica uno en las opciones del comando."
+
+ticket-already-closed:
+  type: "error"
+  title:
+    en: "Ticket already closed"
+    it: "Ticket già chiuso"
+    es: "Ticket ya cerrado"
+  content:
+    en: "This ticket is already closed."
+    it: "Questo ticket è già chiuso."
+    es: "Este ticket ya está cerrado."
+
+ticket-already-open:
+  type: "error"
+  title:
+    en: "Ticket not closed"
+    it: "Ticket non chiuso"
+    es: "Ticket no cerrado"
+  content:
+    en: "This ticket is not closed."
+    it: "Questo ticket non è chiuso."
+    es: "Este ticket no está cerrado."
+
+accepted-reopening:
+  type: "success"
+  title:
+    en: "Request accepted"
+    it: "Richiesta accettata"
+    es: "Solicitud aceptada"
+  content:
+    en: "The reopening request for this ticket has been successfully accepted."
+    it: "La richiesta di riapertura per questo ticket è stata accettata con successo."
+    es: "La solicitud de reapertura para este ticket ha sido aceptada con éxito."
+
+denied-reopening:
+  type: "success"
+  title:
+    en: "Request denied"
+    it: "Richiesta negata"
+    es: "Solicitud denegada"
+  content:
+    en: "The reopening request for this ticket has been succesfully denied."
+    it: "La richiesta di riapertura per questo ticket è stata negata con successo."
+    es: "La solicitud de reapertura para este ticket ha sido denegada con éxito."
+
+blocked-reopening:
+  type: "success"
+  title:
+    en: "Reopening requests blocked"
+    it: "Richieste di riapertura bloccate"
+    es: "Solicitudes de reapertura bloqueadas"
+  content:
+    en: "Further reopening requests for this ticket have been successfully blocked."
+    it: "Ulteriori richieste di riapertura per questo ticket sono state bloccate con successo."
+    es: "Se han bloqueado con éxito futuras solicitudes de reapertura para este ticket."
+
+ticket-not-closed:
+  type: "error"
+  title:
+    en: "Ticket not closed"
+    it: "Ticket non chiuso"
+    es: "Ticket no cerrado"
+  content:
+    en: "This ticket is not closed. To permanently delete a ticket, it must be closed first."
+    it: "Questo ticket non è chiuso. Per eliminare permanentemente un ticket, deve essere prima chiuso."
+    es: "Este ticket no está cerrado. Para eliminar permanentemente un ticket, primero debe estar cerrado."
+
+not-assignee:
+  type: "error"
+  title:
+    en: "You are not the assignee"
+    it: "Non sei l'assegnatario"
+    es: "No eres el asignado"
+  content:
+    en: "You cannot unclaim this ticket because you are not assigned to it. To unassign it from whoever it is assigned to, use the `/tck unassign` command."
+    it: "Non puoi disassegnare questo ticket perché non sei assegnato a esso. Per disassociare chiunque sia assegnato, usa il comando `/tck unassign`."
+    es: "No puedes desasignar este ticket porque no estás asignado a él. Para desasignarlo de quien sea que esté asignado, usa el comando `/tck unassign`."
+
+ticket-assigned:
+  type: "success"
+  title:
+    en: "Ticket assigned"
+    it: "Ticket assegnato"
+    es: "Ticket asignado"
+  content:
+    en: "The ticket <#<!--ticket_id--!>> has been successfully assigned to <@<!--assignee_id--!>>."
+    it: "Il ticket <#<!--ticket_id--!>> è stato assegnato con successo a <@<!--assignee_id--!>>."
+    es: "El ticket <#<!--ticket_id--!>> ha sido asignado con éxito a <@<!--assignee_id--!>>."
+
+ticket-unassigned:
+  type: "success"
+  title:
+    en: "Ticket unassigned"
+    it: "Ticket disassegnato"
+    es: "Ticket desasignado"
+  content:
+    en: "The ticket <#<!--ticket_id--!>> has been successfully unassigned."
+    it: "Il ticket <#<!--ticket_id--!>> è stato disassegnato con successo."
+    es: "El ticket <#<!--ticket_id--!>> ha sido desasignado con éxito."
+
+user-added:
+  type: "success"
+  title:
+    en: "User added to ticket"
+    it: "Utente aggiunto al ticket"
+    es: "Usuario añadido al ticket"
+  content:
+    en: "The user <@<!--user_id--!>> has been successfully added to the ticket <#<!--ticket_id--!>>."
+    it: "L'utente <@<!--user_id--!>> è stato aggiunto con successo al ticket <#<!--ticket_id--!>>."
+    es: "El usuario <@<!--user_id--!>> ha sido añadido con éxito al ticket <#<!--ticket_id--!>>."
+
+user-removed:
+  type: "success"
+  title:
+    en: "User removed from ticket"
+    it: "Utente rimosso dal ticket"
+    es: "Usuario eliminado del ticket"
+  content:
+    en: "The user <@<!--user_id--!>> has been successfully removed from the ticket <#<!--ticket_id--!>>."
+    it: "L'utente <@<!--user_id--!>> è stato rimosso con successo dal ticket <#<!--ticket_id--!>>."
+    es: "El usuario <@<!--user_id--!>> ha sido eliminado con éxito del ticket <#<!--ticket_id--!>>."
+
+user-muted:
+  type: "success"
+  title:
+    en: "User muted in ticket"
+    it: "Utente silenziato nel ticket"
+    es: "Usuario silenciado en el ticket" 
+  content:
+    en: "The user <@<!--user_id--!>> has been successfully muted in the ticket <#<!--ticket_id--!>>."
+    it: "L'utente <@<!--user_id--!>> è stato silenziato con successo nel ticket <#<!--ticket_id--!>>."
+    es: "El usuario <@<!--user_id--!>> ha sido silenciado con éxito en el ticket <#<!--ticket_id--!>>."
+
+user-unmuted:
+  type: "success"
+  title:
+    en: "User unmuted in ticket"
+    it: "Utente riattivato nel ticket"
+    es: "Usuario desilenciado en el ticket"
+  content:
+    en: "The user <@<!--user_id--!>> has been successfully unmuted in the ticket <#<!--ticket_id--!>>."
+    it: "L'utente <@<!--user_id--!>> è stato riattivato con successo nel ticket <#<!--ticket_id--!>>."
+    es: "El usuario <@<!--user_id--!>> ha sido desilenciado con éxito en el ticket <#<!--ticket_id--!>>."
+
+default-category-enabled:
+  type: "success"
+  title:
+    en: "Default category enabled"
+    it: "Categoria predefinita abilitata"
+    es: "Categoría predeterminada activada"
+  content:
+    en: "The \"default category\" mode has been enabled.\n\nFrom now on, provided the default ticket category is setup, the ticket panel displayed through the `/tck panel` command will display only a button that opens a ticket in the category preselected from the BotAdmins by default with the `/set tck default-category` command.\n\nTo view the default category, if it's setup (and, if yes, which one), run the `/info tck` command."
+    it: "La modalità \"categoria predefinita\" è stata abilitata.\n\nD'ora in poi, a patto che la categoria predefinita dei ticket sia configurata, il pannello dei ticket mostrato attraverso il comando `/tck panel` mostrerà solo un bottone che apre un ticket nella categoria preselezionata dai BotAdmin di default con il comando `/set tck default-category`.\n\nPer visualizzare la categoria predefinita, se è configurata (e, se sì, quale), esegui il comando `/info tck`."
+    es: "El modo \"categoría predeterminada\" ha sido activado.\n\nA partir de ahora, siempre que la categoría predeterminada de tickets esté configurada, el panel de tickets mostrado a través del comando `/tck panel` mostrará solo un botón que abre un ticket en la categoría preseleccionada por los BotAdmins de forma predeterminada con el comando `/set tck default-category`.\n\nPara visualizar la categoría predeterminada, si está configurada (y, si es así, cuál), ejecuta el comando `/info tck`."
+
+default-category-disabled:
+  type: "success"
+  title:
+    en: "Default category disabled"
+    it: "Categoria predefinita disabilitata"
+    es: "Categoría predeterminada desactivada"
+  content:
+    en: "The \"default category\" mode has been disabled.\n\nFrom now on the ticket panel displayed through the `/tck panel` command will display a select menu with all the ticket categories the BotAdmins have setup for the server for the user to choose the best suitable one.\n\nTo view the all the cateogries setup on the server, run the `/info tck` command."
+    it: "La modalità \"categoria predefinita\" è stata disabilitata.\n\nD'ora in poi il pannello dei ticket mostrato attraverso il comando `/tck panel` mostrerà un menu a tendina con tutte le categorie dei ticket che i BotAdmin hanno configurato per il server per far scegliere all'utente quella più adatta.\n\nPer visualizzare tutte le categorie configurate sul server, esegui il comando `/info tck`."
+    es: "El modo \"categoría predeterminada\" ha sido desactivado.\n\nA partir de ahora el panel de tickets mostrado a través del comando `/tck panel` mostrará un menú desplegable con todas las categorías de tickets que los BotAdmins han configurado para el servidor para que el usuario elija la más adecuada.\n\nPara visualizar todas las categorías configuradas en el servidor, ejecuta el comando `/info tck`."
+
+transcipts-channel-set:
+  type: "success"
+  title:
+    en: "Transcripts channel set"
+    it: "Canale dei trascrizioni impostato"
+    es: "Canal de transcripciones establecido"
+  content:
+    en: "The transcripts channel has been set to <#<!--channel_id--!>>."
+    it: "Il canale dei trascrizioni è stato impostato su <#<!--channel_id--!>>."
+    \es: "El canal de transcripciones ha sido establecido en <#<!--channel_id--!>>."
+
+transcipts-channel-unset:
+  type: "success"
+  title:
+    en: "Transcripts channel unset"
+    it: "Canale dei trascrizioni rimosso"
+    es: "Canal de transcripciones eliminado"
+  content:
+    en: "The transcripts will no longer be sent to a specific channel."
+    it: "Le trascrizioni non saranno più inviate ad un canale specifico."
+    es: "Las transcripciones ya no serán enviadas a un canal específico."

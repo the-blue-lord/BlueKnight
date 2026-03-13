@@ -1,0 +1,6 @@
+{
+    "name": "tck",
+    "description": "Commands related to ticketing system.",
+    "test": false,
+    "type": 1
+}

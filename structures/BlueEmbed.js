@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("
 const yaml = require("yaml");
 const fs = require("fs");
 
-const zeroWidth = require("../utilis/zeroWidthSteganography");
+const zeroWidth = require("../utils/zeroWidthSteganography");
 
 module.exports = class BlueEmbed {
     constructor(client, embed_id, language = "en", variables = {}, additional_fields = []) {

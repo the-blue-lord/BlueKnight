@@ -1,5 +1,5 @@
 const fs = require("fs");
-const queryDatabase = require("../utilis/queryDatabase");
+const queryDatabase = require("../utils/queryDatabase");
 
 module.exports = async interaction => {
     

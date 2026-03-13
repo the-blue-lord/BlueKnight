@@ -1,3 +1,6 @@
+Tostart:
+  ☐ EPHEMERAL VOICE CHANNELS
+
 Todo:
   ☐ Add Report and feedback buttons
   ☐ Upgrade translation system
@@ -5,31 +8,45 @@ Todo:
     ✔ Implement select menu translation @started(25-07-06 01:21) @done(25-07-06 02:12) @lasted(51m19s)
       ✔ Replace translate buttons with translate string select menu @started(25-07-05 02:31) @done(25-07-05 03:19) @lasted(49m)
       ✔ Deal with different translating request @started(25-07-06 01:21) @done(25-07-06 02:12) @lasted(51m7s)
-  ✔ Substitute message-reply with embed-reply in `/server-info` command @started(25-07-04 03:00) @done(25-07-04 03:57) @lasted(57m45s)
+  ✔ Substitute message-reply with embed-reply in `/info server` command @started(25-07-04 03:00) @done(25-07-04 03:57) @lasted(57m45s)
     ✔ Implement category template in the embed data for server-info @done(25-07-04 03:00)
-    // Note: Translation for server info is implmented differently using specific `getServerInfo` function, located at `utilis\getServerInfo.js`
+    // Translation for server info is implented differently using specific `getServerInfo` function, located at `utils\getServerInfo.js`
   ☐ Add logging
   ☐ Use specific classes to create custom objects
-  // Note: menus are manually generated and only when triggered recognized via solely the interaction custom id
+  // Menus are manually generated and only when triggered recognized via solely the interaction custom id
   ✔ Add guild localisation @started(25-06-25 03:59) @done(25-06-25 04:20) @lasted(21m16s)
   ✔ Solve /* Localisation */ issue @started(25-06-26 02:03) @done(25-06-26 02:38) @lasted(35m7s)
   ✔ Manage select menu ticket creation @started(25-06-23 16:29) @done(25-06-24 00:35) @lasted(8h6m19s)
   ✔ Manage button ticket creation @started(25-06-24 22:02) @done(25-06-25 02:28) @lasted(4h26m9s)
   ✔ Add default ticket emoji @started(25-06-26 02:40) @done(25-06-26 03:41) @lasted(1h1m10s)
-  ✔ Get guild locale on /setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
+  ✔ Get guild locale on /set setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
 
 Fixme:
-  ☐ Default categories broken in `/server-info` ~embed~ message
+  ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)
+  ✔ Tickets in default categories not recongized because they don't have category_id @done(26-03-13 19:24)
+  ☐ CategoryQuestionsModal not completly loclized
+  ☐ Unable to identufy the problem bot not selecting right locale for ticket closure
+  ☐ Add regex checks for emojis
+  ☐ Add info/help mesage to tell the user to activate default catgeogry after choosing the default category
+  ☐ ticket reopening request blocker not actually blocking any reopening request
 
 Commands:
+  Info:
+    ☐ Fix `/info server` embed
   Settings:
     ☐ `/set-update_ticket_category`
+    ✔ `/set-transcript_channel` @done(26-03-13 21:18)
   Ticketing:
-    ☐ `/tck-close`
-    ☐ `/tck-reopen`
-    ☐ `/tck-delete`
-    ☐ `/tck-add`
-    ☐ `/tck-remove`
-    ☐ `/tck-assign`
-    ☐ `/tck-claim`
-    ☐ `/tck-unassign`
+    ✔ `/tck close` @started(25-08-06 01:15) @done(25-08-06 16:41) @lasted(15h26m2s)
+    ✔ `/tck reopen` @started(25-08-06 16:41) @done(25-08-11 23:24) @lasted(5d6h43m58s)
+    ✔ `/tck delete` @done(25-09-25 10:51) // Test command
+    ✔ `/tck add` @done(25-09-26 08:56) // Test command
+    ✔ `/tck remove` @done(25-09-26 08:57) // Test command
+    ✔ `/tck assign` @done(25-11-07 20:00) // Test command
+    ✔ `/tck claim` @done(25-11-07 20:00) // Test command
+    ✔ `/tck unassign` @done(25-11-07 20:00) // Test command
+    ✔ `/tck unclaim` @done(25-11-07 20:00) // Test command
+    ✔ `/tck mute` @done(25-11-07 20:00) // Test command
+    ✔ `/tck unmute` @done(25-11-07 20:00) // Test command
+    ✔ `/tck-info` @done(26-03-13 19:23)
+    ☐ `/tck-system_status`

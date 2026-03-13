@@ -1,0 +1,6 @@
+{
+    "name": "info",
+    "description": "Commands related to information retrieval.",
+    "test": false,
+    "type": 1
+}

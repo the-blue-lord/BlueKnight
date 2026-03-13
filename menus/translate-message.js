@@ -1,11 +1,13 @@
-const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, Emoji } = require("discord.js");
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, ComponentType } = require("discord.js");
 const BlueMenu = require("../structures/BlueMenu");
 const fs = require("fs");
 const yaml = require("yaml");
 
 const BlueMessage = require("../structures/BlueMessage");
 
-const getVariables = require("../utilis/getVariables");
+const getVariables = require("../utils/getVariables");
+const rebuildComponents = require("../utils/rebuildComponents");
+const BlueButton = require("../structures/BlueButton");
 
 module.exports = class TranslateMessageMenu extends BlueMenu {
     constructor(client, message_id, from_language = "en") {
@@ -57,10 +59,43 @@ module.exports = class TranslateMessageMenu extends BlueMenu {
 
         const message = new BlueMessage(interaction.client, this.message_id, translating_language, variables);
 
+        const new_components = rebuildComponents(interaction.message.components);
+
+        new_components.forEach(row => 
+            row.components = row.components.map(component => {
+                const custom_id = component.data?.custom_id || component.customId;
+
+                const action = custom_id.split("_")[0];
+                const data = custom_id.split("_").slice(1);
+
+                if(component.data.type == ComponentType.Button) {
+                    const blue_button = new BlueButton(this.client, action, translating_language, data.join("_"));
+                    return blue_button.button;
+                }
+                
+                if(action == "translate-message") {
+                    const menu = new TranslateMessageMenu(this.client, data[0], translating_language);
+                    return menu.build()?.components[0];
+                }
+                
+                const menus_files = fs.readdirSync("./menus");
+                for(const menu_file of menus_files) {
+                    const menuClass = require(`../menus/${menu_file}`);
+                    const menuObject = new menuClass(this.client, ...data);
+
+                    if(menuObject.action != action) continue;
+
+                    return menuObject.build()?.components[0];
+                }
+
+                return component;
+            })
+        );
+
         await interaction.reply({
             embeds: [message.embed],
             files: message.attachments,
-            components: message.components,
+            components: new_components,
             flags: MessageFlags.Ephemeral
         });
     }

@@ -2,13 +2,13 @@ const Discord = require('discord.js');
 
 const BlueModal = require('../structures/BlueModal');
 const BlueMessage = require('../structures/BlueMessage');
-const queryDatabase = require('../utilis/queryDatabase');
+const queryDatabase = require('../utils/queryDatabase');
 
 module.exports = class CategoryQuestionsModal extends BlueModal {
-    constructor(client, localisation = "en", category_name) {
-        super(client, "category-questions", localisation, category_name);
+    constructor(client, localisation = "en", category_id) {
+        super(client, "category-questions", localisation, category_id);
 
-        this.category_name = category_name;
+        this.category_id = category_id;
     }
 
     async run(modalId, interaction) {
@@ -23,7 +23,7 @@ module.exports = class CategoryQuestionsModal extends BlueModal {
             if(!question) continue;
 
             try {
-                await queryDatabase("INSERT INTO `CategoryQuestions` (`guild_id`, `category_name`, `question`) VALUES (?, ?, ?)", [interaction.guild.id, this.category_name, question]);
+                await queryDatabase("INSERT INTO `CategoryQuestions` (`guild_id`, `category_id`, `question`) VALUES (?, ?, ?)", [interaction.guild.id, this.category_id, question]);
             } catch (error) {
                 console.error("Database error:", error);
                 return;

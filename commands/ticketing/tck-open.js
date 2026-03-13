@@ -5,6 +5,7 @@ const BlueMessage = require("../../structures/BlueMessage");
 
 const { openTicket } = require("../../routes/ticket-router");
 const { Routes, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
+const queryDatabase = require("../../utils/queryDatabase");
 
 module.exports = class TckOpen extends BlueCommand {
     constructor(client) {
@@ -13,13 +14,13 @@ module.exports = class TckOpen extends BlueCommand {
 
     async run(interaction) {
         await interaction.deferReply({
-                    flags: Discord.MessageFlags.Ephemeral
+            flags: Discord.MessageFlags.Ephemeral
         });
 
-        const category = interaction.options.get("category")?.value;
+        const category_id = interaction.options.get("category_id")?.value;
         const user_id = interaction.options.get("user")?.value;
 
-        const channel = await openTicket(this.client, interaction, interaction.guild.id, category, user_id);
+        const channel = await openTicket(this.client, interaction, interaction.guild.id, category_id, user_id);
 
         const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];

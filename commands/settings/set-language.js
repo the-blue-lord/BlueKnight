@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 const BlueCommand = require("../../structures/BlueCommand");
 const BlueMessage = require("../../structures/BlueMessage");
-const queryDatabase = require("../../utilis/queryDatabase");
+const queryDatabase = require("../../utils/queryDatabase");
 
 module.exports = class StnLanguage extends BlueCommand{
     constructor(client) {
@@ -16,7 +16,7 @@ module.exports = class StnLanguage extends BlueCommand{
 
         const locale = interaction.options?.get("language")?.value;
 
-        if(!this.isBotAdmin(interaction.member)) {
+        if(!(await this.isBotAdmin(interaction.member))) {
             const msg = new BlueMessage(this.client, "not-administrator", locale);
             await interaction.editReply({
                 embeds: [msg.embed],

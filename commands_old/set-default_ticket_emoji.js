@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
-const queryDatabase = require("../../utilis/queryDatabase");
+const BlueCommand = require("../structures/BlueCommand");
+const BlueMessage = require("../structures/BlueMessage");
+const queryDatabase = require("../utils/queryDatabase");
 
 module.exports = class StnViprole extends BlueCommand{
     constructor(client) {
-        super(client, "set-vip_ticket_emoji");
+        super(client, "set-default_ticket_emoji");
     }
 
     async run(interaction) {
@@ -17,7 +17,7 @@ module.exports = class StnViprole extends BlueCommand{
         const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
-        if(!this.isBotAdmin(interaction.member)) {
+        if(!(await this.isBotAdmin(interaction.member))) {
             const msg = new BlueMessage(this.client, "not-administrator", locale);
             await interaction.editReply({
                 embeds: [msg.embed],
@@ -40,7 +40,7 @@ module.exports = class StnViprole extends BlueCommand{
         }
 
         const emoji = interaction.options?.get("emoji")?.value;
-        await queryDatabase("UPDATE `Ticketing` SET `vip_emoji` = ? WHERE `guild_id` = ?", [emoji, interaction.guild.id]);
+        await queryDatabase("UPDATE `Ticketing` SET `default_emoji` = ? WHERE `guild_id` = ?", [emoji, interaction.guild.id]);
 
         const msg = new BlueMessage(this.client, "viprole-setup", locale);
 

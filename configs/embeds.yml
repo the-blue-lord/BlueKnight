@@ -31,9 +31,18 @@ server-info:
         it: "Categorie ticket predefinite"
         es: "Categorías de ticket predeterminadas"
       value:
-        en: "_Regular Ticket Category:_ <#<!--ticket_category--!>>\n_Vip Ticket Category:_ <#<!--vip_ticket_category--!>>"
-        it: "_Categoria Ticket Normale:_ <#<!--ticket_category--!>>\n_Categoria Ticket Vip:_ <#<!--vip_ticket_category--!>>"
-        es: "_Categoría de Ticket Normal:_ <#<!--ticket_category--!>>\n_Categoría de Ticket Vip:_ <#<!--vip_ticket_category--!>>"
+        en: "_Regular Ticket Category:_ <#<!--ticket_category--!>>\n_Vip Ticket Category:_ <#<!--vip_ticket_category--!>>\n(these categories are <!--default_category_information--!> in use, they could be overwritten by the additional categories added with the `/set tck add-category` command)"
+        it: "_Categoria Ticket Regolare:_ <#<!--ticket_category--!>>\n_Categoria Ticket Vip:_ <#<!--vip_ticket_category--!>>\n(queste categorie <!--default_category_information--!> sono in uso, potrebbero essere sovrascritte dalle categorie aggiuntive aggiunte con il comando `/set tck add-category`)"
+        es: "_Categoría de Ticket Regular:_ <#<!--ticket_category--!>>\n_Categoría de Ticket Vip:_ <#<!--vip_ticket_category--!>>\n(estas categorías <!--default_category_information--!> son en uso, podrían ser sobreescritas por las categorías adicionales agregadas con el comando `/set tck add-category`)"
+    - inline: false
+      name:
+        en: "Additional ticket categories"
+        it: "Categorie ticket aggiuntive"
+        es: "Categorías de ticket adicionales"
+      value:
+        en: "Additional ticket categories"
+        it: "Categorie ticket aggiuntive"
+        es: "Categorías de ticket adicionales"
     - template_type: "additional-category"
   templates:
     additional-category:
@@ -47,15 +56,59 @@ server-info:
         it: "> _Descrizione:_ <!--category_description--!>\n> _Canali:_ <#<!--category_id--!>> (_vip:_ <#<!--vip_category_id--!>>)\n> _Helper:_ <@&<!--helper_role--!>>\n> _Emoji:_ <!--category_emoji--!>"
         es: "> _Descripción:_ <!--category_description--!>\n> _Canales:_ <#<!--category_id--!>> (_vip:_ <#<!--vip_category_id--!>>)\n> _Helper:_ <@&<!--helper_role--!>>\n> _Emoji:_ <!--category_emoji--!>"
 
+tck-info:
+  title:
+    en: "Ticket information"
+    it: "Informazioni sui ticket"
+    es: "Información de los tickets"
+  description:
+    en: "Basic ticket system configuration info. If you are looking for how the ticketing system actually works and not the custom data it's running on you should use the `/help tck` command."
+    it: "Informazioni di base sulla configurazione del sistema ticket. Se stai cercando come funziona effettivamente il sistema ticket e non i dati personalizzati su cui viene eseguito, dovresti utilizzare il comando `/help tck`."
+    es: "Información básica sobre la configuración del sistema de tickets. Si estás buscando cómo funciona realmente el sistema de tickets y no los datos personalizados en los que se ejecuta, deberías usar el comando `/help tck`."
+  fields:
+    - inline: false
+      name:
+        en: "Ticket panel"
+        it: "Pannello ticket"
+        es: "Panel de tickets"
+      value:
+        en: "_Title:_\n> <!--ticket_panel_title--!>\n_Description:_\n> <!--ticket_panel_description--!>"
+        it: "_Titolo:_\n> <!--ticket_panel_title--!>\n_Descrizione:_\n> <!--ticket_panel_description--!>"
+        es: "_Título:_\n> <!--ticket_panel_title--!>\n_Descripción:_\n> <!--ticket_panel_description--!>"
+    - inline: false
+      name:
+        en: "Default category"
+        it: "Categoria predefinita"
+        es: "Categoría predeterminada"
+      value:
+        en: "The default category is enabled: ***<!--default_category_enabled--!>***\n> **Id:** <!--default_category_id--!>\n> **Name:** <!--default_category_name--!>\n> **Description:** <!--default_category_description--!>\n> **Emoji:** <!--default_category_emoji--!>\n> **Normal category:** <#<!--default_category_normal--!>> \n> **Vip category:** <#<!--default_category_vip--!>>\n> **Helper role:** <@&<!--default_category_helper--!>>"
+        it: "La categoria predefinita è abilitata: ***<!--default_category_enabled--!>***\n> **Id:** <!--default_category_id--!>\n> **Name:** <!--default_category_name--!>\n> **Description:** <!--default_category_description--!>\n> **Emoji:** <!--default_category_emoji--!>\n**Categoria normale**: <#<!--default_category_normal--!>> \n> **Categoria vip:** <#<!--default_category_vip--!>>\n> **Ruolo helper:** <@&<!--default_category_helper--!>>"
+        es: "La categoría predeterminada está habilitada: ***<!--default_category_enabled--!>***\n> **Id:** <!--default_category_id--!>\n> **Name:** <!--default_category_name--!>\n> **Description:** <!--default_category_description--!>\n> **Emoji:** <!--default_category_emoji--!>\n> **Categoría normal:** <#<!--default_category_normal--!>> \n> **Categoría vip:** <#<!--default_category_vip--!>>\n> **Rol helper:** <@&<!--default_category_helper--!>>"
+    - template_type: "category"
+  templates:
+    category:
+      inline: true
+      name:
+        en: "Category <!--category_id--!>:"
+        it: "Categoria <!--category_id--!>:"
+        es: "Categoría <!--category_id--!>:"
+      value:
+        en: "> **Id:** <!--category_id--!>\n> **Name:** <!--category_name--!>\n> **Description:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Normal category:** <#<!--category_normal--!>> \n> **Vip category:** <#<!--category_vip--!>>\n> **Helper role:** <@&<!--category_helper--!>>"
+        it: "> **Id:** <!--category_id--!>\n> **Name:** <!--category_name--!>\n> **Description:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Normal category:** <#<!--category_normal--!>> \n> **Vip category:** <#<!--category_vip--!>>\n> **Helper role:** <@&<!--category_helper--!>>"
+        es: "> **Id:** <!--category_id--!>\n> **Name:** <!--category_name--!>\n> **Description:** <!--category_description--!>\n> **Emoji:** <!--category_emoji--!>\n> **Normal category:** <#<!--category_normal--!>> \n> **Vip category:** <#<!--category_vip--!>>\n> **Helper role:** <@&<!--category_helper--!>>"
+        
+
+
+
 setup-info:
   title:
     en: "Setup information"
     it: "Informazioni di setup"
     es: "Información de configuración"
   description:
-    en: "**IMPORTANT: Before doing any of the steps below, setup the server in the bot database by doing `/setup`**\n\nThis bot has plenty of customisable features.\nAll the commands that let you customize this features start with `/set-` and are only available for BotAdmins.\n\n**Who are BotAdmins?**\nA BotAdmin is somone who is server administrator or at least has the role specified in the settings to access BotAdmin commands."
-    it: "**IMPORTANTE: Prima di eseguire uno qualsiasi dei passaggi seguenti, configura il server nel database del bot eseguendo `/setup`**\n\nQuesto bot ha molte funzionalità personalizzabili.\nTutti i comandi che ti permettono di personalizzare queste funzionalità iniziano con `/set-` e sono disponibili solo per i BotAdmin.\n\n**Chi sono i BotAdmin?**\nUn BotAdmin è qualcuno che è amministratore del server o ha almeno il ruolo specificato nelle impostazioni per accedere ai comandi BotAdmin."
-    es: "**IMPORTANTE: Antes de realizar cualquiera de los siguientes pasos, configura el servidor en la base de datos del bot ejecutando `/setup`**\n\nEste bot tiene muchas características personalizables.\nTodos los comandos que te permiten personalizar estas características comienzan con `/set-` y solo están disponibles para los BotAdmins.\n\n**¿Quiénes son los BotAdmins?**\nUn BotAdmin es alguien que es administrador del servidor o tiene al menos el rol especificado en la configuración para acceder a los comandos BotAdmin."
+    en: "**IMPORTANT: Before doing any of the steps below, setup the server in the bot database by doing `/set setup`**\n\nThis bot has plenty of customisable features.\nAll the commands that let you customize this features start with `/set-` and are only available for BotAdmins.\n\n**Who are BotAdmins?**\nA BotAdmin is somone who is server administrator or at least has the role specified in the settings to access BotAdmin commands."
+    it: "**IMPORTANTE: Prima di eseguire uno qualsiasi dei passaggi seguenti, configura il server nel database del bot eseguendo `/set setup`**\n\nQuesto bot ha molte funzionalità personalizzabili.\nTutti i comandi che ti permettono di personalizzare queste funzionalità iniziano con `/set-` e sono disponibili solo per i BotAdmin.\n\n**Chi sono i BotAdmin?**\nUn BotAdmin è qualcuno che è amministratore del server o ha almeno il ruolo specificato nelle impostazioni per accedere ai comandi BotAdmin."
+    es: "**IMPORTANTE: Antes de realizar cualquiera de los siguientes pasos, configura el servidor en la base de datos del bot ejecutando `/set setup`**\n\nEste bot tiene muchas características personalizables.\nTodos los comandos que te permiten personalizar estas características comienzan con `/set-` y solo están disponibles para los BotAdmins.\n\n**¿Quiénes son los BotAdmins?**\nUn BotAdmin es alguien que es administrador del servidor o tiene al menos el rol especificado en la configuración para acceder a los comandos BotAdmin."
   fields:
     - inline: false
       name:
@@ -63,9 +116,49 @@ setup-info:
         it: "Ticket"
         es: "Tickets"
       value:
-        en: "If you follow this instructions you will be ready to manage the bot ticketing service:\n* Run `/tck-panel` to display the ticket panel\n* Run `/set-ticket_panel` to customize it\n* (optional) Re-run `/tck-panel` to see the changes"
-        it: "Se segui queste istruzioni sarai pronto a gestire il servizio di ticketing del bot:\n* Esegui `/tck-panel` per visualizzare il pannello dei ticket\n* Esegui `/set-ticket_panel` per personalizzarlo\n* (opzionale) Riesegui `/tck-panel` per vedere i cambiamenti"
-        es: "Si sigues estas instrucciones estarás listo para gestionar el servicio de tickets del bot:\n* Ejecuta `/tck-panel` para mostrar el panel de tickets\n* Ejecuta `/set-ticket_panel` para personalizarlo\n* (opcional) Vuelve a ejecutar `/tck-panel` para ver los cambios"
+        en: "If you follow this instructions you will be ready to manage the bot ticketing service:\n* Run `/tck panel` to display the ticket panel\n* Run `/set tck panel` to customize it\n* (optional) Re-run `/tck panel` to see the changes"
+        it: "Se segui queste istruzioni sarai pronto a gestire il servizio di ticketing del bot:\n* Esegui `/tck panel` per visualizzare il pannello dei ticket\n* Esegui `/set tck panel` per personalizzarlo\n* (opzionale) Riesegui `/tck panel` per vedere i cambiamenti"
+        es: "Si sigues estas instrucciones estarás listo para gestionar el servicio de tickets del bot:\n* Ejecuta `/tck panel` para mostrar el panel de tickets\n* Ejecuta `/set tck panel` para personalizarlo\n* (opcional) Vuelve a ejecutar `/tck panel` para ver los cambios"
+
+ticket-opened:
+  title:
+    en: "Ticket opened"
+    it: "Ticket aperto"
+    es: "Ticket abierto"
+  description:
+    en: "This ticket has been opened by user <@<!--user_id--!>> inside the following category: <!--category_name--!>"
+    it: "Questo ticket è stato aperto dall'utente <@<!--user_id--!>> all'interno della seguente categoria: <!--category_name--!>"
+    es: "Este ticket ha sido abierto por el usuario <@<!--user_id--!>> dentro de la siguiente categoría: <!--category_name--!>"
+  
+ticket-closed:
+  title:
+    en: "Ticket closed"
+    it: "Ticket chiuso"
+    es: "Ticket cerrado"
+  description:
+    en: "This ticket has been closed by user <@<!--closer_id--!>>.\n\nDear User,\nthis means the people assigned to this ticket have considered the matter resolved. Therefore the permission of the channel have been set to read-only to avoid any further interaction.\n\nIf you belive this was a mistake, you consider the matter still not resolved or it was resolved but the issue has arisen again, you can ask for the ticket to be reopened by pressing the button below.\n\nEither way, if the ticket reopens, I'll make sure to tag you. ;)"
+    it: "Questo ticket è stato chiuso dall'utente <@<!--closer_id--!>>.\n\nGentile Utente,\nquesto significa che le persone assegnate a questo ticket hanno considerato la questione risolta. Pertanto i permessi del canale sono stati impostati come di sola lettura per evitare ulteriori interazioni.\nSe ritieni che sia stato un errore, consideri la questione ancora non risolta o è stata risolta ma il problema si è ripresentato, puoi chiedere che il ticket venga riaperto premendo il pulsante qui sotto.\n\nIn ogni caso, se il ticket si riapre, mi assicurerò di taggarti. ;)"
+    es: "Este ticket ha sido cerrado por el usuario <@<!--closer_id--!>>.\n\nEstimado Usuario,\nesto significa que las personas asignadas a este ticket han considerado el asunto resuelto. Por lo tanto, los permisos del canal se han configurado como de solo lectura para evitar cualquier interacción adicional.\n\nSi crees que esto fue un error, consideras que el asunto aún no está resuelto o se resolvió pero el problema ha surgido nuevamente, puedes solicitar que se reabra el ticket presionando el botón de abajo.\n\nDe cualquier manera, si el ticket se reabre, me aseguraré de mencionarte. ;)"
+
+ticket-reopened:
+  title:
+    en: "Ticket reopened"
+    it: "Ticket riaperto"
+    es: "Ticket reabierto"
+  description:
+    en: "This ticket has been reopened by user <@<!--reopener_id--!>>.\n\nDear User,\nthe permission of the channel have been restored to allow you to interact again, good luck! :)"
+    it: "Questo ticket è stato riaperto dall'utente <@<!--reopener_id--!>>.\n\nGentile Utente,\ni permessi del canale sono stati ripristinati per consentirti di interagire nuovamente, buona fortuna! :)"
+    es: "Este ticket ha sido reabierto por el usuario <@<!--reopener_id--!>>.\n\nEstimado Usuario,\nse han restaurado los permisos del canal para permitirte interactuar nuevamente, ¡buena suerte! :)"
+
+ticket-reopening-asked:
+  title:
+    en: "Ticket reopening request"
+    it: "Richiesta di riapertura del ticket"
+    es: "Solicitud de reapertura del ticket"
+  description:
+    en: "The user <@<!--user_id--!>> has asked to reopen this ticket for the following reason.\n\n**<!--reopening_reason--!>**\n\nAn helper is required to review this request and either accept it, deny it or block any other further requests until reopening using the buttons below."
+    it: "L'utente <@<!--user_id--!>> ha chiesto di riaprire questo ticket per il seguente motivo.\n\n**<!--reopening_reason--!>**\n\nÈ necessario un helper per esaminare questa richiesta e accettarla, negarla o bloccare ulteriori richieste fino ad una nuova riapertura utilizzando i pulsanti sottostanti."
+    es: "El usuario <@<!--user_id--!>> ha solicitado reabrir este ticket por la siguiente razón.\n\n**<!--reopening_reason--!>**\n\nSe requiere un helper para revisar esta solicitud y aceptarla, rechazarla o bloquear cualquier otra solicitud adicional hasta una nueva reapertura utilizando los botones de abajo."
 
 ticket-questions:
   title:
@@ -89,3 +182,83 @@ ticket-questions:
         en: "<!--answer--!>"
         it: "<!--answer--!>"
         es: "<!--answer--!>"
+
+accepted-reopening:
+  title:
+    en: "Reopening request accepted"
+    it: "Richiesta di riapertura accettata"
+    es: "Solicitud de reapertura aceptada"
+  description:
+    en: "The reopening request for this ticket has been accepted by <@<!--reopener_id--!>>.\n\nDear User <@<!--user_id--!>>,\nyou can now receive the assistance requested."
+    it: "La richiesta di riapertura per questo ticket è stata accettata da <@<!--reopener_id--!>>.\n\nCaro Utente <@<!--user_id--!>>,\npuoi ora ricevere l'assistenza richiesta."
+    es: "La solicitud de reapertura para este ticket ha sido aceptada por <@<!--reopener_id--!>>.\n\nEstimado Usuario <@<!--user_id--!>>,\nahora puede recibir la asistencia solicitada."
+
+denied-reopening:
+  title:
+    en: "Reopening request denied"
+    it: "Richiesta di riapertura negata"
+    es: "Solicitud de reapertura denegada"
+  description:
+    en: "The reopening request for this ticket has been denied by <@<!--denier_id--!>>.\n\nDear User <@<!--user_id--!>>,\nunfortunately your request has been denied. If you think this is a mistake, please contact the server staff."
+    it: "La richiesta di riapertura per questo ticket è stata negata da <@<!--denier_id--!>>.\n\nCaro Utente <@<!--user_id--!>>,\nsfortunatamente la tua richiesta è stata negata. Se credi sia un errore, contatta lo staff del server."
+    es: "La solicitud de reapertura para este ticket ha sido denegada por <@<!--denier_id--!>>.\n\nEstimado Usuario <@<!--user_id--!>>,\ndesafortunadamente su solicitud ha sido denegada. Si cree que es un error, por favor contacte con el personal del servidor."
+
+blocked-reopening:
+  title:
+    en: "Reopening requests blocked"
+    it: "Richieste di riapertura bloccate"
+    es: "Solicitudes de reapertura bloqueadas"
+  description:
+    en: "The reopening request for this ticket has been blocked by <@<!--blocker_id--!>>.\n\nDear User <@<!--user_id--!>>,\nunfortunately your request has been denied along with a block on any further reopen requests."
+    it: "La richiesta di riapertura per questo ticket è stata bloccata da <@<!--blocker_id--!>>.\n\nCaro Utente <@<!--user_id--!>>,\nsfortunatamente la tua richiesta è stata negata insieme ad un blocco di qualsiasi ulteriore richiesta di riapertura."
+    es: "La solicitud de reapertura para este ticket ha sido bloqueada por <@<!--blocker_id--!>>.\n\nEstimado Usuario <@<!--user_id--!>>,\ndesafortunadamente su solicitud ha sido denegada junto con un bloqueo de cualquier otra solicitud de reapertura."
+
+transcript-info:
+  title:
+    en: "Ticket Transcript"
+    it: "Trascrizione di ticket"
+    es: "Transcripción de ticket"
+  description:
+    en: "The following ticket has just been closed and deleted permanently.\n**User:** <@<!--user_id--!>>\n**Category:** <!--category_name--!>\n**Closed by:** <@<!--deleter_id--!>>\n\nYou can find the full transcript of the ticket in the `.html` file attached below which you can open with your preferred browser of choice."
+    it: "Il seguente ticket è stato appena chiuso e eliminato permanentemente.\n**Utente:** <@<!--user_id--!>>\n**Categoria:** <!--category_name--!>\n**Chiuso da:** <@<!--deleter_id--!>>\n\nPuoi trovare la trascrizione completa del ticket nel file `.html` allegato qui sotto."
+    es: "El siguiente ticket ha sido cerrado y eliminado permanentemente.\n**Usuario:** <@<!--user_id--!>>\n**Categoría:** <!--category_name--!>\n**Cerrado por:** <@<!--deleter_id--!>>\n\nPuedes encontrar la transcripción completa del ticket en el archivo `.html` adjunto a continuación."
+
+confirm-deletion:
+  title:
+    en: "Confirm ticket deletion"
+    it: "Conferma eliminazione ticket"
+    es: "Confirma eliminación de ticket"
+  description:
+    en: "You are about to permanently delete this ticket. This action is irreversible but a transcript will be save and available in the following channel: <#<!--transcripts_channel_id--!>>.\n\nIf you want to proceed, please press the button below."
+    it: "Stai per eliminare permanentemente questo ticket. Questa azione è irreversibile ma una trascrizione sarà salvata e disponibile nel seguente canale: <#<!--transcripts_channel_id--!>>.\n\nSe vuoi procedere, premi il pulsante qui sotto."
+    es: "Estás a punto de eliminar permanentemente este ticket. Esta acción es irreversible pero una transcripción se guardará y estará disponible en el siguiente canal: <#<!--transcripts_channel_id--!>>.\n\nSi deseas continuar, presiona el botón de abajo."
+
+no-transcript-channel:
+  title:
+    en: "Confirm ticket deletion (no transcript channel)"
+    it: "Conferma eliminazione ticket (nessun canale per la trascrizione)"
+    es: "Confirma eliminación de ticket (sin canal de transcripción)"
+  description:
+    en: "You are about to permanently delete this ticket. This action is irreversible and **a transcript channel has not been set in which to save the transcript attached below**. To avoid losing the ticket data you might want to download the file or it will be deleted along with the ticket at the deletion confirmation.\n\nIf you want to save the transcript on the server, a BotAdmin must run the `/set-transcript_channel` to set the right channel. After that you can proceed and the transcript will be saved in the specified channel.\n\nIf you want to proceed, please press the button below."
+    it: "Stai per eliminare permanentemente questo ticket. Questa azione è irreversibile e **non è stato impostato un canale per la trascrizione in cui salvare la trascrizione allegata qui sotto**. Per evitare di perdere i dati del ticket potresti voler scaricare il file o verrà eliminato insieme al ticket alla conferma di eliminazione.\n\nSe vuoi salvare la trascrizione sul server, un BotAdmin deve eseguire il comando `/set-transcript_channel` per impostare il canale giusto. Dopo di che puoi procedere e la trascrizione sarà salvata nel canale specificato.\n\nSe vuoi procedere, premi il pulsante qui sotto."
+    es: "Estás a punto de eliminar permanentemente este ticket. Esta acción es irreversible y **no se ha establecido un canal de transcripción en el que guardar la transcripción adjunta a continuación**. Para evitar perder los datos del ticket, es posible que desees descargar el archivo o se eliminará junto con el ticket a la confirmación de eliminación.\n\nSi deseas guardar la transcripción en el servidor, un BotAdmin debe ejecutar el comando `/set-transcript_channel` para establecer el canal correcto. Después de eso puedes proceder y la transcripción se guardará en el canal especificado.\n\nSi deseas continuar, presiona el botón de abajo."
+
+ticket-assigned:
+  title:
+    en: "Ticket assigned"
+    it: "Ticket assegnato"
+    es: "Ticket asignado"
+  description:
+    en: "This ticket has now somone to refer to, it has been assigned to <@<!--assignee_id--!>>.\n\nDear user,\nthe previously stated helper will you assist with your ticket, hope you get the best assitance possible! :)"
+    it: "Questo ticket ha ora qualcuno a cui fare riferimento, è stato assegnato a <@<!--assignee_id--!>>.\n\nCara utente,\nil assistente precedentemente indicato ti aiuterà con il tuo ticket, speriamo che ottenga l'assistenza migliore possibile! :)"
+    es: "Este ticket ahora tiene a alguien a quien referirse, ha sido asignado a <@<!--assignee_id--!>>.\n\nEstimado usuario,\nel asistente previamente indicado te ayudará con tu ticket, ¡esperamos que obtengas la mejor asistencia posible! :)"
+
+ticket-unassigned:
+  title:
+    en: "Ticket unassigned"
+    it: "Ticket non assegnato"
+    es: "Ticket no asignado"
+  description:
+    en: "This ticket has been unassigned from <@<!--assignee_id--!>> and now has no one to refer to.\n\nDear user,\nthe helper previously assigned to this ticket will no longer be the refernce point for it. This doent mean at all that the ticket has been closed or delted, nor that the matter has been considered resolved."
+    it: "Questo ticket è stato non assegnato da <@<!--assignee_id--!>> e ora non ha nessuno a cui fare riferimento.\n\nCaro utente,\nl'assistente precedentemente assegnato a questo ticket non sarà più il punto di riferimento per esso. Questo non significa affatto che il ticket sia stato chiuso o eliminato, né che la questione sia stata considerata risolta."
+    es: "Este ticket ha sido no asignado de <@<!--assignee_id--!>> y ahora no tiene a nadie a quien referirse.\n\nEstimado usuario,\nel asistente previamente asignado a este ticket ya no será el punto de referencia para él. Esto no significa en absoluto que el ticket haya sido cerrado o eliminado, ni que el asunto haya sido considerado resuelto."

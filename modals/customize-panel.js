@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 const BlueModal = require("../structures/BlueModal");
 const BlueMessage = require("../structures/BlueMessage");
 
-const queryDatabase = require("../utilis/queryDatabase");
+const queryDatabase = require("../utils/queryDatabase");
 
-module.exports = class CustomizePanel extends BlueModal {
+module.exports = class CustomizePanelModal extends BlueModal {
     constructor(client, localisation = "en") {
         super(client, "customize-panel", localisation);
     }

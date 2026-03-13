@@ -2,36 +2,38 @@ const Discord = require('discord.js');
 
 const BlueModal = require('../structures/BlueModal');
 const BlueMessage = require('../structures/BlueMessage');
-const queryDatabase = require('../utilis/queryDatabase');
+const queryDatabase = require('../utils/queryDatabase');
 
 const ticket_router = require('../routes/ticket-router');
 const BlueEmbed = require('../structures/BlueEmbed');
 
 module.exports = class TicketQuestionsModal extends BlueModal {
-    constructor(client, localisation = "en", category_name, guild_id) {
-        super(client, "open-ticket", localisation, category_name);
+    constructor(client, localisation = "en", category_id) {
+        super(client, "open-ticket", localisation, category_id);
 
-        this.category_name = category_name;
-        this.guild_id = guild_id;
+        this.category_id = category_id;
     }
 
     async build() {
-        const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `guild_id` = ? AND `category_name` = ?", [this.guild_id, this.category_name]);
+        const categories = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [this.category_id]);
+        const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `category_id` = ?", [this.category_id]);
+        
         this.modal = new Discord.ModalBuilder()
-            .setTitle("Open Ticket - " + this.category_name)
+            .setTitle("Open Ticket - " + categories[0].category_name)
             .setCustomId(this.id);
 
         var cnt = 0;
 
         for(const question of questions) {
-            this.modal.addComponents(
-                new Discord.ActionRowBuilder().addComponents(
-                    new Discord.TextInputBuilder()
-                        .setStyle(Discord.TextInputStyle.Paragraph)
-                        .setLabel(question.question)
-                        .setRequired(true)
-                        .setCustomId("answer_" + cnt++)
-                )
+            this.modal.addLabelComponents(
+                new Discord.LabelBuilder()
+                    .setLabel(question.question)
+                    .setTextInputComponent(
+                        new Discord.TextInputBuilder()
+                            .setStyle(Discord.TextInputStyle.Paragraph)
+                            .setRequired(true)
+                            .setCustomId("answer_" + cnt++)
+                    )
             );
         }
     }
@@ -48,9 +50,10 @@ module.exports = class TicketQuestionsModal extends BlueModal {
         const isVip = interaction.member.roles.cache.find(r => r.id == vip_role_id) ? true : false;
         const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
-        const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `guild_id` = ? AND `category_name` = ?", [interaction.guild.id, this.category_name]);
+        const categories = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [this.category_id]);
+        const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `category_id` = ?", [this.category_id]);
 
-        const ticketChannel = await ticket_router.openTicket(interaction.client, interaction, interaction.guild.id, this.category_name, interaction.user.id, isVip);
+        const ticketChannel = await ticket_router.openTicket(interaction.client, interaction, interaction.guild.id, this.category_id, interaction.user.id, isVip);
 
         if(!ticketChannel) {
             interaction.editReply("Error");
@@ -60,7 +63,7 @@ module.exports = class TicketQuestionsModal extends BlueModal {
         const msg = new BlueMessage(interaction.client, "ticket-opened", locale, {
             "channel_id": ticketChannel.id,
             "user_id": interaction.user.id,
-            "category_name": this.category_name,
+            "category_name": categories[0].category_name,
             "channel_link": `https://discord.com/channels/${interaction.guild.id}/${ticketChannel.id}`,
         });
 
