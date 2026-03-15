@@ -174,17 +174,17 @@ ping:
 server-info:
   name: "server"
   description: "Display information on the server"
-  test: true
+  test: false
 
 tck-info:
   name: "tck"
   description: "Infomration about the server ticketing system"
-  test: true
+  test: false
 
 setup-info:
   name: "setup"
   description: "Display information on how to setup the bot"
-  test: true
+  test: false
 
 
 
@@ -193,7 +193,7 @@ setup-info:
 set-transcripts_channel:
   name: "transcripts-channel"
   description: "Set the channel where the ticket transcripts will be sent"
-  test: true
+  test: false
   options:
     - name: "channel"
       description: "The channel where the ticket transcripts will be sent. Leave blank to disable the current channel."
@@ -203,17 +203,17 @@ set-transcripts_channel:
 set-default_cateogry_enable:
   name: "default-category-enable"
   description: "Enable the default category for the server (use one default category)"
-  test: true
+  test: false
   
 set-default_cateogry_disable:
   name: "default-category-disable"
   description: "Disable the default category for the server (use ticket categories)"
-  test: true
+  test: false
 
 set-add_ticket_category:
   name: "add-category"
   description: "Add a ticket category to the server"
-  test: true
+  test: false
   options:
     - name: "name"
       description: "The name of the category to be added (it must be unique)"
@@ -223,7 +223,7 @@ set-add_ticket_category:
 set-admin_role:
   name: "admin"
   description: "Setup the BotAdmin role in the bot database"
-  test: true
+  test: false
   options:
     - name: "role"
       description: "The role that can run every bot command, even the most delicate ones (settings commands)"
@@ -233,7 +233,7 @@ set-admin_role:
 set-default_ticket_emoji:
   name: "default-emoji"
   description: "Set the default emoji for the tickets"
-  test: true
+  test: false
   options:
     - name: "emoji"
       description: "The emoji to be used as the default ticket emoji"
@@ -243,7 +243,7 @@ set-default_ticket_emoji:
 set-language:
   name: "language"
   description: "Set the language for this server"
-  test: true
+  test: false
   options:
     - name: "language"
       description: "The language you want the bot to use"
@@ -254,7 +254,7 @@ set-language:
 set-helper_role:
   name: "helper"
   description: "Setup the helper role in the bot database"
-  test: true
+  test: false
   options:
     - name: "role"
       description: "The role that can interact with every command of the bot, except the most delicate ones (settings commands)"
@@ -264,7 +264,7 @@ set-helper_role:
 set-remove_ticket_category:
   name: "remove-category"
   description: "Remove a ticket category from the server"
-  test: true
+  test: false
   options:
     - name: "category_id"
       description: "The id of the category to be removed"
@@ -275,7 +275,7 @@ set-remove_ticket_category:
 set-ticket_category:
   name: "default-category"
   description: "Choose the default ticket category among the ones already added"
-  test: true
+  test: false
   options:
     - name: "category_id"
       description: "The id of the category you want to use as default for the server"
@@ -286,12 +286,12 @@ set-ticket_category:
 set-ticket_panel:
   name: "panel"
   description: "Customize the ticket panel"
-  test: true
+  test: false
 
 set-vip_role:
   name: "vip"
   description: "Setup the vip role in the bot database"
-  test: true
+  test: false
   options:
     - name: "role"
       description: "The role that will be used as the VIP role"
@@ -301,7 +301,7 @@ set-vip_role:
 set-vip_ticket_emoji:
   name: "vip-emoji"
   description: "Set the emoji that will be displayed next to the category emoji in vip tickets name"
-  test: true
+  test: false
   options:
     - name: "emoji"
       description: "The emoji to be used as the vip ticket emoji"
@@ -311,7 +311,7 @@ set-vip_ticket_emoji:
 
 setup:
   description: "Add server to the bot database"
-  test: true
+  test: false
 
 
 
