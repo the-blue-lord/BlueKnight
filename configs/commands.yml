@@ -174,7 +174,7 @@ ping:
 server-info:
   name: "server"
   description: "Display information on the server"
-  test: false
+  test: true
 
 tck-info:
   name: "tck"
@@ -184,7 +184,7 @@ tck-info:
 setup-info:
   name: "setup"
   description: "Display information on how to setup the bot"
-  test: false
+  test: true
 
 
 
