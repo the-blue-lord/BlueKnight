@@ -24,13 +24,15 @@ Todo:
 Fixme:
   ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)
   ✔ Tickets in default categories not recongized because they don't have category_id @done(26-03-13 19:24)
-  ☐ CategoryQuestionsModal not completly loclized
+  ✔ CategoryQuestionsModal not completly localized @done(26-03-17 00:58)
   ☐ Unable to identufy the problem bot not selecting right locale for ticket closure
   ☐ Add regex checks for emojis
   ☐ Add info/help mesage to tell the user to activate default catgeogry after choosing the default category
   ☐ ticket reopening request blocker not actually blocking any reopening request
+  ☐ Update messages and embeds to reflect command names changes
 
 Commands:
+  ☐ `/help`
   Info:
     ☐ Fix `/info server` embed
   Settings:

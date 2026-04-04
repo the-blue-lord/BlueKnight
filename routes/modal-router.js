@@ -1,13 +1,15 @@
 const fs = require("fs");
 const queryDatabase = require("../utils/queryDatabase");
 
+const { insertUnderscore } = require("../utils/customIdNomralization");
+
 module.exports = async interaction => {
     
     // --- If the interaction was not produced by a modal, exit
     if(!interaction.isModalSubmit()) return;
 
-    const modalAction = interaction.customId.split("_")[0];
-    const modalData = interaction.customId.split("_").slice(1);
+    const modalAction = insertUnderscore(interaction.customId.split("_")[0]);
+    const modalData = interaction.customId.split("_").slice(1).map(d => insertUnderscore(d));
 
     const modalsFolder = global.MODALS_FOLDER;
 

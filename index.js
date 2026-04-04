@@ -74,7 +74,7 @@ async function initClient() {
         intents: [
             GatewayIntentBits.Guilds,
             GatewayIntentBits.GuildMessages,
-            GatewayIntentBits.MessageContent
+            GatewayIntentBits.MessageContent,
         ],
 
         partials: [
@@ -153,20 +153,20 @@ function getFolderCommands(client, folderPath) {
         const commandClass = require(path.join(__dirname, folderPath, file));
         const commandObject = new commandClass(client);
         const data = commandObject.getData();
-        test_commands.push(data);
-        if(!commandObject.test) commands.push(data);
+        if(commandObject.test) test_commands.push(data);
+        else commands.push(data);
     });
 
     directories.forEach(directory => {
         const subData = JSON.parse(fs.readFileSync(path.join(folderPath, directory, "000-index.json"), "utf-8"));
         const { test_commands: test_options, commands: options} = getFolderCommands(client, path.join(folderPath, directory));
-        test_commands.push({
+        if(test_options.length) test_commands.push({
             "type": subData.type,
             "name": subData.name,
             "description": subData.description,
             "options": test_options
         });
-        if(!subData.test) commands.push({
+        if(options.length) commands.push({
             "type": subData.type,
             "name": subData.name,
             "description": subData.description,

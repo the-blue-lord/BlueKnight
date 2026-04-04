@@ -60,10 +60,10 @@ module.exports = class CategoryDataModal extends BlueModal {
             return;
         }
 
-        const cat_id = cateogries[cateogries.length-1].category_id
+        const cat_id = cateogries[cateogries.length-1].category_id;
 
         const msg = new BlueMessage(this.client, "category-added", this.lan);
-        const questions_button = new AddCategoryQuestionsButton(this.client, this.lan, cat_id)
+        const questions_button = new AddCategoryQuestionsButton(this.client, this.lan, cat_id);
         const row = new ActionRowBuilder().addComponents(questions_button.button);
         await interaction.editReply({
             embeds: [msg.embed],

@@ -6,6 +6,8 @@ const queryDatabase = require('../utils/queryDatabase');
 
 const ticket_router = require('../routes/ticket-router');
 const BlueEmbed = require('../structures/BlueEmbed');
+const yaml = require('yaml');
+const fs = require('fs');
 
 module.exports = class TicketQuestionsModal extends BlueModal {
     constructor(client, localisation = "en", category_id) {
@@ -15,11 +17,14 @@ module.exports = class TicketQuestionsModal extends BlueModal {
     }
 
     async build() {
+        const languages = yaml.parse(fs.readFileSync("./configs/languages.yml", "utf8"));
+
+
         const categories = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [this.category_id]);
         const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `category_id` = ?", [this.category_id]);
         
         this.modal = new Discord.ModalBuilder()
-            .setTitle("Open Ticket - " + categories[0].category_name)
+            .setTitle(languages.open_ticket[this.lan] + " - " + categories[0].category_name)
             .setCustomId(this.id);
 
         var cnt = 0;
@@ -52,6 +57,7 @@ module.exports = class TicketQuestionsModal extends BlueModal {
 
         const categories = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [this.category_id]);
         const questions = await queryDatabase("SELECT * FROM `CategoryQuestions` WHERE `category_id` = ?", [this.category_id]);
+        
 
         const ticketChannel = await ticket_router.openTicket(interaction.client, interaction, interaction.guild.id, this.category_id, interaction.user.id, isVip);
 

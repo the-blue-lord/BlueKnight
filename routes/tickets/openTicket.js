@@ -2,6 +2,7 @@ const { OverwriteType, ChannelType, PermissionFlagsBits, PermissionsBitField, Ac
 const queryDatabase = require("../../utils/queryDatabase");
 const BlueEmbed = require("../../structures/BlueEmbed");
 const CloseTicketButton = require("../../buttons/close-ticket");
+const BlueMessage = require("../../structures/BlueMessage");
 
 module.exports = async (client, interaction, guild_id, category_id, user_id, vip_ticket = false) => {
     const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [guild_id]);
@@ -23,10 +24,28 @@ module.exports = async (client, interaction, guild_id, category_id, user_id, vip
 
     if(!channel_id || !vip_channel_id) return;
 
+    await interaction.guild.channels.create({
+        name: "log2",
+        type: 0,
+        parent: vip_ticket ? vip_channel_id : channel_id
+    });
+
+    const parent_id = vip_ticket ? vip_channel_id : channel_id;
+
+    const parent_channnel = await interaction.guild.channels.fetch(parent_id);
+    if(!parent_channnel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ViewChannel)) {
+        const msg = new BlueMessage(client, "no-category-access", guildData[0].locale);
+        await interaction.editReply({
+            embeds: [msg.embed],
+            components: msg.components,
+            files: msg.files
+        });
+    }
+    
     const channel = await interaction.guild.channels.create({
         name: ticketChannelName,
         type: ChannelType.GuildText,
-        parent: vip_ticket ? vip_channel_id : channel_id,
+        parent: parent_id,
         permissionOverwrites: [
             {
                 type: OverwriteType.Role,

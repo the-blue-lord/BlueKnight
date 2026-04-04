@@ -2,12 +2,14 @@ const { ModalBuilder, TextInputStyle, TextInputBuilder, ActionRowBuilder, String
 const yaml = require("yaml");
 const fs = require("fs");
 
+const { removeUnderscore } = require("../utils/customIdNomralization");
+
 module.exports = class BlueModal {
     constructor(client, modal_action, localisation = "en", modal_data) {
         this.client = client;
         this.action = modal_action;
         this.lan = localisation;
-        this.id = modal_action + (modal_data ? "_" + modal_data : "");
+        this.id = removeUnderscore(modal_action) + (removeUnderscore(modal_data) ? "_" + removeUnderscore(modal_data) : "");
     }
 
     async build(vars = {}) {

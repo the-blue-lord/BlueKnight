@@ -200,13 +200,13 @@ set-transcripts_channel:
       required: false
       type: 7
 
-set-default_cateogry_enable:
-  name: "default-category-enable"
+set-default_category_enable:
+  name: "enable-default-category"
   description: "Enable the default category for the server (use one default category)"
   test: false
   
-set-default_cateogry_disable:
-  name: "default-category-disable"
+set-default_category_disable:
+  name: "disable-default-category"
   description: "Disable the default category for the server (use ticket categories)"
   test: false
 
@@ -393,7 +393,7 @@ tck-open:
 tck-panel:
   name: "panel"
   description: "Display the ticket panel"
-  test: true
+  test: false
 
 tck-remove:
   name: "remove"
@@ -466,3 +466,9 @@ tck-mute:
       description: "The ticket where to mute the user"
       required: false
       type: 7
+
+# HELP
+help:
+  name: "help"
+  description: "Display the help message, with a gist of all the bot commands and functionalities"
+  test: true

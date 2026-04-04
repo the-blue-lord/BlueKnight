@@ -5,7 +5,7 @@ const BlueMessage = require("../../../structures/BlueMessage");
 
 module.exports = class SetDefaultTicketCategoryDisable extends BlueCommand {
     constructor(client) {
-        super(client, "set-default_cateogry_disable");
+        super(client, "set-default_category_disable");
     }
 
     async run(interaction) {
