@@ -64,6 +64,7 @@ module.exports = class TranslateMessageMenu extends BlueMenu {
         new_components.forEach(row => 
             row.components = row.components.map(component => {
                 const custom_id = component.data?.custom_id || component.customId;
+                if(!custom_id) return component;
 
                 const action = custom_id.split("_")[0];
                 const data = custom_id.split("_").slice(1);

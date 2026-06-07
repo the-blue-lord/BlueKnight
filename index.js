@@ -15,6 +15,7 @@ const old_error = console.error
 console.event = (...msg) => console.log("[EVENT]", ...msg);
 console.command = (...msg) => console.log("[COMMAND]", ...msg);
 console.error = (...msg) => old_error("[ERROR]", ...msg);
+console.database = (...msg) => console.log("[DATABASE]", ...msg);
 
 
 
@@ -59,7 +60,7 @@ function initProcessListeners() {
 }
 
 function initDatabase() {
-    global.DATABASE = mysql.createConnection({
+    const db = mysql.createConnection({
         host: process.env.HOST,
         port: process.env.PORT,
         user: process.env.USER,
@@ -67,6 +68,13 @@ function initDatabase() {
         database: process.env.DATABASE,
         charset: "utf8mb4"
     });
+
+    db.connect((err) => {
+        if(err) return console.error("Database connection failed:", err);
+        console.database("Database connected")
+    });
+
+    global.DATABASE = db
 }
 
 async function initClient() {
