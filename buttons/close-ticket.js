@@ -1,66 +1,60 @@
+// Imports
 const { MessageFlags, ButtonStyle } = require("discord.js");
 const BlueMessage = require("../structures/BlueMessage");
 const queryDatabase = require("../utils/queryDatabase");
 const BlueButton = require("../structures/BlueButton");
+const getGuildData = require("../utils/data-fetchers/getGuildData");
+const getTicketData = require("../utils/data-fetchers/getTicketData");
+const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
+const ticketMustBeOpen = require("../utils/checks/ticketMustBeOpen");
 
 
+// Class for the button that closes a ticket
 module.exports = class CloseTicketButton extends BlueButton {
+    // Constructor
     constructor(client, locale) {
+        // Build the button data
         super(client, "close-ticket", locale);
     }
 
+    // Button function
     async run(action, interaction) {
+        // Check if it's the right event
         if(action != this.action) return;
         
+        // Defer the reply to the interaction
         await interaction.deferReply({
             flags: MessageFlags.Ephemeral
         });
 
-        const ticketChannel = interaction.channel;
+        // Get the ticket channel
+        const ticket_channel = interaction.channel;
 
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale;
+        // Fetch database data
+        const bot_guild = await getGuildData(this.client, interaction.guild.id, interaction);
+        const bot_ticket = await getTicketData(this.client, ticket_channel.id, interaction, bot_guild.locale);
 
-        const ticketData = await queryDatabase("SELECT * FROM `Tickets` WHERE `ticket_id` = ?", [ticketChannel.id]);
+        const locale = bot_guild.locale;
 
-        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
-            const msg = new BlueMessage(this.client, "not-category-helper", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastCategoryHelper(interaction.member, bot_ticket.category_id, locale, this.client, interaction);
 
-        if(!ticketData) {
-            const msg = new BlueMessage(this.client, "ticket-not-found", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
-
-        if(ticketData[0].closed == "1") {
-            const msg = new BlueMessage(this.client, "ticket-already-closed", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        // Check if the ticket can be closed
+        await ticketMustBeOpen(bot_ticket, "ticket-already-closed", locale, this.client, interaction);
         
+        // Close the ticket
         const closeTicket = require("../routes/tickets/closeTicket");
-        await closeTicket(this.client, interaction.guild, ticketChannel, locale, interaction.member.id);
+        await closeTicket(this.client, interaction.guild, ticket_channel, locale, interaction.member.id);
 
+        // Notify the successful closure
         const message = new BlueMessage(this.client, "ticket-closed", locale);
         await interaction.editReply({
             embeds: [message.embed],
             components: message.components,
             files: message.attachments
         });
+
+        // Return
+        return;
     }
-}
+};

@@ -19,14 +19,25 @@ function getTimeString() {
 
 // Console element extension for custom logging
 
+function appendPrefix(log_type, ...msg) {
+    const prefix = `[${getTimeString()}] ${log_type} >>`;
+
+    const new_msg = msg.map(m => String(m).replaceAll("\n", `\n${prefix} `));
+
+    const start = `----------------------------------------------------------------------------------------------------\n${prefix}`
+
+    new_msg.unshift(start);
+
+    return new_msg;
+};
+
 const old_error = console.error;
 const old_debug = console.debug;
-console.event = (...msg) => console.log(`[${getTimeString()}] EVENT >>`, ...msg);
-console.command = (...msg) => console.log(`[${getTimeString()}] COMMAND >>`, ...msg);
-console.error = (...msg) => old_error(`[${getTimeString()}] ERROR >>`, ...msg);
-console.database = (...msg) => console.log(`[${getTimeString()}] DATABASE >>`, ...msg);
-console.debug = (...msg) => old_debug(`[${getTimeString()}] DEBUG >>`, ...msg);
-
+console.event = (...msg) => console.log(...appendPrefix("EVENT", ...msg));
+console.command = (...msg) => console.log(...appendPrefix("COMMAND", ...msg));
+console.error = (...msg) => old_error(...appendPrefix("ERROR", ...msg));
+console.database = (...msg) => console.log(...appendPrefix("DATABASE", ...msg));
+console.debug = (...msg) => old_debug(...appendPrefix("DEBUG", ...msg));
 
 
 // Global variables

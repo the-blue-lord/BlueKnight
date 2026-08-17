@@ -4,8 +4,8 @@ Tostart:
 
 Todo:
   ☐ Add Report and feedback buttons
-  ☐ Upgrade translation system
-    ☐ Add translation for embeds
+  ✔ Upgrade translation system @done(26-08-17 14:54)
+    ✔ Add translation for embeds @done(26-08-17 14:54)
     ✔ Implement select menu translation @started(25-07-06 01:21) @done(25-07-06 02:12) @lasted(51m19s)
       ✔ Replace translate buttons with translate string select menu @started(25-07-05 02:31) @done(25-07-05 03:19) @lasted(49m)
       ✔ Deal with different translating request @started(25-07-06 01:21) @done(25-07-06 02:12) @lasted(51m7s)
@@ -21,6 +21,7 @@ Todo:
   ✔ Manage button ticket creation @started(25-06-24 22:02) @done(25-06-25 02:28) @lasted(4h26m9s)
   ✔ Add default ticket emoji @started(25-06-26 02:40) @done(25-06-26 03:41) @lasted(1h1m10s)
   ✔ Get guild locale on /set setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
+  ☐ Add category-not-found error (or find the correct one)
 
 Fixme:
   ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)
@@ -35,6 +36,7 @@ Fixme:
   ☐ Change old command names in help messges
   ✔ Avoid using cache to get members, roles and other entities, better use fetch because cache might not be up to date @done(26-07-06 20:47)
   ☐ rewire claim/unclaim, assign/unassign
+  ☐ User can re-click an old reopen request in the ticket when blocked (levae always only one button to request reopening)
 
 Commands:
   ☐ `/help`
@@ -57,3 +59,6 @@ Commands:
     ✔ `/tck unmute` @done(25-11-07 20:00)
     ☐ `/tck-info`
     ☐ `/tck-system_status`
+
+Future proposals:
+  ☐ Add not only category helper role but also category AdminHelper role

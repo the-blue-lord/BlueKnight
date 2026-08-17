@@ -10,6 +10,7 @@ module.exports = class BlueEvent {
                 await this.run(...args);
             }
             catch (err) {
+                if(err === null) return;
                 if(this.name == "error") return;
                 this.client.emit("error", err, this.name);
             }
