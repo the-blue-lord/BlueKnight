@@ -16,7 +16,7 @@ module.exports = class ConfirmDeletionButton extends BlueButton {
 
         await interaction.reply("Deleting ticket...");
 
-        const ticketChannel = await interaction.guild.channels.cache.get(this.channel_id) || this.channel_id;
+        const ticketChannel = await interaction.guild.channels.fetch(this.channel_id) || this.channel_id; // INSERTED FETCH
 
 
         const ticketData = await queryDatabase("SELECT * FROM `Tickets` AS t JOIN `Categories` AS c ON t.category_id = c.category_id WHERE `ticket_id` = ?", [ticketChannel.id]);
@@ -34,7 +34,7 @@ module.exports = class ConfirmDeletionButton extends BlueButton {
         }
 
         const transcript = await createTranscript(ticketChannel);
-        const transcriptChannel = await interaction.guild.channels.cache.get(guildData[0].ticket_transcripts_channel);
+        const transcriptChannel = await interaction.guild.channels.fetch(guildData[0].ticket_transcripts_channel); // INSERTED FETCH
 
         await queryDatabase("DELETE FROM `Tickets` WHERE ticket_id = ?", [this.channel_id]);
         await ticketChannel.delete();
@@ -46,6 +46,7 @@ module.exports = class ConfirmDeletionButton extends BlueButton {
                 deleter_id: interaction.user.id
             });
 
+            // FIXME: Not sending s=message bc transcriptChannel not recongized as a chennel, prolly probelms with newly insrted fetch
             transcriptChannel.send({
                 embeds: [transcript_embed.embed],
                 components: transcript_embed.components,

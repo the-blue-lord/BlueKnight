@@ -30,6 +30,9 @@ module.exports = class TckClose extends BlueCommand {
             return;
         }
 
+        console.debug(ticketData);
+        console.debug(!ticketData);
+
         if(!ticketData) {
             const msg = new BlueMessage(this.client, "ticket-not-found", locale);
             await interaction.editReply({

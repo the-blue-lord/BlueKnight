@@ -18,28 +18,33 @@ module.exports = async (client, interaction, guild_id, category_id, user_id, vip
     const category_name = categoryData[0].category_name || "";
     const vip_emoji = ticketingData[0].vip_emoji || "";
     const emoji = categoryData[0].category_emoji || "🎫";
-    const username = interaction.guild.members.cache.get(user_id)?.user?.username || "undefined";
+    const username = (await interaction.guild.members.fetch(user_id))?.user?.username || "undefined"; // INSERTED FETCH
 
     const ticketChannelName = (vip_ticket ? vip_emoji : "") + emoji + "┃" + username + (category_name ? ("・" + category_name) : "");
 
     if(!channel_id || !vip_channel_id) return;
 
+/*
     await interaction.guild.channels.create({
         name: "log2",
         type: 0,
         parent: vip_ticket ? vip_channel_id : channel_id
     });
+*/
 
     const parent_id = vip_ticket ? vip_channel_id : channel_id;
 
     const parent_channnel = await interaction.guild.channels.fetch(parent_id);
     if(!parent_channnel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.Flags.ViewChannel)) {
+        // BUG: Add error information
         const msg = new BlueMessage(client, "no-category-access", guildData[0].locale);
         await interaction.editReply({
             embeds: [msg.embed],
             components: msg.components,
             files: msg.files
         });
+
+        return;
     }
     
     const channel = await interaction.guild.channels.create({
@@ -58,11 +63,11 @@ module.exports = async (client, interaction, guild_id, category_id, user_id, vip
             },
             {
                 id: client.user.id,
-                allow: [PermissionFlagsBits.ViewChannel]
+                allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
             },
             {
                 id: category_role,
-                allow: [PermissionFlagsBits.ViewChannel]
+                allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
             }
         ]
     });

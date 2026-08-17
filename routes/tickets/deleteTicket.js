@@ -30,7 +30,7 @@ module.exports = async (client, ticketChannel, ticketData, transcriptsChannel, i
 
     const transcript_file = await createTranscript(ticketChannel);
 
-    const user = interaction.guild.members.cache.get(ticketData[0].user_id).user;
+    const user = (await interaction.guild.members.fetch(ticketData[0].user_id)).user;
 
     const file_name = `transcript-ticket_${ticketChannel.id}-${user.username}-${ticketData[0].category_name}`;
 

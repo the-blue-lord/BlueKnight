@@ -400,8 +400,8 @@ tck-remove:
   description: "Remove a user from the ticket"
   test: true
   options:
-    - name: "member"
-      description: "The member to remove"
+    - name: "user"
+      description: "The user to remove"
       required: true
       type: 6
     - name: "ticket-channel"

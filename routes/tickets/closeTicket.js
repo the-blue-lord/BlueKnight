@@ -6,7 +6,7 @@ const AskTicketReopeningButton = require("../../buttons/ask-reopening");
 const DeleteTicketButton = require("../../buttons/delete-ticket");
 
 module.exports = async (client, guild, ticket_channel, locale, excutor_id) => {
-    ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: false});
+    await ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: false});
 
     await queryDatabase("UPDATE `Tickets` SET `closed` = '1' WHERE `ticket_id` = ?", [ticket_channel.id]);
 

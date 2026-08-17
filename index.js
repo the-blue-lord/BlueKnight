@@ -7,15 +7,25 @@ const path = require("path");
 const mysql = require("mysql");
 const { Client, GatewayIntentBits, Partials, REST, Routes, applicationDirectory } = require("discord.js");
 
+function getTimeString() {
+    const now = new Date();
 
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${hours}:${minutes}:${seconds}`;
+}
 
 // Console element extension for custom logging
 
-const old_error = console.error
-console.event = (...msg) => console.log("[EVENT]", ...msg);
-console.command = (...msg) => console.log("[COMMAND]", ...msg);
-console.error = (...msg) => old_error("[ERROR]", ...msg);
-console.database = (...msg) => console.log("[DATABASE]", ...msg);
+const old_error = console.error;
+const old_debug = console.debug;
+console.event = (...msg) => console.log(`[${getTimeString()}] EVENT >>`, ...msg);
+console.command = (...msg) => console.log(`[${getTimeString()}] COMMAND >>`, ...msg);
+console.error = (...msg) => old_error(`[${getTimeString()}] ERROR >>`, ...msg);
+console.database = (...msg) => console.log(`[${getTimeString()}] DATABASE >>`, ...msg);
+console.debug = (...msg) => old_debug(`[${getTimeString()}] DEBUG >>`, ...msg);
 
 
 
@@ -108,7 +118,7 @@ async function initCommands(client) {
 
     // Register the commands
     await client.application?.commands?.set(commands);
-    await client.guilds?.cache?.get(process.env.GUILD_ID)?.commands?.set(test_commands);
+    await (await client.guilds?.fetch(process.env.GUILD_ID))?.commands?.set(test_commands); // INSERTED FETCH
 
     // Log commands registration
     console.command("Commands registered");

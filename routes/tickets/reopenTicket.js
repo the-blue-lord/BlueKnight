@@ -4,7 +4,7 @@ const CloseTicketButton = require("../../buttons/close-ticket");
 const queryDatabase = require("../../utils/queryDatabase");
 
 module.exports = async (client, guild, ticket_channel, locale, excutor_id, reopening_requested = false) => {
-    ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: true});
+    await ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: true});
 
     await queryDatabase("UPDATE `Tickets` SET `closed` = '0' WHERE `ticket_id` = ?", [ticket_channel.id]);
 

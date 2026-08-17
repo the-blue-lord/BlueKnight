@@ -436,3 +436,15 @@ transcipts-channel-unset:
     en: "The transcripts will no longer be sent to a specific channel."
     it: "Le trascrizioni non saranno più inviate ad un canale specifico."
     es: "Las transcripciones ya no serán enviadas a un canal específico."
+
+no-category-access:
+  type: "error"
+  title:
+    en: "No access to necessary category"
+    it: "Nessun accesso alla categoria necessaria"
+    es: "Sin acceso a la categoría necesaria"
+  content:
+    en: "The bot does not have access to the category it needs to perform the action requested. Please contact an admin to fix this problem."
+    it: "Il bot non ha accesso alla categoria di cui ha bisogno per eseguire l'azione richiesta. Per favore contatta un amministratore per risolvere questo problema."
+    es: "El bot no tiene acceso a la categoría que necesita para realizar la acción solicitada. Por favor, contacta a un administrador para solucionar este problema."
+  

@@ -16,7 +16,7 @@ module.exports = class BlueModal {
         const modalData = yaml.parse(fs.readFileSync("./configs/modals.yml", "utf-8"))[this.action];
 
         this.modal = new ModalBuilder().setCustomId(this.id);
-
+        // BUG: When modalData = {}
         if(!modalData) {
             this.modal.setTitle("Default modal").addLabelComponents(
                 new LabelBuilder()

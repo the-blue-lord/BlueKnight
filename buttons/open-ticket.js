@@ -62,6 +62,7 @@ module.exports = class OpenTicketButton extends BlueButton {
             });
 
             const ticketChannel = await ticket_router.openTicket(interaction.client, interaction, interaction.guild.id, this.category_id, interaction.user.id, isVip);
+            if(!ticketChannel) return;
 
             const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
             const msg = new BlueMessage(interaction.client, "ticket-opened", locale,  {

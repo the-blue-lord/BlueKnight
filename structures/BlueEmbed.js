@@ -9,6 +9,7 @@ module.exports = class BlueEmbed {
         const embeds = yaml.parse(fs.readFileSync("./configs/embeds.yml", "utf-8"));
         const embedData = embeds[embed_id];
 
+        // BUG: When embedData = {}
         if(!embedData) return null;
 
         const title = Object.entries(variables).reduce((str, [key, value]) => str.replaceAll(`<!--${key}--!>`, value), (embedData.title[language] || embedData.title["en"]));

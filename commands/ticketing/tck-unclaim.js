@@ -2,6 +2,8 @@ const { MessageFlags } = require("discord.js");
 const BlueCommand = require("../../structures/BlueCommand");
 const BlueMessage = require("../../structures/BlueMessage");
 
+queryDatabase = require("../../utils/queryDatabase");
+
 module.exports = class TckClaim extends BlueCommand {
     constructor(client) {
         super(client, "tck-unclaim");

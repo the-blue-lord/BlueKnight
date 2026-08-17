@@ -63,7 +63,7 @@ module.exports = class TckDeleteCommand extends BlueCommand {
             return;
         }
 
-        const transcriptsChannel = interaction.guild.channels?.cache?.get(ticketingData[0].ticket_transcripts_channel);
+        const transcriptsChannel = await interaction.guild.channels?.fetch(ticketingData[0].ticket_transcripts_channel); // INSERTED FETCH
 
         deleteTicket(this.client, ticketChannel, ticketData, transcriptsChannel, interaction, locale);
     }

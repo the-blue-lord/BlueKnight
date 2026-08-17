@@ -14,6 +14,7 @@ module.exports = class TckRemoveCommand extends BlueCommand {
         });
 
         const ticketChannel = interaction.options?.getChannel("ticket-channel") || interaction.channel;
+        console.debug(interaction.options);
         const user = interaction.options?.getUser("user");
 
         const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);

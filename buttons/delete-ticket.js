@@ -67,7 +67,9 @@ module.exports = class DeleteTicketButton extends BlueButton {
             return;
         }
 
-        const transcriptsChannel = interaction.guild.channels?.cache?.get(guildData[0].ticket_transcripts_channel);
+        const transcript_channel_id = guildData[0].ticket_transcripts_channel;
+
+        const transcriptsChannel = transcript_channel_id && await interaction.guild.channels?.fetch(transcript_channel_id); // INSERTED FETCH
 
         deleteTicket(this.client, ticketChannel, ticketData, transcriptsChannel, interaction, locale);
     }

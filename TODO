@@ -1,4 +1,5 @@
 Tostart:
+  ✔ TICKETING SYSTEM @done(26-07-06 20:48)
   ☐ EPHEMERAL VOICE CHANNELS
 
 Todo:
@@ -25,11 +26,15 @@ Fixme:
   ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)
   ✔ Tickets in default categories not recongized because they don't have category_id @done(26-03-13 19:24)
   ✔ CategoryQuestionsModal not completly localized @done(26-03-17 00:58)
-  ☐ Unable to identufy the problem bot not selecting right locale for ticket closure
+  ✔ Unable to identufy the problem bot not selecting right locale for ticket closure @done(26-07-06 23:12)
   ☐ Add regex checks for emojis
   ☐ Add info/help mesage to tell the user to activate default catgeogry after choosing the default category
   ☐ ticket reopening request blocker not actually blocking any reopening request
   ☐ Update messages and embeds to reflect command names changes
+  ☐ In commands/ticketing all the checks of ticketData are done too late because the array variable ticketData is beeing accessed before checking if it exists, in addition there is no check to wether ticketData is an empty array ( ![] returns false, better to use !ticketData.length )
+  ☐ Change old command names in help messges
+  ✔ Avoid using cache to get members, roles and other entities, better use fetch because cache might not be up to date @done(26-07-06 20:47)
+  ☐ rewire claim/unclaim, assign/unassign
 
 Commands:
   ☐ `/help`
@@ -41,14 +46,14 @@ Commands:
   Ticketing:
     ✔ `/tck close` @started(25-08-06 01:15) @done(25-08-06 16:41) @lasted(15h26m2s)
     ✔ `/tck reopen` @started(25-08-06 16:41) @done(25-08-11 23:24) @lasted(5d6h43m58s)
-    ✔ `/tck delete` @done(25-09-25 10:51) // Test command
-    ✔ `/tck add` @done(25-09-26 08:56) // Test command
-    ✔ `/tck remove` @done(25-09-26 08:57) // Test command
+    ✔ `/tck delete` @done(25-09-25 10:51)
+    ✔ `/tck add` @done(25-09-26 08:56)
+    ✔ `/tck remove` @done(25-09-26 08:57)
     ✔ `/tck assign` @done(25-11-07 20:00) // Test command
     ✔ `/tck claim` @done(25-11-07 20:00) // Test command
     ✔ `/tck unassign` @done(25-11-07 20:00) // Test command
     ✔ `/tck unclaim` @done(25-11-07 20:00) // Test command
-    ✔ `/tck mute` @done(25-11-07 20:00) // Test command
-    ✔ `/tck unmute` @done(25-11-07 20:00) // Test command
-    ✔ `/tck-info` @done(26-03-13 19:23)
+    ✔ `/tck mute` @done(25-11-07 20:00)
+    ✔ `/tck unmute` @done(25-11-07 20:00)
+    ☐ `/tck-info`
     ☐ `/tck-system_status`
