@@ -6,7 +6,7 @@ module.exports = async (category_id, locale = "en", client = null, interaction =
 
     if(!category_data || !category_data[0]) {
         if(client && interaction) {
-            const msg = new BlueMessage(client, "category-not-found", locale);
+            const msg = new BlueMessage(client, "unknown-category", locale);
             
             const interaction_is_replied = interaction.replied || interaction.deferred;
             const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);

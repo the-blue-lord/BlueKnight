@@ -21,7 +21,7 @@ Todo:
   ✔ Manage button ticket creation @started(25-06-24 22:02) @done(25-06-25 02:28) @lasted(4h26m9s)
   ✔ Add default ticket emoji @started(25-06-26 02:40) @done(25-06-26 03:41) @lasted(1h1m10s)
   ✔ Get guild locale on /set setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
-  ☐ Add category-not-found error (or find the correct one)
+  ✔ Add category-not-found error (or find the correct one) @done(26-09-05 00:46)
 
 Fixme:
   ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)

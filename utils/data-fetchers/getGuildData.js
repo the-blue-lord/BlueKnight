@@ -7,7 +7,7 @@ module.exports = async (guild_id, client = null, interaction = null) => {
     if(!guild_data || !guild_data[0]) {
 
         if(client && interaction) {
-            const msg = new BlueMessage(client, "not-setup");
+            const msg = new BlueMessage(client, "not-setup", interaction.guild.preferredLocale.split("-")[0]);
             
             const interaction_is_replied = interaction.replied || interaction.deferred;
             const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);
