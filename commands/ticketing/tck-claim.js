@@ -22,8 +22,8 @@ module.exports = class TckClaim extends BlueCommand {
 
         const ticketData = await queryDatabase("SELECT * FROM `Tickets` WHERE `ticket_id` = ?", [ticketChannel.id]);
 
-        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
-            const msg = new BlueMessage(this.client, "not-category-helper", locale);
+        if(!ticketData) {
+            const msg = new BlueMessage(this.client, "ticket-not-found", locale);
             await interaction.editReply({
                 embeds: [msg.embed],
                 components: msg.components,
@@ -32,8 +32,8 @@ module.exports = class TckClaim extends BlueCommand {
             return;
         }
 
-        if(!ticketData) {
-            const msg = new BlueMessage(this.client, "ticket-not-found", locale);
+        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
+            const msg = new BlueMessage(this.client, "not-category-helper", locale);
             await interaction.editReply({
                 embeds: [msg.embed],
                 components: msg.components,

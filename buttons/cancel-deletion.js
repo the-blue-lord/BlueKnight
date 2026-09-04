@@ -1,44 +1,48 @@
+// Imports
 const { MessageFlags, ButtonInteraction } = require("discord.js");
 const BlueButton = require("../structures/BlueButton");
 const queryDatabase = require("../utils/queryDatabase");
 const rebuildComponents = require("../utils/rebuildComponents");
+const BlueMessage = require("../structures/BlueMessage");
+const getGuildData = require("../utils/data-fetchers/getGuildData");
+const getTicketData = require("../utils/data-fetchers/getTicketData");
+const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
 
+// Class for the button that cancels the deletion of a ticket
 module.exports = class CancelDeletionButton extends BlueButton {
-	constructor(client, locale, ticket_id) {
-        super(client, "cancel-deletion", locale);
-
-        this.old_interaction_id;
+    // Constructor
+	constructor(client, locale, deletion_message_id) {
+        // Build the button data
+        super(client, "cancel-deletion", locale, deletion_message_id);
+        this.deletion_message_id = deletion_message_id;
     }
 
+    // Button function
     async run(action, interaction) {
+        // Check if it's the right event
         if(action != this.action) return;
 
-        interaction.deferReply({
-            content: "Canceling deletion...",
-            flags: MessageFlags.Ephemeral
-        });
+        // Not deferring the interaction reply to let the bot be able to disable confirm/cancel deletion buttons
 
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale;
+        // Get the ticket channel
+        const ticket_channel = interaction.channel;
 
-        const ticketData = await queryDatabase("SELECT * FROM `Tickets` AS t JOIN `Categories` AS c ON t.category_id = c.category_id WHERE `ticket_id` = ?", [this.category_id]);
+        // Fetch database data
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const bot_ticket = await getTicketData(ticket_channel.id, bot_guild.locale, this.client, interaction);
 
-        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
-            const msg = new BlueMessage(this.client, "not-category-helper", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        const locale = bot_guild.locale;
 
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastCategoryHelper(interaction.member, bot_ticket.category_id, locale, this.client, interaction);
+
+        // Disable confirm and cancel deletion buttons
         const new_components = rebuildComponents(interaction.message.components, component => component.setDisabled(true));
-
-        await interaction.message.edit({
+        await interaction.update({
             components: new_components
         });
 
-        interaction.deleteReply();
+        // Return
+        return;
     }
 }

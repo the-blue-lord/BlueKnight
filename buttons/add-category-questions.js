@@ -9,7 +9,6 @@ module.exports = class AddCategoryQuestionsButton extends BlueButton{
     constructor(client, locale, category_id) {
         // Build the button data
         super(client, "add-category-questions", locale, category_id);
-
         this.category_id = category_id;
     }
 

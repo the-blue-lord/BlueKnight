@@ -26,7 +26,8 @@ module.exports = async (client, ticketChannel, ticketData, transcriptsChannel, i
     });
 
     const confirm_button = new ConfirmDeletionButton(client, locale, ticketChannel.id);
-    const row = new ActionRowBuilder().addComponents(confirm_button.button);
+    const cancel_button = new CancelDeletionButton(client, locale, interaction.message.id);
+    const row = new ActionRowBuilder().addComponents(confirm_button.button, cancel_button.button);
 
     const transcript_file = await createTranscript(ticketChannel);
 

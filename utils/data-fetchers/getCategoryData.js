@@ -1,6 +1,5 @@
 const BlueMessage = require("../../structures/BlueMessage");
 const queryDatabase = require("../queryDatabase");
-const getGuildData = require("./getGuildData");
 
 module.exports = async (category_id, locale = "en", client = null, interaction = null) => {
     const category_data = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [category_id]);

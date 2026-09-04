@@ -1,7 +1,6 @@
 // Imports
 const { MessageFlags, ButtonStyle } = require("discord.js");
 const BlueMessage = require("../structures/BlueMessage");
-const queryDatabase = require("../utils/queryDatabase");
 const BlueButton = require("../structures/BlueButton");
 const getGuildData = require("../utils/data-fetchers/getGuildData");
 const getTicketData = require("../utils/data-fetchers/getTicketData");
@@ -31,8 +30,8 @@ module.exports = class CloseTicketButton extends BlueButton {
         const ticket_channel = interaction.channel;
 
         // Fetch database data
-        const bot_guild = await getGuildData(this.client, interaction.guild.id, interaction);
-        const bot_ticket = await getTicketData(this.client, ticket_channel.id, interaction, bot_guild.locale);
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const bot_ticket = await getTicketData(ticket_channel.id, bot_guild.locale, this.client, interaction);
 
         const locale = bot_guild.locale;
 

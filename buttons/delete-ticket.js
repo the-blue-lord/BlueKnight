@@ -1,76 +1,54 @@
-const { MessageFlags, ButtonStyle } = require("discord.js");
-const BlueMessage = require("../structures/BlueMessage");
-const queryDatabase = require("../utils/queryDatabase");
+// Imports
+const { MessageFlags } = require("discord.js");
 const BlueButton = require("../structures/BlueButton");
-const BlueEmbed = require("../structures/BlueEmbed");
-const { createTranscript } = require("discord-html-transcripts");
 const deleteTicket = require("../routes/tickets/deleteTicket");
+const getGuildData = require("../utils/data-fetchers/getGuildData");
+const getTicketData = require("../utils/data-fetchers/getTicketData");
+const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
+const ticketMustBeClosed = require("../utils/checks/ticketMustBeClosed");
 
+// Class for the button that deletes a ticket
 module.exports = class DeleteTicketButton extends BlueButton {
+    // Constructor
     constructor(client, locale) {
+        // Build the button data
         super(client, "delete-ticket", locale);
     }
 
+    // Button function
     async run(action, interaction) {
+        // Check if it's the right event
         if(action != this.action) return;
 
+        // Defer the reply to the interaction
         await interaction.deferReply({
             flags: MessageFlags.Ephemeral
         });
 
-        const ticketChannel = interaction.channel;
+        // Get the ticket channel
+        const ticket_channel = interaction.channel;
 
-        const ticketData = await queryDatabase("SELECT * FROM `Tickets` AS t JOIN `Categories` AS c ON t.category_id = c.category_id WHERE `ticket_id` = ?", [ticketChannel.id]);
-        const guildData = await queryDatabase("SELECT * FROM `Ticketing` AS t JOIN `Guilds` AS g ON t.guild_id = g.guild_id WHERE g.`guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale;
+        // Fetch database data
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const bot_ticket = await getTicketData(ticket_channel.id, bot_guild.locale, this.client, interaction);
 
-        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
-            const msg = new BlueMessage(this.client, "not-category-helper", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        const locale = bot_guild.locale;
 
-        if(!guildData.length) {
-            const msg = new BlueMessage(this.client, "not-setup", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastCategoryHelper(interaction.member, bot_ticket.category_id, locale, this.client, interaction);
 
-            return;
-        }
+        // Check if the ticket is closed
+        await ticketMustBeClosed(bot_ticket, "ticket-not-closed", locale, this.client, interaction);
 
-        if(!ticketData.length) {
-            const msg = new BlueMessage(this.client, "ticket-not-found", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
+        // Fetch the transcripts channel, if specified
+        const transcript_channel_id = bot_guild.ticket_transcripts_channel;
+        const transcripts_channel = transcript_channel_id && await interaction.guild.channels?.fetch(transcript_channel_id); // INSERTED FETCH
 
-            return;
-        }
+        // Call the appropriate function to delete the ticket
+        // NOTE: Inserting bot_ticket into an array to maintain compatibility with the old deleteTicket function
+        await deleteTicket(this.client, ticket_channel, [bot_ticket], transcripts_channel, interaction, locale);
 
-        if(ticketData[0].closed == "0") {
-            const msg = new BlueMessage(this.client, "ticket-not-closed", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-
-            return;
-        }
-
-        const transcript_channel_id = guildData[0].ticket_transcripts_channel;
-
-        const transcriptsChannel = transcript_channel_id && await interaction.guild.channels?.fetch(transcript_channel_id); // INSERTED FETCH
-
-        deleteTicket(this.client, ticketChannel, ticketData, transcriptsChannel, interaction, locale);
+        // Return
+        return;
     }
 }

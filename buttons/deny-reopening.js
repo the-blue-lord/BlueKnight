@@ -1,48 +1,43 @@
+// Imports
 const { MessageFlags } = require("discord.js");
 const BlueButton = require("../structures/BlueButton");
 const BlueEmbed = require("../structures/BlueEmbed");
 const BlueMessage = require("../structures/BlueMessage");
 const queryDatabase = require("../utils/queryDatabase");
 
+// Class for the button that denies the reopening request for a ticket
 module.exports = class DenyReopeningButton extends BlueButton {
+    // Constructor
+    // NOTE: The close_message_id parameter is not used in this class
     constructor(client, locale, close_message_id) {
+        // Build the button data
         super(client, "deny-reopening", locale);
     }
 
+    // Button function
     async run(action, interaction) {
+        // Check if it's the right event
         if(action != this.action) return;
 
+        // Defer the reply to the interaction
         await interaction.deferReply({
             flags: MessageFlags.Ephemeral
         });
 
-        const ticketChannel = interaction.channel;
+        // Get the ticket channel
+        const ticket_channel = interaction.channel;
 
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale;
+        // Fetch database data
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const bot_ticket = await getTicketData(ticket_channel.id, bot_guild.locale, this.client, interaction);
 
-        const ticketData = await queryDatabase("SELECT * FROM `Tickets` WHERE `ticket_id` = ?", [ticketChannel.id]);
+        const locale = bot_guild.locale;
 
-        if(!(await this.isBotAdmin(interaction.member)) && !(await this.isCategoryHelper(interaction.member, ticketData[0].category_id))) {
-            const msg = new BlueMessage(this.client, "not-category-helper", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastCategoryHelper(interaction.member, bot_ticket.category_id, locale, this.client, interaction);
 
-        if(!ticketData) {
-            const msg = new BlueMessage(this.client, "ticket-not-found", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
 
+        // Silently notify the successful denial only to the admin/helper
         const message = new BlueMessage(this.client, "denied-reopening", locale);
         await interaction.editReply({
             embeds: [message.embed],
@@ -50,15 +45,21 @@ module.exports = class DenyReopeningButton extends BlueButton {
             files: message.attachments
         });
 
+        // Build the embed to notify the denied reopening request
         const emebed = new BlueEmbed(this.client, "denied-reopening", locale, {
             denier_id: interaction.member.id,
-            user_id: ticketData[0].user_id
+            user_id: bot_ticket.user_id
         });
 
+        // Publicly notify the denied reopening request in the ticket channel
+        // NOTE: Can be added a ping to the user who reqeusted the reopening, maybe pingin always the ticket opener ao maybe not pinging anyone
         await interaction.channel.send({
             embeds: [emebed.embed],
             components: emebed.components,
             files: emebed.attachments
         });
+
+        // Return
+        return;
     }
 };
