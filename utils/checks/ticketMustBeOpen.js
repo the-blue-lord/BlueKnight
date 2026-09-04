@@ -4,10 +4,15 @@ module.exports = async (ticket_data, message_id, locale = "en", client = null, i
     if(ticket_data.closed == "1") {
         if(client && interaction) {
             const msg = new BlueMessage(client, message_id, locale);
-            await interaction.editReply({
+            
+            const interaction_is_replied = interaction.replied || interaction.deferred;
+            const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);
+
+            await blueReply({
                 embeds: [msg.embed],
                 components: msg.components,
-                files: msg.attachments
+                files: msg.attachments,
+                flags: 64 // MessageFlags.Ephemeral = 64
             });
         }
         throw null;

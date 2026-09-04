@@ -8,10 +8,15 @@ module.exports = async (guild_id, client = null, interaction = null) => {
 
         if(client && interaction) {
             const msg = new BlueMessage(client, "not-setup");
-            await interaction.editReply({
+            
+            const interaction_is_replied = interaction.replied || interaction.deferred;
+            const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);
+
+            await blueReply({
                 embeds: [msg.embed],
                 components: msg.components,
-                files: msg.attachments
+                files: msg.attachments,
+                flags: 64 // MessageFlags.Ephemeral = 64
             });
         }
 

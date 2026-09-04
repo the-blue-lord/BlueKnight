@@ -7,10 +7,15 @@ module.exports = async (category_id, locale = "en", client = null, interaction =
     if(!category_data || !category_data[0]) {
         if(client && interaction) {
             const msg = new BlueMessage(client, "category-not-found", locale);
-            await interaction.editReply({
+            
+            const interaction_is_replied = interaction.replied || interaction.deferred;
+            const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);
+
+            await blueReply({
                 embeds: [msg.embed],
                 components: msg.components,
-                files: msg.attachments
+                files: msg.attachments,
+                flags: 64 // MessageFlags.Ephemeral = 64
             });
         }
         throw new Error("Category not found in database");

@@ -7,11 +7,15 @@ module.exports = async (member, locale = "en", client = null, interaction = null
     if(!isBotAdmin) {
         if(client && interaction) {
             const msg = new BlueMessage(client, "not-admin", locale);
+            
+            const interaction_is_replied = interaction.replied || interaction.deferred;
+            const blueReply = interaction_is_replied ? (...a) => interaction.editReply(...a) : (...a) => interaction.reply(...a);
 
-            await interaction.editReply({
+            await blueReply({
                 embeds: [msg.embed],
                 components: msg.components,
-                files: msg.attachments
+                files: msg.attachments,
+                flags: 64 // MessageFlags.Ephemeral = 64
             });
         }
 
