@@ -11,6 +11,7 @@ module.exports = async interaction => {
     const buttonsFolder = global.BUTTONS_FOLDER;
 
     for(const buttonFile of fs.readdirSync(buttonsFolder)) {
+        if(buttonFile == ".module.js") continue;
         if(buttonFile.split(".").reverse()[0] != "js") continue;
 
         const buttonClass = require("../" + buttonsFolder + "/" + buttonFile);

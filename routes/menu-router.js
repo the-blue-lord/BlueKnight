@@ -11,6 +11,7 @@ module.exports = async interaction => {
     const menusFolder = global.MENUS_FOLDER;
 
     for(const menuFile of fs.readdirSync(menusFolder)) {
+        if(menuFile == ".module.js") continue;
         if(menuFile.split(".").reverse()[0] != "js") continue;
 
         const menuClass = require("../" + menusFolder + "/" + menuFile);

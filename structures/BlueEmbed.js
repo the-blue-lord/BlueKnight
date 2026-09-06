@@ -1,8 +1,10 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const yaml = require("yaml");
 const fs = require("fs");
 
-const zeroWidth = require("../utils/zeroWidthSteganography");
+// --- const zeroWidth = require("../utils/zeroWidthSteganography");
+
+const { zeroWidthSteganography: zws } = require("#utils");
 
 module.exports = class BlueEmbed {
     constructor(client, embed_id, language = "en", variables = {}, additional_fields = []) {
@@ -65,7 +67,7 @@ module.exports = class BlueEmbed {
             });
         }
 
-        const encoded_data = zeroWidth.encode(JSON.stringify(data));
+        const encoded_data = zws.encode(JSON.stringify(data));
 
         this.embed.setDescription(description + "\u2063" + encoded_data);
 

@@ -1,6 +1,6 @@
-const { PermissionFlagsBits } = require("discord.js");
 const fs = require("fs");
-const queryDatabase = require("../utils/queryDatabase");
+
+const { memberIsBotAdmin, memberIsCategoryHelper } = require("#utils").checks;
 
 module.exports = class BlueCommand {
     // --- Default command constructor
@@ -26,18 +26,10 @@ module.exports = class BlueCommand {
     }
 
     async isBotAdmin(member) {
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [member.guild.id]);
-
-        const botAdminRole = guildData[0]?.admin_role;
-
-        return member.permissions.has(PermissionFlagsBits.Administrator) || member.roles.cache.has(botAdminRole);
+        return memberIsBotAdmin(member);
     }
 
     async isCategoryHelper(member, category_id) {
-        const categoryData = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [category_id]);
-
-        const botHelperRole = categoryData[0]?.helper_role;
-
-        return member.roles.cache.has(botHelperRole);
+        return memberIsCategoryHelper(member, category_id);
     }
 };

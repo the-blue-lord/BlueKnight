@@ -17,6 +17,7 @@ module.exports = async interaction => {
     const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
 
     for(const modalFile of fs.readdirSync(modalsFolder)) {
+        if(modalFile == ".module.js") continue;
         if(modalFile.split(".").reverse()[0] != "js") continue;
         
         const modalClass = require("../" + modalsFolder + "/" + modalFile);

@@ -1,7 +1,7 @@
-const queryDatabase = require("../queryDatabase");
-const BlueMessage = require("../../structures/BlueMessage");
+const queryDatabase = require("#utils").queryDatabase;
+const BlueMessage = require("#structures").BlueMessage;
 
-module.exports = async (guild_id, client = null, interaction = null) => {
+module.exports = async (guild_id, client = null, interaction = null, fetch_categories = false) => {
     const guild_data = await queryDatabase("SELECT * FROM `Ticketing` AS t JOIN `Guilds` AS g ON t.guild_id = g.guild_id WHERE g.`guild_id` = ?", [guild_id]);
 
     if(!guild_data || !guild_data[0]) {
@@ -23,5 +23,13 @@ module.exports = async (guild_id, client = null, interaction = null) => {
         throw new Error("Guild not found in database.");
         return;
     }
-    return guild_data[0];
+
+    const result = guild_data[0];
+
+    if(fetch_categories) {
+        const categories_data = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [guild_id]);
+        if(categories_data) result.categories = categories_data;
+    }
+
+    return result;
 };

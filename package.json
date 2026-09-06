@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "imports": {
+    "#*": "./*/.module.js"
+  },
   "keywords": [],
   "author": "Mr. Blue (the-blue-lord)",
   "license": "ISC",

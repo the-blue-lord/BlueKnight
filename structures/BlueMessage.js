@@ -1,6 +1,6 @@
-const { EmbedBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const fs = require("fs");
 const yaml = require("yaml");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 
 module.exports = class BlueMessage {
     constructor(client, message_id, language = "en", variables = {}) {

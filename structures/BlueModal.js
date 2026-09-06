@@ -1,8 +1,8 @@
-const { ModalBuilder, TextInputStyle, TextInputBuilder, ActionRowBuilder, StringSelectMenuBuilder, LabelBuilder, RoleSelectMenuBuilder, ChannelSelectMenuBuilder, ChannelType } = require("discord.js");
 const yaml = require("yaml");
 const fs = require("fs");
+const { ModalBuilder, TextInputStyle, TextInputBuilder, LabelBuilder, RoleSelectMenuBuilder, ChannelSelectMenuBuilder } = require("discord.js");
 
-const { removeUnderscore } = require("../utils/customIdNomralization");
+const { removeUnderscore } = require("#utils").customIdNomralization;
 
 module.exports = class BlueModal {
     constructor(client, modal_action, localisation = "en", modal_data) {
