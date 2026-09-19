@@ -1,43 +1,37 @@
-const BlueCommand = require("../../../structures/BlueCommand.js");
-const BlueMessage = require("../../../structures/BlueMessage.js");
-const queryDatabase = require("../../../utils/queryDatabase.js");
+// Imports
+const { BlueCommand } = require("#structures");
+const { getGuildData } = require("#utils").fetches;
+const { memberIsAtLeastBotAdmin } = require("#utils").checks;
 
-const CategoryDataModal = require("../../../modals/category-data.js");
+const { categoryData: CategoryDataModal } = require("#modals");
 
+// Class for the set-add_ticket_category command
 module.exports = class SetAddTicketCategory extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "set-add_ticket_category");
     }
 
+    // Command function
     async run(interaction) {
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
+        // Fetch guild configuration
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const locale = bot_guild.locale;
 
-        if (!(await this.isBotAdmin(interaction.member))) {
-            const msg = new BlueMessage(this.client, "not-administrator", locale);
-            await interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastBotAdmin(interaction.member, locale, this.client, interaction);
 
+        // Read the category name from the command options
         const categoryName = interaction.options.getString("name");
 
-        if (guildData.length == 0) {
-            const msg = new BlueMessage(this.client, "not-setup", locale);
-            await interaction.reply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-            return;
-        }
-
+        // Build and display the category data modal
         const categoryDataModal = new CategoryDataModal(this.client, locale, categoryName);
         await categoryDataModal.build();
             
         await interaction.showModal(categoryDataModal.modal);
+
+        // Return
+        return;
     }
 };

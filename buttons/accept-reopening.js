@@ -1,14 +1,10 @@
 // Imports
-const BlueMessage = require("../structures/BlueMessage");
-const BlueButton = require("../structures/BlueButton");
-const queryDatabase = require("../utils/queryDatabase");
-const BlueEmbed = require("../structures/BlueEmbed");
 const { MessageFlags } = require("discord.js");
-const rebuildComponents = require("../utils/rebuildComponents");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
-const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
-const ticketMustBeClosed = require("../utils/checks/ticketMustBeClosed");
+
+const { BlueButton, BlueMessage } = require("#structures");
+const { rebuildComponents } = require("#utils");
+const { getGuildData, getTicketData } = require("#utils").fetches;
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
 
 // Class for the button that accepts a ticket reopening request
 module.exports = class AcceptReopeningButton extends BlueButton {
@@ -44,7 +40,7 @@ module.exports = class AcceptReopeningButton extends BlueButton {
         await ticketMustBeClosed(bot_ticket, locale, this.client, interaction);
 
         // Reopen the ticket
-        const reopenTicket = require("../routes/tickets/reopenTicket");
+        const { reopenTicket } = require("#routes").ticketRouter;
         await reopenTicket(this.client, interaction.guild, ticket_channel, locale, interaction.member.id, true);
 
         // Disable the old button to ask reopenings to prevent the user to bypass a possible reopening blockage

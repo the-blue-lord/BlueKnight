@@ -1,11 +1,10 @@
 // Imports
 const { MessageFlags } = require("discord.js");
-const BlueButton = require("../structures/BlueButton");
-const deleteTicket = require("../routes/tickets/deleteTicket");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
-const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
-const ticketMustBeClosed = require("../utils/checks/ticketMustBeClosed");
+
+const { BlueButton } = require("#structures");
+const { deleteTicket } = require("#routes").ticketRouter;
+const { getGuildData, getTicketData } = require("#utils").fetches;
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
 
 // Class for the button that deletes a ticket
 module.exports = class DeleteTicketButton extends BlueButton {

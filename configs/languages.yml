@@ -2,3 +2,18 @@ open_ticket:
   en: "Open Ticket"
   it: "Apri Ticket"
   es: "Abrir Ticket"
+
+negation_adverb:
+  en: "not"
+  it: "non"
+  es: "no"
+
+positive_response:
+  en: "yes"
+  it: "si"
+  es: "si"
+
+negative_response:
+  en: "no"
+  it: "no"
+  es: "no"

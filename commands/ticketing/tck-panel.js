@@ -1,54 +1,40 @@
-const Discord = require("discord.js");
 
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
-const queryDatabase = require("../../utils/queryDatabase");
-const OpenTicketButton = require("../../buttons/open-ticket");
+// Imports
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
+const { BlueCommand, BlueMessage } = require("#structures");
+const { getGuildData } = require("#utils").fetches;
+const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { openTicket: OpenTicketButton } = require("#buttons");
+
+// Class for the tck-panel command
 module.exports = class TckPanel extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "tck-panel");
     }
 
+    // Command function
     async run(interaction) {
+        // Defer the reply to the interaction
         await interaction.deferReply();
 
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
+        // Fetch guild configuration
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction, true);
+        const locale = bot_guild.locale;
 
-        if(!(await this.isBotAdmin(interaction.member))) {
-            const msg = new BlueMessage(this.client, "not-admin", locale);
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastBotAdmin(interaction.member, locale, this.client, interaction);
 
-            interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
+        // Build the response message
+        const embed = this.getPanelEmbed(bot_guild);
 
-            return;
-        }
+        const categoriesData = bot_guild.categories || [];
+        const generalActive = bot_guild.default_category_active;
+        const generalCategory = bot_guild.default_ticket_category;
 
-        const embed = await this.getPanelEmbed(interaction.guild.id);
-
-        if(!embed) {
-            const msg = new BlueMessage(this.client, "not-setup", locale);
-
-            interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-
-            return;
-        }
-
-        const ticketing_guilds = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const categoriesData = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [interaction.guild.id]);
-
-        const generalActive = ticketing_guilds[0]?.default_category_active;
-        const generalCategory = ticketing_guilds[0]?.default_ticket_category;
-
+        // If no categories exist, send an error message
         if(!categoriesData.length) {
             const msg = new BlueMessage(this.client, "no-categories", locale);
 
@@ -61,11 +47,14 @@ module.exports = class TckPanel extends BlueCommand {
             return;
         }
 
+        // If categories exist, build the panel action row
         const row  = new ActionRowBuilder();
 
+        // If the default category is disabled, use a category menu
         if(!generalActive || generalActive == "0") {
             const selectMenu = new StringSelectMenuBuilder().setCustomId("open-ticket");
             
+            // Add each configured category to the menu
             for(const cat of categoriesData) {
                 const option = new StringSelectMenuOptionBuilder()
                     .setLabel(cat.category_name || "unknown")
@@ -78,12 +67,14 @@ module.exports = class TckPanel extends BlueCommand {
 
             row.addComponents(selectMenu);
         }
+        // If the default category is enabled, use the default category button
         else {
             row.addComponents(
                 new OpenTicketButton(this.client, locale, generalCategory).button
             );
         }
 
+        // Send the response message
         interaction.editReply({
             embeds: [embed],
             components: [row]
@@ -92,15 +83,12 @@ module.exports = class TckPanel extends BlueCommand {
         return;
     }
 
-    async getPanelEmbed(guild_id) {
-        const guilds = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [guild_id]);
-
-        if(!guilds.length) return null;
-
+    // Build the ticket panel embed
+    getPanelEmbed(bot_guild) {
         const embed = new EmbedBuilder()
-            .setTitle(guilds[0].ticket_panel_title || "Ticket panel")
-            .setDescription(guilds[0].ticket_panel_description || "Welcome to the ticket panel. Here you can open a ticket.")
-            .setColor(guilds[0].ticket_panel_color || "#03bafc")
+            .setTitle(bot_guild.ticket_panel_title || "Ticket panel")
+            .setDescription(bot_guild.ticket_panel_description || "Welcome to the ticket panel. Here you can open a ticket.")
+            .setColor(bot_guild.ticket_panel_color || "#03bafc")
             .setTimestamp()
             .setFooter({
                 text: "BlueKnight",

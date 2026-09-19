@@ -1,9 +1,7 @@
-// Imports
-const { ButtonStyle } = require("discord.js");
-const BlueButton = require("../structures/BlueButton");
-const TicketReopeningReasonModal = require("../modals/ticket-reopening-reason");
-const queryDatabase = require("../utils/queryDatabase");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
+//Imports
+const { BlueButton } = require("#structures");
+const { ticketReopeningReason: TicketReopeningReasonModal } = require("#modals");
+const { getGuildData } = require("#utils").fetches;
 
 // Class for the button used to request the reopening of a closed ticket
 module.exports = class AskTicketReopeningButton extends BlueButton {

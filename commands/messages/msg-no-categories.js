@@ -1,21 +1,33 @@
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
+// Imports
+const { BlueCommand, BlueMessage } = require("#structures");
 
+// Class for the msg-no-categories command
 module.exports = class NoCategories extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "msg-no-categories");
     }
 
+    // Command function
     async run(interaction) {
+        // Defer the reply to the interaction
         await interaction.deferReply();
 
-        const loc = interaction.options.get("localisation")?.value;
+        // Fetch the requested localisation
+        const locale = interaction.options.get("localisation")?.value;
         
-        const message = new BlueMessage(this.client, "no-categories", loc);
+        // Build the response message
+        const message = new BlueMessage(this.client, "no-categories", locale);
+
+        // Send the response message
         await interaction.editReply({
             embeds: [message.embed],
             files: message.attachments,
             components: message.components
         });
+
+        // Return
+        return;
     }
 };

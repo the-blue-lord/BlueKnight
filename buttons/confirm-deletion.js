@@ -1,11 +1,9 @@
 // Imports
 const { createTranscript } = require("discord-html-transcripts");
-const BlueButton = require("../structures/BlueButton");
-const BlueMessage = require("../structures/BlueMessage");
-const BlueEmbed = require("../structures/BlueEmbed");
-const queryDatabase = require("../utils/queryDatabase");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
+
+const { BlueButton, BlueEmbed } = require("#structures");
+const { queryDatabase } = require("#utils");
+const { getGuildData, getTicketData } = require("#utils").fetches;
 
 // Class for the button that confirms the deletion of a ticket
 module.exports = class ConfirmDeletionButton extends BlueButton {

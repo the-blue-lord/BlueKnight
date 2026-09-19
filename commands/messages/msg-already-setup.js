@@ -1,21 +1,33 @@
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
+// Imports
+const { BlueCommand, BlueMessage } = require("#structures");
 
+// Class for the msg-already-setup command
 module.exports = class AlreadySetup extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "msg-already-setup");
     }
 
+    // Command function
     async run(interaction) {
+        // Defer the reply to the interaction
         await interaction.deferReply();
 
-        const loc = interaction.options.get("localisation")?.value;
+        // Fetch the requested localisation
+        const locale = interaction.options.get("localisation")?.value;
         
-        const message = new BlueMessage(this.client, "already-setup", loc);
+        // Build the response message
+        const message = new BlueMessage(this.client, "already-setup", locale);
+
+        // Send the response message
         await interaction.editReply({
             embeds: [message.embed],
             files: message.attachments,
             components: message.components
         });
+
+        // Return
+        return;
     }
 };

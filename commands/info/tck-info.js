@@ -1,43 +1,47 @@
-const { MessageFlags, EmbedBuilder } = require("discord.js");
-const BlueCommand = require("../../structures/BlueCommand");
-const queryDatabase = require("../../utils/queryDatabase");
-const BlueMessage = require("../../structures/BlueMessage");
-const BlueEmbed = require("../../structures/BlueEmbed");
+// Imports
+const yaml = require("yaml");
+const fs = require("fs");
+
+const { BlueCommand, BlueEmbed } = require("#structures");
+const { getGuildData } = require("#utils").fetches;
+const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+
 
 // HACK: TO TEST
 
+// Class fot the tck-info command
 module.exports = class TckInfo extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "tck-info");
     }
 
+    // Command fucntion
     async run (interaction) {
+        // Defer the reply to the interaction
         await interaction.deferReply({
+            // NOTE: What is this? why is eohemeral commented out?!
             //flags: MessageFlags.Ephemeral
         });
 
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const ticketingData = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const categoriesData = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [interaction.guild.id]);
+        // Fetch database data
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction, true);
+        const locale = bot_guild.locale;
 
-        const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
+        // --- const bot_guild.categories = await queryDatabase("SELECT * FROM `Categories` WHERE `guild_id` = ?", [interaction.guild.id]);
 
-        if(ticketingData.length == 0) {
-            const msg = new BlueMessage(this.client, "not-setup", locale);
-            interaction.editReply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments
-            });
-        }
+        // Check if user is authorized to run this command
+        await memberIsAtLeastBotAdmin(interaction.member, locale, this.client, interaction);
 
-        const panel_title = ticketingData[0].ticket_panel_title;
-        const panel_description = ticketingData[0].ticket_panel_description;
+        // Retrive the needed variables
+        const panel_title = bot_guild.ticket_panel_title;
+        const panel_description = bot_guild.ticket_panel_description;
+        const defId = bot_guild.default_ticket_category;
+        const defEnabled = (bot_guild.default_category_active == "1");
 
-        const defId = ticketingData[0].default_ticket_category;
-        const defEnabled = (ticketingData[0].default_category_active == "1");
-
-        const categories = categoriesData.map(r => { return {
+        // Build the metadata structure needed for the response embed creation
+        const categories = bot_guild.categories.map(r => { return {
             type: "category",
             vars: {
                 category_id: r.category_id || undefined,
@@ -50,24 +54,19 @@ module.exports = class TckInfo extends BlueCommand {
             }
         }});
 
-        const def_cat = categoriesData.find(c => c.category_id == defId);
+        // Retrive default category data
+        const def_cat = bot_guild.categories.find(c => c.category_id == defId);
 
-        const affirmative_answer = {
-            en: "YES",
-            it: "SI",
-            es: "SI"
-        };
+        // Fetch all the supported languages possible responses
+        const languages = yaml.parse(fs.readFileSync("./config/languages.yml"));
+        const positive_response = languages.positive_response;
+        const negative_response = languages.negative_response;
 
-        const negative_answer = {
-            en: "NO",
-            it: "NO",
-            es: "NO"
-        }
-
+        // Build the response embed
         const embed = new BlueEmbed(this.client, "tck-info", locale, {
             ticket_panel_title: panel_title,
             ticket_panel_description: panel_description,
-            default_category_enabled: defEnabled ? affirmative_answer[locale] : negative_answer[locale],
+            default_category_enabled: defEnabled ? positive_response[locale] : negative_response[locale],
             default_category_id: def_cat?.category_id,
             default_category_name: def_cat?.category_name || undefined,
             default_category_description: def_cat?.category_description || undefined,
@@ -78,10 +77,14 @@ module.exports = class TckInfo extends BlueCommand {
 
         }, categories);
 
+        // Send the embed as repsonse
         interaction.editReply({
             embeds: [embed.embed],
             components: embed.components,
             files: embed.attachments
         });
+
+        // Return
+        return;
     }
 };

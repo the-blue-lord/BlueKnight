@@ -1,16 +1,12 @@
 // Imports
-const { ModalBuilder, TextInputBuilder, TextInputStyle, ButtonStyle, MessageFlags, LabelBuilder  } = require("discord.js");
+const { MessageFlags } = require("discord.js");
 
-const BlueButton = require("../structures/BlueButton");
-const BlueMessage = require("../structures/BlueMessage");
-
-const queryDatabase = require("../utils/queryDatabase");
-const ticket_router = require("../routes/ticket-router");
+const { BlueButton, BlueMessage } = require("#structures");
+const { queryDatabase } = require("#utils");
+const { ticketRouter: ticket_router } = require("#routes");
 const Discord = require("discord.js");
-const TicketQuestionsModal = require("../modals/ticket-questions");
-
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getCategoryData = require("../utils/data-fetchers/getCategoryData");
+const { ticketQuestions: TicketQuestionsModal } = require("#modals"); // NOTE: Rename exported variable to PascalCase
+const { getGuildData, getCategoryData } = require("#utils").fetches;
 
 // Class for the button that opens a ticket
 module.exports = class OpenTicketButton extends BlueButton {

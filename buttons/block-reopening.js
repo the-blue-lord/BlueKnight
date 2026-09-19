@@ -1,12 +1,9 @@
-// Imports
-const BlueMessage = require("../structures/BlueMessage");
-const BlueButton = require("../structures/BlueButton");
-const queryDatabase = require("../utils/queryDatabase");
-const BlueEmbed = require("../structures/BlueEmbed");
+//Imports
 const { MessageFlags } = require("discord.js");
-const rebuildComponents = require("../utils/rebuildComponents");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
+ 
+const { BlueButton, BlueEmbed, BlueMessage } = require("#structures");
+const { rebuildComponents } = require("#utils");
+const { getGuildData, getTicketData } = require("#utils").fetches;
 
 // Class for the button used to block the reopening of a closed ticket
 module.exports = class BlockReopeningButton extends BlueButton {

@@ -1,9 +1,7 @@
 // Imports
 const { MessageFlags } = require("discord.js");
-const BlueButton = require("../structures/BlueButton");
-const BlueEmbed = require("../structures/BlueEmbed");
-const BlueMessage = require("../structures/BlueMessage");
-const queryDatabase = require("../utils/queryDatabase");
+
+const { BlueEmbed, BlueMessage } = require("#structures");
 
 // Class for the button that denies the reopening request for a ticket
 module.exports = class DenyReopeningButton extends BlueButton {

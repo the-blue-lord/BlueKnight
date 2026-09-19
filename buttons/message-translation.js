@@ -1,10 +1,10 @@
 // Imports
-const Discord = require("discord.js");
+const { MessageFlags } = require("discord.js");
 const yaml = require("yaml");
 const fs = require("fs");
-const BlueButton = require("../structures/BlueButton");
-const BlueMessage = require("../structures/BlueMessage");
-const getServerInfo = require("../utils/getServerInfo");
+
+const { BlueButton, BlueMessage } = require("#structures");
+const { getServerInfo } = require("#utils");
 
 // Class for the button that translates a message
 module.exports = class MessageTranslationButton extends BlueButton {
@@ -32,7 +32,7 @@ module.exports = class MessageTranslationButton extends BlueButton {
         if(this.message_id == "server-info") {
             // Defer the reply to the interaction
             await interaction.deferReply({
-                flags: Discord.MessageFlags.Ephemeral
+                flags: MessageFlags.Ephemeral
             });
 
             // Resend the server info message in the requested language
@@ -41,7 +41,7 @@ module.exports = class MessageTranslationButton extends BlueButton {
                 embeds: [msg.embed],
                 files: msg.attachments,
                 components: msg.components,
-                flags: Discord.MessageFlags.Ephemeral
+                flags: MessageFlags.Ephemeral
             });
     
             // Return
@@ -63,7 +63,7 @@ module.exports = class MessageTranslationButton extends BlueButton {
             embeds: [message.embed],
             files: message.attachments,
             components: message.components,
-            flags: Discord.MessageFlags.Ephemeral
+            flags: MessageFlags.Ephemeral
         });
 
         // Return

@@ -1,7 +1,6 @@
 // Imports
-const { MessageFlags } = require("discord.js");
-const CategoryQuestionsModal = require("../modals/category-questions");
-const BlueButton = require("../structures/BlueButton");
+const { categoryQuestions: CategoryQuestionsModal } = require("#modals"); // NOTE: Rename exported variable in PascalCase
+const { BlueButton } = require("#structures");
 
 // Class for the button used to add default questions for the user to a ticket category
 module.exports = class AddCategoryQuestionsButton extends BlueButton{

@@ -1,21 +1,33 @@
-const BlueCommand = require("../../structures/BlueCommand");
-const BlueMessage = require("../../structures/BlueMessage");
+// Imports
+const { BlueCommand, BlueMessage } = require("#structures");
 
+// Class for the msg-not-admin command
 module.exports = class NotAdmin extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "msg-not-admin");
     }
 
+    // Command function
     async run(interaction) {
+        // Defer the reply to the interaction
         await interaction.deferReply();
 
-        const loc = interaction.options.get("localisation")?.value;
+        // Fetch the requested localisation
+        const locale = interaction.options.get("localisation")?.value;
         
-        const message = new BlueMessage(this.client, "not-admin", loc);
+        // Build the response message
+        const message = new BlueMessage(this.client, "not-admin", locale);
+
+        // Send the response message
         await interaction.editReply({
             embeds: [message.embed],
             files: message.attachments,
             components: message.components
         });
+
+        // Return
+        return;
     }
 };

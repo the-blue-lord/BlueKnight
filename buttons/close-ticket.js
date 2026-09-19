@@ -1,11 +1,9 @@
 // Imports
-const { MessageFlags, ButtonStyle } = require("discord.js");
-const BlueMessage = require("../structures/BlueMessage");
-const BlueButton = require("../structures/BlueButton");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
-const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
-const ticketMustBeOpen = require("../utils/checks/ticketMustBeOpen");
+const { MessageFlags } = require("discord.js");
+
+const { BlueButton, BlueMessage } = require("#structures");
+const { getGuildData, getTicketData } = require("#utils").fetches;
+const { memberIsAtLeastCategoryHelper, ticketMustBeOpen } = require("#utils").checks;
 
 
 // Class for the button that closes a ticket
@@ -42,7 +40,7 @@ module.exports = class CloseTicketButton extends BlueButton {
         await ticketMustBeOpen(bot_ticket, "ticket-already-closed", locale, this.client, interaction);
         
         // Close the ticket
-        const closeTicket = require("../routes/tickets/closeTicket");
+        const { closeTicket } = require("#routes").ticketRouter;
         await closeTicket(this.client, interaction.guild, ticket_channel, locale, interaction.member.id);
 
         // Notify the successful closure

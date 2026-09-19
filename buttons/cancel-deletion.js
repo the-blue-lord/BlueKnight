@@ -1,12 +1,8 @@
-// Imports
-const { MessageFlags, ButtonInteraction } = require("discord.js");
-const BlueButton = require("../structures/BlueButton");
-const queryDatabase = require("../utils/queryDatabase");
-const rebuildComponents = require("../utils/rebuildComponents");
-const BlueMessage = require("../structures/BlueMessage");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
-const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
+//Imports
+const { BlueButton } = require("#structures");
+const { rebuildComponents } = require("#utils");
+const { getGuildData, getTicketData } = require("#utils").fetches;
+const { memberIsAtLeastCategoryHelper } = require("#utils").checks;
 
 // Class for the button that cancels the deletion of a ticket
 module.exports = class CancelDeletionButton extends BlueButton {

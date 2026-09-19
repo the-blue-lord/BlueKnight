@@ -1,55 +1,33 @@
-const Discord = require("discord.js");
+// Imports
 
-const BlueCommand = require("../../../structures/BlueCommand.js");
-const BlueMessage = require("../../../structures/BlueMessage.js");
-const BlueModal = require("../../../structures/BlueModal.js");
-const queryDatabase = require("../../../utils/queryDatabase.js");
-const CustomizePanelModal = require("../../../modals/customize-panel.js");
+const { BlueCommand } = require("#structures");
+const { getGuildData } = require("#utils").fetches;
+const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { customizePanel: CustomizePanelModal } = require("#modals");
 
+// Class for the set-ticket_panel command
 module.exports = class StnPanel extends BlueCommand {
+    // Constructor
     constructor(client) {
+        // Build the command data
         super(client, "set-ticket_panel");
     }
 
+    // Command function
     async run(interaction) {
-        const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const ticketingData = await queryDatabase("SELECT * FROM `Ticketing` WHERE `guild_id` = ?", [interaction.guild.id]);
-        const locale = guildData[0]?.locale || interaction.guild.preferredLocale.split("-")[0];
+        // Fetch guild configuration
+        const bot_guild = await getGuildData(interaction.guild.id, this.client, interaction);
+        const locale = bot_guild.locale;
 
-        if(!(await this.isBotAdmin(interaction.member))) {
-            const msg = new BlueMessage(this.client, "not-administrator", locale);
-            await interaction.reply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments,
-                flags: Discord.MessageFlags.Ephemeral
-            });
-            return;
-        }
+        // Check if the user is authorized to run this command
+        await memberIsAtLeastBotAdmin(interaction.member, locale, this.client, interaction);
 
-        if(guildData.length == 0 || ticketingData.length == 0) {
-            const msg = new BlueMessage(this.client, "not-setup", locale);
+        // Read the current ticket panel settings
+        const panel_title = bot_guild.ticket_panel_title;
+        const panel_description = bot_guild.ticket_panel_description;
+        const panel_color = bot_guild.ticket_panel_color;
 
-            await interaction.reply({
-                embeds: [msg.embed],
-                components: msg.components,
-                files: msg.attachments,
-                flags: Discord.MessageFlags.Ephemeral
-            });
-
-            return;
-
-            /*
-                ---apuù
-                àyàc
-                -KeyObject
-            */
-        }
-
-        const panel_title = ticketingData[0]?.ticket_panel_title;
-        const panel_description = ticketingData[0]?.ticket_panel_description;
-        const panel_color = ticketingData[0]?.ticket_panel_color;
-
+        // Build and display the panel customization modal
         const modal = new CustomizePanelModal(this.client, locale);
         modal.build({
             panel_title: panel_title || undefined,
@@ -59,6 +37,7 @@ module.exports = class StnPanel extends BlueCommand {
 
         await interaction.showModal(modal.modal);
 
+        // Return
         return;
     }
 };

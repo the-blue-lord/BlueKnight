@@ -1,12 +1,9 @@
 // Imports
-const { MessageFlags, ButtonStyle } = require("discord.js");
-const BlueMessage = require("../structures/BlueMessage");
-const queryDatabase = require("../utils/queryDatabase");
-const BlueButton = require("../structures/BlueButton");
-const getGuildData = require("../utils/data-fetchers/getGuildData");
-const getTicketData = require("../utils/data-fetchers/getTicketData");
-const memberIsAtLeastCategoryHelper = require("../utils/checks/memberIsAtLeastCategoryHelper");
-const ticketMustBeClosed = require("../utils/checks/ticketMustBeClosed");
+const { MessageFlags } = require("discord.js");
+
+const { BlueButton, BlueMessage } = require("#structures");
+const { getGuildData, getTicketData } = require("#utils").fetches;
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
 
 // Class for the button that reopens a closed ticket
 module.exports = class ReopenTicketButton extends BlueButton {
@@ -42,7 +39,7 @@ module.exports = class ReopenTicketButton extends BlueButton {
         await ticketMustBeClosed(bot_ticket, "ticket-already-open", locale, this.client, interaction);
 
         // Import and call the appropriate function to reopen the ticket, importing function now to avoid circular dependencies that make the bot crash on startup
-        const reopenTicket = require("../routes/tickets/reopenTicket");
+        const { reopenTicket } = require("#routes").ticketRouter;
         await reopenTicket(this.client, interaction.guild, ticket_channel, locale, interaction.member.id);
 
         // Notify the successful reopening of the ticket
