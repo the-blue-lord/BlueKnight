@@ -1,4 +1,4 @@
-const BlueMessage = require("../../structures/BlueMessage");
+const BlueMessage = require("#sng/structures/BlueMessage");
 const memberIsBotAdmin = require("./memberIsBotAdmin");
 const memberIsCategoryHelper = require("./memberIsCategoryHelper");
 const { MessageFlags } = require("discord.js");

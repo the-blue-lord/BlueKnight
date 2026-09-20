@@ -1,4 +1,4 @@
-const getGuildData = require("../fetches/getGuildData");
+const getGuildData = require("#sng/fetches/getGuildData");
 
 module.exports = async (member, client = null, interaction = null) => {
     const guild_data = await getGuildData(member.guild.id, client, interaction);

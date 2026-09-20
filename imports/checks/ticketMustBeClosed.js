@@ -1,4 +1,4 @@
-const BlueMessage = require("../../structures/BlueMessage");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
 module.exports = async (ticket_data, locale = "en", client = null, interaction = null) => {
     if(ticket_data.closed == "0") {

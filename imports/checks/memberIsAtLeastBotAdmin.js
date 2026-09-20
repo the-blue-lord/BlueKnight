@@ -1,4 +1,4 @@
-const BlueMessage = require("../../structures/BlueMessage");
+const BlueMessage = require("#sng/structures/BlueMessage");
 const memberIsBotAdmin = require("./memberIsBotAdmin");
 
 module.exports = async (member, locale = "en", client = null, interaction = null) => {

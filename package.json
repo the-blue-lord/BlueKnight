@@ -8,6 +8,7 @@
   },
   "imports": {
     "#app/*": "./*/.module.js",
+    "#sng/*": "./imports/*",
     "#*": "./imports/*/.module.js"
   },
   "keywords": [],

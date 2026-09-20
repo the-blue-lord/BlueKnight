@@ -1,4 +1,4 @@
-const BlueEvent = require("../../structures/BlueEvent");
+const BlueEvent = require("#sng/structures/BlueEvent");
 
 module.exports = class Error extends BlueEvent {
     constructor(client) {
