@@ -2,8 +2,8 @@
 const { MessageFlags } = require("discord.js");
 
 const { BlueCommand, BlueMessage } = require("#structures");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper } = require("#checks");
 
 // Class for the tck-assign command
 module.exports = class TckAssign extends BlueCommand {

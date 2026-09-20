@@ -3,7 +3,7 @@ const { createTranscript } = require("discord-html-transcripts");
 
 const { BlueButton, BlueEmbed } = require("#structures");
 const { queryDatabase } = require("#utils");
-const { getGuildData, getTicketData } = require("#utils").fetches;
+const { getGuildData, getTicketData } = require("#fetches");
 
 // Class for the button that confirms the deletion of a ticket
 module.exports = class ConfirmDeletionButton extends BlueButton {

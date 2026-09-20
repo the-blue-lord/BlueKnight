@@ -1,6 +1,6 @@
 const { ModalSubmitInteraction, ActionRowBuilder } = require("discord.js");
-const BlueModal = require("../structures/BlueModal");
-const BlueEmbed = require("../structures/BlueEmbed");
+const BlueModal = require("../imports/structures/BlueModal");
+const BlueEmbed = require("../imports/structures/BlueEmbed");
 const AcceptReopeningButton = require("../buttons/accept-reopening");
 const DenyReopeningButton = require("../buttons/deny-reopening");
 const BlockReopeningButton = require("../buttons/block-reopening");

@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const { memberIsBotAdmin, memberIsCategoryHelper } = require("#utils").checks;
+const { memberIsBotAdmin, memberIsCategoryHelper } = require("#checks");
 
 module.exports = class BlueCommand {
     // --- Default command constructor

@@ -5,8 +5,6 @@ const getVariables = require("./getVariables");
 const queryDatabase = require("./queryDatabase");
 const rebuildComponents = require("./rebuildComponents");
 const zeroWidthSteganography = require("./zeroWidthSteganography");
-const checks = require("./checks/.module");
-const fetches = require("./data-fetchers/.module");
 
 module.exports = {
     buildModalQuestions,
@@ -15,7 +13,5 @@ module.exports = {
     getVariables,
     queryDatabase,
     rebuildComponents,
-    zeroWidthSteganography,
-    checks,
-    fetches
+    zeroWidthSteganography
 };

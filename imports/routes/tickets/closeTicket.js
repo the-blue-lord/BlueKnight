@@ -1,7 +1,7 @@
 const { ActionRowBuilder } = require("discord.js");
 const ReopenTicketButton = require("../../buttons/reopen-ticket");
-const BlueEmbed = require("../../structures/BlueEmbed");
-const queryDatabase = require("../../utils/queryDatabase");
+const BlueEmbed = require("../../imports/structures/BlueEmbed");
+const queryDatabase = require("../../imports/utils/queryDatabase");
 const AskTicketReopeningButton = require("../../buttons/ask-reopening");
 const DeleteTicketButton = require("../../buttons/delete-ticket");
 

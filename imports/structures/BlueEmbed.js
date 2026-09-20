@@ -71,7 +71,7 @@ module.exports = class BlueEmbed {
 
         this.embed.setDescription(description + "\u2063" + encoded_data);
 
-        const TranslateEmbedMenu = require("../menus/translate-embed");
+        const TranslateEmbedMenu = require("../../menus/translate-embed");
 
         this.components = [];
         this.components.push(new TranslateEmbedMenu(client, embed_id, language).build());

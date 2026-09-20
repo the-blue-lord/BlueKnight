@@ -3,8 +3,8 @@ const { MessageFlags } = require("discord.js");
 
 const { BlueCommand, BlueMessage } = require("#structures");
 const { queryDatabase } = require("#utils");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper } = require("#checks");
 
 // Class for the tck-claim command
 module.exports = class TckClaim extends BlueCommand {

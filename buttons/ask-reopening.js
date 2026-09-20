@@ -1,7 +1,7 @@
 //Imports
 const { BlueButton } = require("#structures");
-const { ticketReopeningReason: TicketReopeningReasonModal } = require("#modals");
-const { getGuildData } = require("#utils").fetches;
+const { ticketReopeningReason: TicketReopeningReasonModal } = require("#app/modals");
+const { getGuildData } = require("#fetches");
 
 // Class for the button used to request the reopening of a closed ticket
 module.exports = class AskTicketReopeningButton extends BlueButton {

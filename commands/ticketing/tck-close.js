@@ -2,8 +2,8 @@
 const { MessageFlags } = require("discord.js");
 
 const { BlueCommand, BlueMessage } = require("#structures");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper, ticketMustBeOpen } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper, ticketMustBeOpen } = require("#checks");
 
 // Class for the tck-close command
 module.exports = class TckClose extends BlueCommand {

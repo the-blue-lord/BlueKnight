@@ -5,8 +5,8 @@ const { BlueButton, BlueMessage } = require("#structures");
 const { queryDatabase } = require("#utils");
 const { ticketRouter: ticket_router } = require("#routes");
 const Discord = require("discord.js");
-const { ticketQuestions: TicketQuestionsModal } = require("#modals"); // NOTE: Rename exported variable to PascalCase
-const { getGuildData, getCategoryData } = require("#utils").fetches;
+const { ticketQuestions: TicketQuestionsModal } = require("#app/modals"); // NOTE: Rename exported variable to PascalCase
+const { getGuildData, getCategoryData } = require("#fetches");
 
 // Class for the button that opens a ticket
 module.exports = class OpenTicketButton extends BlueButton {

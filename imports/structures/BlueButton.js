@@ -2,7 +2,7 @@ const yaml = require("yaml");
 const fs = require("fs");
 
 const { ButtonBuilder } = require("discord.js");
-const { memberIsBotAdmin, memberIsCategoryHelper } = require("#utils").checks;
+const { memberIsBotAdmin, memberIsCategoryHelper } = require("#checks");
 
 module.exports = class BlueButton {
     constructor(client, button_action, locale = "en", button_data = "") {

@@ -3,9 +3,9 @@
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
 const { BlueCommand, BlueMessage } = require("#structures");
-const { getGuildData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
-const { openTicket: OpenTicketButton } = require("#buttons");
+const { getGuildData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
+const { openTicket: OpenTicketButton } = require("#app/buttons");
 
 // Class for the tck-panel command
 module.exports = class TckPanel extends BlueCommand {

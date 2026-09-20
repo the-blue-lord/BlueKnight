@@ -1,9 +1,9 @@
 // Imports
 
 const { BlueCommand } = require("#structures");
-const { getGuildData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
-const { customizePanel: CustomizePanelModal } = require("#modals");
+const { getGuildData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
+const { customizePanel: CustomizePanelModal } = require("#app/modals");
 
 // Class for the set-ticket_panel command
 module.exports = class StnPanel extends BlueCommand {

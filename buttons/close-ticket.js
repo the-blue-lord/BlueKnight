@@ -2,8 +2,8 @@
 const { MessageFlags } = require("discord.js");
 
 const { BlueButton, BlueMessage } = require("#structures");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper, ticketMustBeOpen } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper, ticketMustBeOpen } = require("#checks");
 
 
 // Class for the button that closes a ticket

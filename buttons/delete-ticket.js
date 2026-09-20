@@ -3,8 +3,8 @@ const { MessageFlags } = require("discord.js");
 
 const { BlueButton } = require("#structures");
 const { deleteTicket } = require("#routes").ticketRouter;
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#checks");
 
 // Class for the button that deletes a ticket
 module.exports = class DeleteTicketButton extends BlueButton {

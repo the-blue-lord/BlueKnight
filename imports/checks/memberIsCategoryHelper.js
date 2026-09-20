@@ -1,4 +1,4 @@
-const getCategoryData = require("../data-fetchers/getCategoryData");
+const getCategoryData = require("../../fetches/getCategoryData");
 
 module.exports = async (member, category_id, locale = "en", client = null, interaction = null) => {
     const guild_data = await getCategoryData(category_id, locale, client, interaction);

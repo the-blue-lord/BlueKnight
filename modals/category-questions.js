@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 
-const BlueModal = require('../structures/BlueModal');
-const BlueMessage = require('../structures/BlueMessage');
-const queryDatabase = require('../utils/queryDatabase');
+const BlueModal = require('../imports/structures/BlueModal');
+const BlueMessage = require('../imports/structures/BlueMessage');
+const queryDatabase = require('../imports/utils/queryDatabase');
 
 module.exports = class CategoryQuestionsModal extends BlueModal {
     constructor(client, localisation = "en", category_id) {

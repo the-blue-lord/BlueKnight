@@ -1,5 +1,5 @@
 const { ActionRowBuilder, AttachmentBuilder, BaseInteraction } = require("discord.js");
-const BlueEmbed = require("../../structures/BlueEmbed");
+const BlueEmbed = require("../../imports/structures/BlueEmbed");
 const ConfirmDeletionButton = require("../../buttons/confirm-deletion");
 const { createTranscript } = require("discord-html-transcripts");
 const archiver = require("archiver");

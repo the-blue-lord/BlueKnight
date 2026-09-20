@@ -1,9 +1,9 @@
 // Imports
 const { BlueCommand } = require("#structures");
-const { getGuildData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { getGuildData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
 
-const { categoryData: CategoryDataModal } = require("#modals");
+const { categoryData: CategoryDataModal } = require("#app/modals");
 
 // Class for the set-add_ticket_category command
 module.exports = class SetAddTicketCategory extends BlueCommand {

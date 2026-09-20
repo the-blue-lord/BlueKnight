@@ -61,7 +61,7 @@ module.exports = class BlueMessage {
 
         this.components = [];
 
-        const TranslateMessageMenu = require("../menus/translate-message");
+        const TranslateMessageMenu = require("../../menus/translate-message");
 
         this.components.push(new TranslateMessageMenu(client, message_id, language).build());
 

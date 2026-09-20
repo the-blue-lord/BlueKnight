@@ -1,7 +1,7 @@
 const fs = require("fs");
-const queryDatabase = require("../utils/queryDatabase");
+const queryDatabase = require("../imports/utils/queryDatabase");
 
-const { insertUnderscore } = require("../utils/customIdNomralization");
+const { insertUnderscore } = require("../imports/utils/customIdNomralization");
 
 module.exports = async interaction => {
     

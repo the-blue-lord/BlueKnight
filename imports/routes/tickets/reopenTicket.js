@@ -1,7 +1,7 @@
 const { ActionRowBuilder } = require("discord.js");
-const BlueEmbed = require("../../structures/BlueEmbed");
+const BlueEmbed = require("../../imports/structures/BlueEmbed");
 const CloseTicketButton = require("../../buttons/close-ticket");
-const queryDatabase = require("../../utils/queryDatabase");
+const queryDatabase = require("../../imports/utils/queryDatabase");
 
 module.exports = async (client, guild, ticket_channel, locale, excutor_id, reopening_requested = false) => {
     await ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: true});

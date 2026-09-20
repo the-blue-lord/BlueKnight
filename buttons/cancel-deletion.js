@@ -1,8 +1,8 @@
-//Imports
+// Imports
 const { BlueButton } = require("#structures");
 const { rebuildComponents } = require("#utils");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper } = require("#checks");
 
 // Class for the button that cancels the deletion of a ticket
 module.exports = class CancelDeletionButton extends BlueButton {

@@ -3,8 +3,8 @@ const yaml = require("yaml");
 const fs = require("fs");
 
 const { BlueCommand, BlueEmbed } = require("#structures");
-const { getGuildData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { getGuildData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
 
 
 // HACK: TO TEST

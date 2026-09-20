@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 
-const BlueModal = require('../structures/BlueModal');
-const BlueMessage = require('../structures/BlueMessage');
-const queryDatabase = require('../utils/queryDatabase');
+const BlueModal = require('../imports/structures/BlueModal');
+const BlueMessage = require('../imports/structures/BlueMessage');
+const queryDatabase = require('../imports/utils/queryDatabase');
 const CategoryQuestionsModal = require('../modals/category-questions');
 const AddCategoryQuestionsButton = require('../buttons/add-category-questions');
 const { ActionRowBuilder } = require('discord.js');

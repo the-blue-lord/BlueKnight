@@ -3,8 +3,8 @@ const { MessageFlags } = require("discord.js");
 
 const { BlueButton, BlueMessage } = require("#structures");
 const { rebuildComponents } = require("#utils");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#checks");
 
 // Class for the button that accepts a ticket reopening request
 module.exports = class AcceptReopeningButton extends BlueButton {

@@ -3,8 +3,8 @@ const { MessageFlags } = require("discord.js");
 
 const { BlueCommand, BlueMessage } = require("#structures");
 const { queryDatabase } = require("#utils");
-const { getGuildData, getCategoryData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { getGuildData, getCategoryData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
 
 // Class for the set-remove_ticket_category command
 module.exports = class SetRemoveTicketCategory extends BlueCommand {

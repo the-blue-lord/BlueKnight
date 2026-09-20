@@ -2,8 +2,8 @@
 const { MessageFlags } = require("discord.js");
 
 const { BlueCommand, BlueEmbed, BlueMessage } = require("#structures");
-const { getGuildData } = require("#utils").fetches;
-const { memberIsAtLeastBotAdmin } = require("#utils").checks;
+const { getGuildData } = require("#fetches");
+const { memberIsAtLeastBotAdmin } = require("#checks");
 
 // Class for the setup-info command
 module.exports = class SetupInfo extends BlueCommand {

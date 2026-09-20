@@ -2,8 +2,8 @@
 const { MessageFlags } = require("discord.js");
 
 const { BlueCommand } = require("#structures");
-const { getGuildData, getTicketData } = require("#utils").fetches;
-const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#utils").checks;
+const { getGuildData, getTicketData } = require("#fetches");
+const { memberIsAtLeastCategoryHelper, ticketMustBeClosed } = require("#checks");
 const { deleteTicket } = require("#routes").ticketRouter;
 
 // Class for the tck-delete command

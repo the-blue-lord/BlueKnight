@@ -3,7 +3,7 @@ const { ButtonBuilder, ButtonStyle, ActionRowBuilder, MessageFlags } = require("
 
 const { BlueCommand, BlueMessage } = require("#structures");
 const { openTicket } = require("#routes").ticketRouter;
-const { getGuildData } = require("#utils").fetches;
+const { getGuildData } = require("#fetches");
 
 // Class for the tck-open command
 module.exports = class TckOpen extends BlueCommand {
