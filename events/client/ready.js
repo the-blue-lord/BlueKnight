@@ -1,5 +1,5 @@
 const { ActivityType } = require("discord.js");
-const BlueEvent = require("#sng/structures/BlueEvent");
+const BlueEvent = require("#structures").BlueEvent;
 
 module.exports = class Ready extends BlueEvent {
     constructor(client) {

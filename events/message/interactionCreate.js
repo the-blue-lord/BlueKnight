@@ -1,7 +1,7 @@
-const BlueEvent = require("#sng/structures/BlueEvent");
+const BlueEvent = require("#structures").BlueEvent;
 
-const router = require("#sng/routes/router");
-const queryDatabase = require("#sng/utils/queryDatabase");
+const { router } = require("#routes");
+const { queryDatabase } = require("#utils");
 
 module.exports = class InteractionCreate extends BlueEvent {
     constructor(client) {

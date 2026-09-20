@@ -1,5 +1,5 @@
 const BlueMessage = require("#sng/structures/BlueMessage");
-const queryDatabase = require("#sng/utils/queryDatabase");
+const { queryDatabase } = require("#utils");
 
 module.exports = async (category_id, locale = "en", client = null, interaction = null) => {
     const category_data = await queryDatabase("SELECT * FROM `Categories` WHERE `category_id` = ?", [category_id]);

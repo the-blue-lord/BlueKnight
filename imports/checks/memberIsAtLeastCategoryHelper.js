@@ -1,7 +1,8 @@
+const { MessageFlags } = require("discord.js");
+
 const BlueMessage = require("#sng/structures/BlueMessage");
 const memberIsBotAdmin = require("./memberIsBotAdmin");
 const memberIsCategoryHelper = require("./memberIsCategoryHelper");
-const { MessageFlags } = require("discord.js");
 
 module.exports = async (member, category_id, locale = "en", client = null, interaction = null, reply_sent = true) => {
     const isBotAdmin = await memberIsBotAdmin(member, client, interaction);

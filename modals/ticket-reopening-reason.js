@@ -1,4 +1,4 @@
-const { ModalSubmitInteraction, ActionRowBuilder } = require("discord.js");
+const { ModalSubmitInteraction, ActionRowBuilder } = require("discord.js"); // NOTE: Remove possible inline unused import
 const BlueModal = require("#sng/structures/BlueModal");
 const BlueEmbed = require("#sng/structures/BlueEmbed");
 const AcceptReopeningButton = require("#app/sng/buttons/accept-reopening");

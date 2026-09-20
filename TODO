@@ -1,3 +1,5 @@
+☐ good imports: buttons, command, events, checks, fetches. In every other block imports must be reviewed
+
 Tostart:
   ✔ TICKETING SYSTEM @done(26-07-06 20:48)
   ☐ EPHEMERAL VOICE CHANNELS
@@ -22,6 +24,8 @@ Todo:
   ✔ Add default ticket emoji @started(25-06-26 02:40) @done(25-06-26 03:41) @lasted(1h1m10s)
   ✔ Get guild locale on /set setup @started(25-06-26 00:58) @done(25-06-26 02:03) @lasted(1h5m25s)
   ✔ Add category-not-found error (or find the correct one) @done(26-09-05 00:46)
+  ☐ review imports
+  ☐ implement error emitting system instead of cicular imports
 
 Fixme:
   ✔ Default categories broken in `/info server` ~embed~ message @done(26-03-13 19:24)

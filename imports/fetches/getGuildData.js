@@ -1,4 +1,4 @@
-const queryDatabase = require("#utils").queryDatabase;
+const { queryDatabase } = require("#utils");
 const BlueMessage = require("#sng/structures/BlueMessage");
 
 module.exports = async (guild_id, client = null, interaction = null, fetch_categories = false) => {
