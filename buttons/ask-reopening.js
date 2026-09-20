@@ -1,6 +1,7 @@
 //Imports
 const { BlueButton } = require("#structures");
-const { ticketReopeningReason: TicketReopeningReasonModal } = require("#app/modals");
+//const { ticketReopeningReason: TicketReopeningReasonModal } = require("#app/modals");
+const TicketReopeningReasonModal = require("#app/sng/modals/ticket-reopening-reason");
 const { getGuildData } = require("#fetches");
 
 // Class for the button used to request the reopening of a closed ticket

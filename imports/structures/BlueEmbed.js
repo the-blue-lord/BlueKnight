@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const yaml = require("yaml");
 const fs = require("fs");
 
-// --- const zeroWidth = require("../utils/zeroWidthSteganography");
+// --- const zeroWidth = require("#sng/utils/zeroWidthSteganography");
 
 const { zeroWidthSteganography: zws } = require("#utils");
 
@@ -71,7 +71,7 @@ module.exports = class BlueEmbed {
 
         this.embed.setDescription(description + "\u2063" + encoded_data);
 
-        const TranslateEmbedMenu = require("../../menus/translate-embed");
+        const TranslateEmbedMenu = require("#app/sng/menus/translate-embed");
 
         this.components = [];
         this.components.push(new TranslateEmbedMenu(client, embed_id, language).build());

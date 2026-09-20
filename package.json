@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "commant-b": "(menus, modals, buttons)",
   "imports": {
+    "#app/sng/*": "./*.js",
     "#app/*": "./*/.module.js",
-    "#sng/*": "./imports/*",
+    "#sng/*": "./imports/*.js",
     "#*": "./imports/*/.module.js"
   },
   "keywords": [],

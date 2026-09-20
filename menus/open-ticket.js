@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 
-const BlueMenu = require("../structures/BlueMenu");
-const BlueMessage = require("../structures/BlueMessage");
+const BlueMenu = require("#sng/structures/BlueMenu");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
-const ticket_router = require("../routes/ticket-router");
-const queryDatabase = require("../utils/queryDatabase");
-const TicketQuestionsModal = require("../modals/ticket-questions");
+const ticket_router = require("#sng/routes/ticket-router");
+const queryDatabase = require("#sng/utils/queryDatabase");
+const TicketQuestionsModal = require("#app/sng/modals/ticket-questions");
 
 module.exports = class OpenTicketMenu extends BlueMenu {
     constructor(client) {

@@ -1,5 +1,5 @@
 const queryDatabase = require("./queryDatabase");
-const BlueMessage = require("../structures/BlueMessage");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
 module.exports = async (client, guildId, localisation) => {
     const info = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [guildId]);

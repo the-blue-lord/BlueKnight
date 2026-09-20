@@ -1,9 +1,9 @@
 const { ActionRowBuilder, AttachmentBuilder, BaseInteraction } = require("discord.js");
-const BlueEmbed = require("../../imports/structures/BlueEmbed");
-const ConfirmDeletionButton = require("../../buttons/confirm-deletion");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const ConfirmDeletionButton = require("#app/sng/buttons/confirm-deletion");
 const { createTranscript } = require("discord-html-transcripts");
 const archiver = require("archiver");
-const CancelDeletionButton = require("../../buttons/cancel-deletion");
+const CancelDeletionButton = require("#app/sng/buttons/cancel-deletion");
 const ZipFolder = require("jszip");
 
 module.exports = async (client, ticketChannel, ticketData, transcriptsChannel, interaction, locale) => {

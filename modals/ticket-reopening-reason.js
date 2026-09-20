@@ -1,9 +1,9 @@
 const { ModalSubmitInteraction, ActionRowBuilder } = require("discord.js");
-const BlueModal = require("../imports/structures/BlueModal");
-const BlueEmbed = require("../imports/structures/BlueEmbed");
-const AcceptReopeningButton = require("../buttons/accept-reopening");
-const DenyReopeningButton = require("../buttons/deny-reopening");
-const BlockReopeningButton = require("../buttons/block-reopening");
+const BlueModal = require("#sng/structures/BlueModal");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const AcceptReopeningButton = require("#app/sng/buttons/accept-reopening");
+const DenyReopeningButton = require("#app/sng/buttons/deny-reopening");
+const BlockReopeningButton = require("#app/sng/buttons/block-reopening");
 
 module.exports = class TicketReopeningReasonModal extends BlueModal {
     constructor(client, locale = "en", ticket_id) {

@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 
-const BlueModal = require("../imports/structures/BlueModal");
-const BlueMessage = require("../imports/structures/BlueMessage");
+const BlueModal = require("#sng/structures/BlueModal");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
-const queryDatabase = require("../imports/utils/queryDatabase");
+const queryDatabase = require("#sng/utils/queryDatabase");
 
 module.exports = class CustomizePanelModal extends BlueModal {
     constructor(client, localisation = "en") {

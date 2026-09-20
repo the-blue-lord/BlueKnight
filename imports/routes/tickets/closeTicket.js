@@ -1,9 +1,9 @@
 const { ActionRowBuilder } = require("discord.js");
-const ReopenTicketButton = require("../../buttons/reopen-ticket");
-const BlueEmbed = require("../../imports/structures/BlueEmbed");
-const queryDatabase = require("../../imports/utils/queryDatabase");
-const AskTicketReopeningButton = require("../../buttons/ask-reopening");
-const DeleteTicketButton = require("../../buttons/delete-ticket");
+const ReopenTicketButton = require("#app/sng/buttons/reopen-ticket");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const queryDatabase = require("#sng/utils/queryDatabase");
+const AskTicketReopeningButton = require("#app/sng/buttons/ask-reopening");
+const DeleteTicketButton = require("#app/sng/buttons/delete-ticket");
 
 module.exports = async (client, guild, ticket_channel, locale, excutor_id) => {
     await ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: false});

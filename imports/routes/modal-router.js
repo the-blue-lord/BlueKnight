@@ -1,7 +1,7 @@
 const fs = require("fs");
-const queryDatabase = require("../imports/utils/queryDatabase");
+const queryDatabase = require("#sng/utils/queryDatabase");
 
-const { insertUnderscore } = require("../imports/utils/customIdNomralization");
+const { insertUnderscore } = require("#sng/utils/customIdNomralization");
 
 module.exports = async interaction => {
     

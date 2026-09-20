@@ -1,13 +1,13 @@
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, ComponentType } = require("discord.js");
-const BlueMenu = require("../structures/BlueMenu");
+const BlueMenu = require("#sng/structures/BlueMenu");
 const fs = require("fs");
 const yaml = require("yaml");
 
-const BlueMessage = require("../structures/BlueMessage");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
-const getVariables = require("../utils/getVariables");
-const rebuildComponents = require("../utils/rebuildComponents");
-const BlueButton = require("../structures/BlueButton");
+const getVariables = require("#sng/utils/getVariables");
+const rebuildComponents = require("#sng/utils/rebuildComponents");
+const BlueButton = require("#sng/structures/BlueButton");
 
 module.exports = class TranslateMessageMenu extends BlueMenu {
     constructor(client, message_id, from_language = "en") {

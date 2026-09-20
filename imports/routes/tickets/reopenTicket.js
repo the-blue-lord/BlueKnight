@@ -1,7 +1,7 @@
 const { ActionRowBuilder } = require("discord.js");
-const BlueEmbed = require("../../imports/structures/BlueEmbed");
-const CloseTicketButton = require("../../buttons/close-ticket");
-const queryDatabase = require("../../imports/utils/queryDatabase");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const CloseTicketButton = require("#app/sng/buttons/close-ticket");
+const queryDatabase = require("#sng/utils/queryDatabase");
 
 module.exports = async (client, guild, ticket_channel, locale, excutor_id, reopening_requested = false) => {
     await ticket_channel.permissionOverwrites.edit(guild.roles.everyone, {SendMessages: true});

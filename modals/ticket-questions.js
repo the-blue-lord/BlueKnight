@@ -4,7 +4,7 @@ const BlueModal = require('../imports/structures/BlueModal');
 const BlueMessage = require('../imports/structures/BlueMessage');
 const queryDatabase = require('../imports/utils/queryDatabase');
 
-const ticket_router = require('../routes/ticket-router');
+const ticket_router = require('../imports/routes/ticket-router');
 const BlueEmbed = require('../imports/structures/BlueEmbed');
 const yaml = require('yaml');
 const fs = require('fs');

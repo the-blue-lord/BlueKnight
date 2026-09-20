@@ -1,14 +1,14 @@
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, MessageFlags, Emoji, ComponentType } = require("discord.js");
-const BlueMenu = require("../structures/BlueMenu");
+const BlueMenu = require("#sng/structures/BlueMenu");
 const fs = require("fs");
 const yaml = require("yaml");
 
-const zeroWidth = require("../utils/zeroWidthSteganography");
+const zeroWidth = require("#sng/utils/zeroWidthSteganography");
 
-const getVariables = require("../utils/getVariables");
-const BlueEmbed = require("../structures/BlueEmbed");
-const BlueButton = require("../structures/BlueButton");
-const rebuildComponents = require("../utils/rebuildComponents");
+const getVariables = require("#sng/utils/getVariables");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const BlueButton = require("#sng/structures/BlueButton");
+const rebuildComponents = require("#sng/utils/rebuildComponents");
 
 module.exports = class TranslateEmbedMenu extends BlueMenu {
     constructor(client, embed_id, from_language = "en") {

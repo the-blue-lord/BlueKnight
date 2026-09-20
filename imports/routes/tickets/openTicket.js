@@ -1,8 +1,8 @@
 const { OverwriteType, ChannelType, PermissionFlagsBits, PermissionsBitField, ActionRowBuilder } = require("discord.js");
-const queryDatabase = require("../../imports/utils/queryDatabase");
-const BlueEmbed = require("../../imports/structures/BlueEmbed");
-const CloseTicketButton = require("../../buttons/close-ticket");
-const BlueMessage = require("../../imports/structures/BlueMessage");
+const queryDatabase = require("#sng/utils/queryDatabase");
+const BlueEmbed = require("#sng/structures/BlueEmbed");
+const CloseTicketButton = require("#app/sng/buttons/close-ticket");
+const BlueMessage = require("#sng/structures/BlueMessage");
 
 module.exports = async (client, interaction, guild_id, category_id, user_id, vip_ticket = false) => {
     const guildData = await queryDatabase("SELECT * FROM `Guilds` WHERE `guild_id` = ?", [guild_id]);

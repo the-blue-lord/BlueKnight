@@ -1,5 +1,6 @@
 // Imports
-const { categoryQuestions: CategoryQuestionsModal } = require("#app/modals"); // NOTE: Rename exported variable in PascalCase
+//const { categoryQuestions: CategoryQuestionsModal } = require("#app/modals"); // NOTE: Rename exported variable in PascalCase
+const CategoryQuestionsModal = require("#app/sng/modals/category-questions");
 const { BlueButton } = require("#structures");
 
 // Class for the button used to add default questions for the user to a ticket category
